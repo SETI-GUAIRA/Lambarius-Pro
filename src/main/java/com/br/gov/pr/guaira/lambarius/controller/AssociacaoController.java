@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/localidades")
-public class LocalidadeController {
+@RequestMapping("/associacoes")
+public class AssociacaoController {
 
   @GetMapping("/novo")
   public ModelAndView novo() {
-    ModelAndView mv = new ModelAndView("pages/Localidades/cadastro");
+    ModelAndView mv = new ModelAndView("pages/Associacoes/cadastro");
 
     return mv;
   }
 
   @GetMapping("/lista")
   public ModelAndView listar() {
-    ModelAndView mv = new ModelAndView("pages/Localidades/lista");
+    ModelAndView mv = new ModelAndView("pages/Associacoes/lista");
 
     return mv;
   }
