@@ -2,11 +2,17 @@ package com.br.gov.pr.guaira.lambarius.domain;
 
 import java.time.LocalDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,17 +33,16 @@ public class Pessoa {
   @Column(nullable = false)
   private String nome;
 
-  @DateTimeFormat(iso = ISO.DATE)
-	@Column(columnDefinition = "DATE", nullable = false)
-	private LocalDate dataNascimento;
+  @Column(name="data_nascimento")
+  private LocalDate dataNascimento;
 
-  @Column(nullable = false)
-  private String cpf_cnpj;
+  @Column(name="cpf_cnpj",nullable = false)
+  private String cpfOuCnpj;
 
-  @Column(nullable = false)
+  @Column(name="rg_ie")
   private String rgOuIe;
 
-  @Column(nullable = false)
+  @Column
   private String foto;
 
   @Embedded
