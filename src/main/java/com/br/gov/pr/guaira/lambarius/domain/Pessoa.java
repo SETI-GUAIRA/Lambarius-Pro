@@ -32,7 +32,7 @@ public class Pessoa {
 	private LocalDate dataNascimento;
 
   @Column(nullable = false)
-  private String cpfCnpj;
+  private String cpf_cnpj;
 
   @Column(nullable = false)
   private String rgOuIe;
