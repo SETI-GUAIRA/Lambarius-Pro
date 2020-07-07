@@ -8,9 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class Contato {
+public class Endereco {
 
-  private String email;
-  private String telefone;
-  private String celular;
+  private String logradouro;
+  private Integer numero;
+  private String bairro;
+  private String complemento;
 }

@@ -39,8 +39,10 @@ public class Pessoa {
 
   @Column(nullable = false)
   private String foto;
-  
+
   @Embedded
   private Contato contato;
 
+  @Embedded
+  private Endereco endereco;
 }
