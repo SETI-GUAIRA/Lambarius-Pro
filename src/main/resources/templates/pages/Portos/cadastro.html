@@ -27,14 +27,15 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
-              <form role="form" class="form" method="POST" action="">
+              <form role="form" class="form" method="POST" th:action="@{/portos/salvar}"
+              th:object="${porto}">
                 <div class="card-body">
                   <label>Nome do porto *</label>
                   <div class="form-group">
                     <input type="text" name="nome" id="nome" class="form-control" autofocus placeholder="Digite o nome"
-                      required="required">
+                      required="required" th:field="*{nome}">
                   </div>
-                <input type="hidden" name="id" value="">
+                <input type="hidden" name="id" th:field="*{id}">
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>

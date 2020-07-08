@@ -1,9 +1,9 @@
-CREATE TABLE pessoa(
+CREATE TABLE pessoa (
 	codigo serial not null primary key,
 	nome text not null,
   data_nascimento timestamp not null,
 	cpf_cnpj text varying(15) not null,
-  rg_ie text not null,
+  rg_ie text varying(15) not null,
   foto text not null,
 
 	logradouro text varying(255),
