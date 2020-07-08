@@ -41,31 +41,22 @@
                         <i class="fas fa-user-alt"></i>
                         Nome</th>
                       <th>
-                        <i class="far fa-id-card"></i>
-                        CPF</th>
-                      <th>
                         <i class="fa fa-edit">
                           Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Nome</td>
-                      <td>CPF
+                    <tr th:each="porto : ${portos}">
+                      <td th:text="${porto.nome}">Nome</td>
                       </td>
                       <td>
                         <div class="row">
-                          <a class="mr-1" href="/seti/tutoriais/{{tutorial.id}}">
-                            <button class="btn btn-success btn-xs">
-                              <i class="fa fa-eye"></i>
-                            </button>
-                          </a>
-                          <a class="mr-1" href="/seti/users/tutorial/{{tutorial.id}}/edit">
+                          <a class="mr-1" th:href="@{/portos/editar/{codigo} (codigo=${porto.codigo})}" >
                             <button class="btn btn-primary btn-xs">
                               <i class="fas fa-pencil-alt"></i>
                             </button>
                           </a>
-                          <form class="formDelete" method="POST" action="/seti/users/tutoriais?_method=DELETE">
+                          <form class="ToDelete" method="POST" th:action="@{/portos/excluir/{codigo} (codigo=${porto.codigo})}">
                             <input type="hidden" name="id" value="{{tutorial.id}}">
                             <button class="btn btn-danger btn-xs" type="submit">
                               <i class="fas fa-trash"></i>
@@ -90,6 +81,7 @@
     <script th:src="@{/js/datatables/dataTables.bootstrap4.min.js}"></script>
     <script th:src="@{/js/datatables/dataTables.responsive.min.js}"></script>
     <script th:src="@{/js/datatables/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
     <script>
       $(function () {
         $("#table").DataTable({ "responsive": true, "autoWidth": false });

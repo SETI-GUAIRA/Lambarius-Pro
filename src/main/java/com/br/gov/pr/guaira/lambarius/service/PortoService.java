@@ -1,5 +1,7 @@
 package com.br.gov.pr.guaira.lambarius.service;
 
+import java.util.List;
+
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
 import com.br.gov.pr.guaira.lambarius.repository.PortoRepository;
 
@@ -16,7 +18,12 @@ public class PortoService {
     portoRepository.save(porto);
   }
 
-  // public void deletar(Long codigo) {
-  //   portoRepository.deleteById(codigo);
-  // }
+  public List<Porto> buscarTodos() {
+    return portoRepository.findAll();
+  }
+
+  public void excluir(Long codigo) {
+    portoRepository.deleteById(codigo);
+  }
+
 }

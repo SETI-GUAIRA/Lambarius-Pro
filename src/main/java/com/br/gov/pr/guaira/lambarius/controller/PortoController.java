@@ -5,7 +5,9 @@ import com.br.gov.pr.guaira.lambarius.service.PortoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,15 +27,21 @@ public class PortoController {
   }
 
   @GetMapping("/lista")
-  public ModelAndView listar() {
-    ModelAndView mv = new ModelAndView("pages/Portos/PortoLista");
-
-    return mv;
+  public String listar(ModelMap model) {
+    model.addAttribute("portos", portoService.buscarTodos());
+    return "/pages/Portos/PortoLista";
   }
 
   @PostMapping("/salvar")
   public String salvar(Porto porto) {
     portoService.salvar(porto);
     return "redirect:/portos/novo";
+  }
+
+  @PostMapping("/excluir/{codigo}")
+  public String excluir(@PathVariable("codigo") Long codigo, ModelMap model) {
+    portoService.excluir(codigo);
+
+    return listar(model);
   }
 }
