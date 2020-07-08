@@ -1,4 +1,4 @@
 CREATE TABLE porto (
   codigo serial not null primary key,
-  nome text not null
+  nome character varying(200) not null
 );

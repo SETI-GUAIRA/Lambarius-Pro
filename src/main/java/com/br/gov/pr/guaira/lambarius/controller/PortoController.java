@@ -18,15 +18,15 @@ public class PortoController {
   private PortoService portoService;
 
   @GetMapping("/novo")
-  public ModelAndView novo() {
-    ModelAndView mv = new ModelAndView("pages/Portos/cadastro");
+  public ModelAndView novo(Porto porto) {
+    ModelAndView mv = new ModelAndView("pages/Portos/PortoCadastro");
 
     return mv;
   }
 
   @GetMapping("/lista")
   public ModelAndView listar() {
-    ModelAndView mv = new ModelAndView("pages/Portos/lista");
+    ModelAndView mv = new ModelAndView("pages/Portos/PortoLista");
 
     return mv;
   }
