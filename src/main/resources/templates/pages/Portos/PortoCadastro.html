@@ -1,54 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
 
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 </head>
 
 <body>
-	<div layout:fragment="corpo">
-		<section class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>Cadastrar novo Porto</h1>
-					</div>
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item">Portos</li>
-							<li class="breadcrumb-item active">Cadastrar Porto</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="card card-navy">
-							<form role="form" class="form" method="POST"
-								th:action="@{/portos/salvar}" th:object="${porto}">
-								<div class="card-body">
-									<label>Nome do porto *</label>
-									<div class="form-group">
-										<input type="text" th:field="*{nome}" id="nome"
-											class="form-control" autofocus placeholder="Digite o nome"
-											required="required" />
-									</div>
-									<input type="hidden" name="codigo" th:field="*{codigo}" />
-									<div class="card-footer">
-										<button type="submit" class="btn btn-primary">Salvar</button>
-									</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
+  <div layout:fragment="corpo">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Cadastrar novo Porto</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Portos</li>
+              <li class="breadcrumb-item active">Cadastrar Porto</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <form role="form" class="form" method="POST" th:action="@{/portos/salvar}" th:object="${porto}">
+                <div class="card-body">
+                  <label>Nome do porto *</label>
+                  <div class="form-group">
+                    <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
+                      placeholder="Digite o nome" required="required" />
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
 
 </html>
