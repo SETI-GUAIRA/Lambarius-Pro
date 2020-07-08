@@ -1,18 +1,18 @@
 CREATE TABLE pessoa (
 	codigo serial not null primary key,
-	nome text not null,
-  data_nascimento timestamp not null,
-	cpf_cnpj text varying(15) not null,
-  rg_ie text varying(15) not null,
-  foto text not null,
+	nome character varying(200) not null,
+  	data_nascimento timestamp not null,
+	cpf_cnpj character varying(15) not null,
+  	rg_ie character varying(15) not null,
+  	foto character varying(100) not null,
 
-	logradouro text varying(255),
-	numero text varying(20),
-	bairro text varying(255),
-	complemento text varying(255),
+	logradouro character varying(255),
+	numero character varying(20),
+	bairro character varying(255),
+	complemento character varying(255),
 
-	telefone text varying(15),
-	celular text varying(15),
-	email text varying(255),
+	telefone character varying(15),
+	celular character varying(15),
+	email character varying(255)
 
 );
