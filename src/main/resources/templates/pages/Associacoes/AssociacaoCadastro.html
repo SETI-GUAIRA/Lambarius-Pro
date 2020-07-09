@@ -27,15 +27,15 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
-              <form role="form" class="form" method="POST" action="">
+              <form role="form" class="form" method="POST" th:action="@{/associacoes/salvar}"
+              th:object="${associacao}">
                 <div class="card-body">
                   <label>Nome da associação *</label>
                   <div class="form-group">
-                    <input type="text" name="nome" id="nome" class="form-control" autofocus placeholder="Digite o nome"
-                      required="required">
+                    <input type="text" id="nome" class="form-control" autofocus placeholder="Digite o nome"
+                      required="required" th:field="*{nome}">
                   </div>
                 </div>
-                <input type="hidden" name="id" value="">
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>

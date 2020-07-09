@@ -1,7 +1,5 @@
 package com.br.gov.pr.guaira.lambarius.controller;
 
-import java.util.Optional;
-
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
 import com.br.gov.pr.guaira.lambarius.service.PortoService;
 
