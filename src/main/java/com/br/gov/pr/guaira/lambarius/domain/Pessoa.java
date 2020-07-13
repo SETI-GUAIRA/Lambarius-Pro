@@ -43,7 +43,7 @@ public class Pessoa {
   private String rgOuIe;
 
   @Column
-  private String foto;
+  private String foto = "/resources/uploads";
 
   @Embedded
   private Contato contato;

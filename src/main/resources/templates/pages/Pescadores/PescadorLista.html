@@ -7,7 +7,7 @@
 
 <div layout:fragment="styles">
   <link rel="stylesheet" th:href="@{/css/datatables/dataTables.bootstrap4.min.css}">
-    <link rel="stylesheet" th:href="@{/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/css/datatables/responsive.bootstrap4.min.css}">
 </div>
 
 <body>
@@ -42,31 +42,33 @@
                         Nome</th>
                       <th>
                         <i class="far fa-id-card"></i>
-                        CPF</th>
+                        RGP</th>
+                      <th>
+                        <i class="far fa-id-card"></i>
+                        CPF ou CNPJ</th>
+                      <th>
+                        <i class="far fa-envelope"></i>
+                        E-mail</th>
                       <th>
                         <i class="fa fa-edit">
                           Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Nome</td>
-                      <td>CPF
-                      </td>
+                    <tr th:each="pescador : ${pescadores}">
+                      <td th:text="${pescador.nome}">Nome</td>
+                      <td th:text="${pescador.rgp}">rgp</td>
+                      <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>
+                      <td th:text="${pescador.contato.email}">email</td>
                       <td>
                         <div class="row">
-                          <a class="mr-1" href="/seti/tutoriais/{{tutorial.id}}">
-                            <button class="btn btn-success btn-xs">
-                              <i class="fa fa-eye"></i>
-                            </button>
-                          </a>
-                          <a class="mr-1" href="/seti/users/tutorial/{{tutorial.id}}/edit">
+                          <a class="mr-1" th:href="@{/pescadores/editar/{codigo} (codigo=${pescador.codigo})}">
                             <button class="btn btn-primary btn-xs">
                               <i class="fas fa-pencil-alt"></i>
                             </button>
                           </a>
-                          <form class="formDelete" method="POST" action="/seti/users/tutoriais?_method=DELETE">
-                            <input type="hidden" name="id" value="{{tutorial.id}}">
+                          <form class="ToDelete" method="POST"
+                            th:action="@{/pescadores/excluir/{codigo} (codigo=${pescador.codigo})}">
                             <button class="btn btn-danger btn-xs" type="submit">
                               <i class="fas fa-trash"></i>
                             </button>
@@ -75,7 +77,6 @@
                       </td>
                     </tr>
                   </tbody>
-                  </tfoot>
                 </table>
               </div>
             </div>
@@ -90,6 +91,7 @@
     <script th:src="@{/js/datatables/dataTables.bootstrap4.min.js}"></script>
     <script th:src="@{/js/datatables/dataTables.responsive.min.js}"></script>
     <script th:src="@{/js/datatables/responsive.bootstrap4.min.js}"></script>
+    <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
     <script>
       $(function () {
         $("#table").DataTable({ "responsive": true, "autoWidth": false });
