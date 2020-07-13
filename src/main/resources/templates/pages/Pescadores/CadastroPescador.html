@@ -33,8 +33,8 @@
                   <div class="row">
                     <div class="col-md-6">
                       <label>Nome *</label>
-                      <input type="text" th:field="*{nome}" class="form-control"
-                        placeholder="Digite o nome do pescador" required="required" autofocus>
+                      <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite o nome do pescador"
+                        required="required" autofocus>
                     </div>
                     <div class="col-md-6">
                       <label>Data de nascimento *</label>
@@ -55,8 +55,8 @@
                     </div>
                     <div class="col-md-4">
                       <label>RGP *</label>
-                      <input type="text" name="rgp" class="form-control"
-                        placeholder="Digite o RGP" maxlength="15" required="required"  th:field="*{rgp}">
+                      <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
+                        required="required" th:field="*{rgp}">
                     </div>
                     <div class="col-md-4">
                       <label>RG ou IE *</label>
@@ -97,13 +97,32 @@
                     <div class="col-md-6">
                       <label>Celular *</label>
                       <input type="text" name="celular" class="form-control"
-                        placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}">
+                        placeholder="Digite o número de celular do pescador" maxlength="15"
+                        th:field="*{contato.celular}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label>E-mail*</label>
-                    <input type="email" name="email" class="form-control"
-                      placeholder="Digite um e-mail" th:field="*{contato.email}">
+                    <input type="email" name="email" class="form-control" placeholder="Digite um e-mail"
+                      th:field="*{contato.email}">
+                  </div>
+                  <div class="row">
+                    <div class="form-group">
+                      <label>Associação *</label>
+                      <select class="form-control select2 js-estados" id="uf">
+                        <option selected>Selecione uma associação</option>
+                        <option th:each="associacao : ${associacoes}" th:value="${pescador.associacao}"
+                          th:text="${associacao.nome}"></option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Porto *</label>
+                      <select class="form-control select2 js-estados" id="uf">
+                        <option selected>Selecione um porto</option>
+                        <option th:each="porto : ${portos}" th:value="${pescador.porto}"
+                          th:text="${porto.nome}"></option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <input type="hidden" name="id" value="">
