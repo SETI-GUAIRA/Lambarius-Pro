@@ -110,7 +110,7 @@
                     <div class="col-md-3">
                       <label>Associação *</label>
                       <select class="form-control select2" th:field="*{associacao}">
-                        <option selected>Selecione uma associação</option>
+                        <option selected value="">Selecione uma associação</option>
                         <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
                           th:text="${associacao.nome}"></option>
                       </select>
@@ -118,7 +118,7 @@
                     <div class="col-md-3">
                       <label>Porto *</label>
                       <select class="form-control select2" th:field="*{porto}">
-                        <option selected>Selecione um porto</option>
+                        <option selected value="">Selecione um porto</option>
                         <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
                       </select>
                     </div>
