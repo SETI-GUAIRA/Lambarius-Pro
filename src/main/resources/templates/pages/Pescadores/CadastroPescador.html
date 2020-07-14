@@ -2,10 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layout}">
 
-<head>
-  <link rel="stylesheet" th:href="@{/css/select2.min.css}">
-</head>
-
 <body>
   <div layout:fragment="corpo">
     <section class="content-header">
@@ -25,111 +21,111 @@
     </section>
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card card-navy">
-              <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Nome *</label>
-                      <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite o nome do pescador"
-                        required="required" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                      <label>Data de nascimento *</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                        <input type="text" class="form-control" data-inputmask-alias="datetime"
-                          data-inputmask-inputformat="dd/mm/yyyy" data-mask th:field="*{dataNascimento}">
+        <div class="col-md-12">
+          <div class="card card-navy">
+            <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Nome *</label>
+                    <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite o nome do pescador"
+                      required="required" autofocus>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Data de nascimento *</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                       </div>
+                      <input type="text" class="form-control" data-inputmask-alias="datetime"
+                        data-inputmask-inputformat="dd/mm/yyyy" data-mask th:field="*{dataNascimento}">
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label>CPF ou CNPJ *</label>
-                      <input type="text" name="cpf_cnpj" class="form-control cpf_cnpj"
-                        placeholder="Digite o CPF ou CNPJ" required="required" maxlength="15" th:field="*{cpfOuCnpj}">
-                    </div>
-                    <div class="col-md-4">
-                      <label>RGP *</label>
-                      <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
-                        required="required" th:field="*{rgp}">
-                    </div>
-                    <div class="col-md-4">
-                      <label>RG ou IE *</label>
-                      <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
-                        required="required" maxlength="15" th:field="*{rgOuIe}">
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>CPF ou CNPJ *</label>
+                    <input type="text" name="cpf_cnpj" class="form-control cpf_cnpj" placeholder="Digite o CPF ou CNPJ"
+                      required="required" maxlength="15" th:field="*{cpfOuCnpj}">
                   </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <label>Logradouro *</label>
-                      <input type="text" name="logradouro" id="lougradouro" class="form-control"
-                        placeholder="Digite o Logradouro" required th:field="*{endereco.logradouro}">
-                    </div>
-                    <div class="col-6">
-                      <label>Número *</label>
-                      <input type="number" name="numero" id="numero" class="form-control" placeholder="Digite o Número"
-                        required="required" th:field="*{endereco.numero}">
-                    </div>
+                  <div class="col-md-4">
+                    <label>RGP *</label>
+                    <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
+                      required="required" th:field="*{rgp}">
                   </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <label>Bairro *</label>
-                      <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Digite o Bairro"
-                        required th:field="*{endereco.bairro}">
-                    </div>
-                    <div class="col-6">
-                      <label>Complemento</label>
-                      <input type="text" name="complemento" id="complemento" class="form-control"
-                        placeholder="Digite um complemento para o endereço" th:field="*{endereco.complemento}">
-                    </div>
+                  <div class="col-md-4">
+                    <label>RG ou IE *</label>
+                    <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
+                      required="required" maxlength="15" th:field="*{rgOuIe}">
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <label>Telefone *</label>
-                      <input type="text" name="telefone" class="form-control"
-                        placeholder="Digite o telefone do pescador" maxlength="15" th:field="*{contato.telefone}">
-                    </div>
-                    <div class="col-md-6">
-                      <label>Celular *</label>
-                      <input type="text" name="celular" class="form-control"
-                        placeholder="Digite o número de celular do pescador" maxlength="15"
-                        th:field="*{contato.celular}">
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <label>Logradouro *</label>
+                    <input type="text" name="logradouro" id="lougradouro" class="form-control"
+                      placeholder="Digite o Logradouro" required th:field="*{endereco.logradouro}">
                   </div>
-                  <div class="form-group">
-                    <label>E-mail*</label>
-                    <input type="email" name="email" class="form-control" placeholder="Digite um e-mail"
-                      th:field="*{contato.email}">
+                  <div class="col-6">
+                    <label>Número *</label>
+                    <input type="number" name="numero" id="numero" class="form-control" placeholder="Digite o Número"
+                      required="required" th:field="*{endereco.numero}">
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <label>Bairro *</label>
+                    <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Digite o Bairro"
+                      required th:field="*{endereco.bairro}">
+                  </div>
+                  <div class="col-6">
+                    <label>Complemento</label>
+                    <input type="text" name="complemento" id="complemento" class="form-control"
+                      placeholder="Digite um complemento para o endereço" th:field="*{endereco.complemento}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Telefone *</label>
+                    <input type="text" name="telefone" class="form-control" placeholder="Digite o telefone do pescador"
+                      maxlength="15" th:field="*{contato.telefone}">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Celular *</label>
+                    <input type="text" name="celular" class="form-control"
+                      placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>E-mail*</label>
+                  <input type="email" name="email" class="form-control" placeholder="Digite um e-mail"
+                    th:field="*{contato.email}">
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
                       <label>Associação *</label>
-                      <select class="form-control select2" th:field="*{associacao}">
+                      <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
                         <option selected value="">Selecione uma associação</option>
                         <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
                           th:text="${associacao.nome}"></option>
                       </select>
                     </div>
-                    <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
                       <label>Porto *</label>
-                      <select class="form-control select2" th:field="*{porto}">
+                      <select class="form-control select2" th:field="*{porto}" style="width: 100%;">
                         <option selected value="">Selecione um porto</option>
                         <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
                       </select>
                     </div>
                   </div>
                 </div>
-                <input type="hidden" name="id" value="">
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Salvar</button>
-                </div>
-              </form>
-            </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -140,7 +136,6 @@
 <div layout:fragment="scripts">
   <script th:src=@{/js/jquery/jquery.inputmask.min.js}></script>
   <script th:src=@{/js/scripts/EnableDateMask.js}></script>
-  <script th:src=@{/js/select2.full.min.js}></script>
 </div>
 
 </html>
