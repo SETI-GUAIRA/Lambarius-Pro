@@ -37,9 +37,6 @@ LambariusPro.MaskCpfCnpj = (function(){
 
 
 $(() => {
-  var dateMask = new LambariusPro.DateMask()
-  dateMask.enable();
-
   var maskCpfCnpj = new LambariusPro.MaskCpfCnpj()
   maskCpfCnpj.enable();
 });
