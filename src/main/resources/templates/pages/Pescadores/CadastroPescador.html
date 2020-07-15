@@ -21,9 +21,13 @@
     </section>
     <section class="content">
       <div class="container-fluid">
-        <div class="col-md-12">
-          <div class="card card-navy">
-            <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
+        <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
+
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Dados do pescador</h3>
+              </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
@@ -60,6 +64,38 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Associação *</label>
+                      <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
+                        <option selected value="">Selecione uma associação</option>
+                        <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
+                          th:text="${associacao.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Porto *</label>
+                      <select class="form-control select2" th:field="*{porto}" style="width: 100%;">
+                        <option selected value="">Selecione um porto</option>
+                        <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Endereço</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
                   <div class="col-6">
                     <label>Logradouro *</label>
                     <input type="text" name="logradouro" id="lougradouro" class="form-control"
@@ -83,6 +119,16 @@
                       placeholder="Digite um complemento para o endereço" th:field="*{endereco.complemento}">
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Contato</h3>
+              </div>
+              <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
                     <label>Telefone *</label>
@@ -100,34 +146,15 @@
                   <input type="email" name="email" class="form-control" placeholder="Digite um e-mail"
                     th:field="*{contato.email}">
                 </div>
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Associação *</label>
-                      <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
-                        <option selected value="">Selecione uma associação</option>
-                        <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
-                          th:text="${associacao.nome}"></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Porto *</label>
-                      <select class="form-control select2" th:field="*{porto}" style="width: 100%;">
-                        <option selected value="">Selecione um porto</option>
-                        <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+
+        </form>
       </div>
     </section>
   </div>

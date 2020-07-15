@@ -16499,7 +16499,7 @@ textarea.form-control.is-warning {
 }
 
 .card-navy:not(.card-outline) > .card-header {
-  background-color: #003b75;
+  background-color: #f7f7f7;
 }
 
 .card-navy:not(.card-outline) > .card-header,
@@ -17963,8 +17963,9 @@ html.maximized-card {
 .card-title {
   float: left;
   font-size: 1.1rem;
-  font-weight: 400;
+  font-weight: bolder;
   margin: 0;
+  color: black;
 }
 
 .card-text {
