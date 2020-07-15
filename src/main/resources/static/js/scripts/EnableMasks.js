@@ -1,20 +1,5 @@
 var LambariusPro = LambariusPro || {}
 
-LambariusPro.DateMask = (function () {
-  class DateMask {
-    constructor() {
-      this.input = $('.datemask').inputmask({ 'placeholder': 'dd/mm/yyyy' })
-      this.data = $('[data-mask]').inputmask()
-    }
-    enable() {
-      this.input
-      this.data
-    }
-  }
-
-  return DateMask
-}())
-
 LambariusPro.MaskCpfCnpj = (function(){
 
   class MaskCpfCnpj {
