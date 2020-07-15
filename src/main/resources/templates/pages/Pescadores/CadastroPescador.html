@@ -22,7 +22,6 @@
     <section class="content">
       <div class="container-fluid">
         <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
-
           <div class="col-md-12">
             <div class="card card-navy">
               <div class="card-header">
@@ -30,11 +29,26 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <label>Nome *</label>
                     <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite o nome do pescador"
                       required="required" autofocus>
                   </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>CPF ou CNPJ *</label>
+                    <input type="text" name="cpf_cnpj" class="form-control js-documento" placeholder="Digite o CPF ou CNPJ"
+                      required="required" maxlength="18" th:field="*{cpfOuCnpj}">
+                  </div>
+
+                  <div class="col-md-6">
+                    <label>RG ou IE *</label>
+                    <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
+                      required="required" maxlength="15" th:field="*{rgOuIe}">
+                  </div>
+                </div>
+                <div class="row">
                   <div class="col-md-6">
                     <label>Data de nascimento *</label>
                     <div class="input-group">
@@ -45,26 +59,14 @@
                         data-inputmask-inputformat="dd/mm/yyyy" data-mask th:field="*{dataNascimento}">
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <label>CPF ou CNPJ *</label>
-                    <input type="text" name="cpf_cnpj" class="form-control cpf_cnpj" placeholder="Digite o CPF ou CNPJ"
-                      required="required" maxlength="15" th:field="*{cpfOuCnpj}">
-                  </div>
-                  <div class="col-md-4">
+                  <div class="col-md-6">
                     <label>RGP *</label>
                     <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
                       required="required" th:field="*{rgp}">
                   </div>
-                  <div class="col-md-4">
-                    <label>RG ou IE *</label>
-                    <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
-                      required="required" maxlength="15" th:field="*{rgOuIe}">
-                  </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label>Associação *</label>
                       <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
@@ -74,7 +76,7 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-6">
                     <div class="form-group">
                       <label>Porto *</label>
                       <select class="form-control select2" th:field="*{porto}" style="width: 100%;">
@@ -87,8 +89,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="col-md-12">
             <div class="card card-navy">
               <div class="card-header">
@@ -162,7 +162,7 @@
 
 <div layout:fragment="scripts">
   <script th:src=@{/js/jquery/jquery.inputmask.min.js}></script>
-  <script th:src=@{/js/scripts/EnableDateMask.js}></script>
+  <script th:src=@{/js/scripts/EnableMasks.js}></script>
 </div>
 
 </html>
