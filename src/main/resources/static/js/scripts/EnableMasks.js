@@ -15,42 +15,45 @@ LambariusPro.DateMask = (function () {
   return DateMask
 }())
 
-LambariusPro.Cpf_CnpjMask = (function () {
-  class Cpf_CnpjMask {
-    constructor() {}
-    enable() {
-      var options = {
-        onKeyPress: function (cpfcnpj, e, field, options) {
-          var masks = ['999.999.999-999', '00.000.000/0000-00'];
-          var mask = (cpfcnpj.length > 14) ? masks[1] : masks[0];
-          $('.js-documento').inputmask(mask, options);
-        }
-      };
-
-      $('.js-documento').inputmask('999.999.999-999', options);
-
-      $('.js-documento').on('change', validaDocumento.bind(this));
-    }
-  }
-
-  function validaDocumento() {
-    var valor = $('.js-documento').val().length;
-    if (valor < 14) {
-      $('.js-documento').val('');
-
-    } else if (valor > 14 && valor < 18) {
-      $('.js-documento').val('');
-    }
-  }
-
-  return Cpf_CnpjMask
-}())
+LambariusPro.MaskCpfCnpj = (function(){
+	
+	function MaskCpfCnpj(){
+		
+	}
+	
+	MaskCpfCnpj.prototype.enable = function(){
+		var options = {
+				onKeyPress : function(cpfcnpj, e, field, options) {
+					var masks = ['000.000.000-009', '00.000.000/0000-00'];
+					var mask = (cpfcnpj.length > 14) ? masks[1] : masks[0];
+					$('.js-documento').mask(mask, options);
+				}
+		};
+		
+		$('.js-documento').mask('000.000.000-009', options);
+		
+		$('.js-documento').on('blur', validaDocumento.bind(this));
+	}
+	
+	function validaDocumento(){
+		var valor = $('.js-documento').val().length;
+		if(valor < 14){
+			$('.js-documento').val('');
+		
+		}else if(valor > 14 && valor < 18){
+			$('.js-documento').val('');
+		}
+	}
+	
+	return MaskCpfCnpj;
+	
+}());
 
 
 $(() => {
   var dateMask = new LambariusPro.DateMask()
-  dateMask.enable()
+  dateMask.enable();
 
-  var cpf_cnpjMask = new LambariusPro.Cpf_CnpjMask()
-  cpf_cnpjMask.enable()
-})
+  var maskCpfCnpj = new LambariusPro.MaskCpfCnpj()
+  maskCpfCnpj.enable();
+});
