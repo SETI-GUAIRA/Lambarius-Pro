@@ -2,11 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layout}">
 
-<head>
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
-</head>
-
 <body>
   <div layout:fragment="corpo">
     <section class="content-header">
@@ -37,36 +32,32 @@
                   <div class="col-md-12">
                     <label>Nome *</label>
                     <input type="text" th:field="*{nome}" class="form-control" placeholder="Digite o nome do pescador"
-                      required="required" autofocus>
+                      required="required" autofocus autocomplete="off">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <label>CPF ou CNPJ *</label>
                     <input type="text" name="cpf_cnpj" class="form-control js-documento"
-                      placeholder="Digite o CPF ou CNPJ" required="required" maxlength="18" th:field="*{cpfOuCnpj}">
+                      placeholder="Digite o CPF ou CNPJ" required="required" maxlength="18" th:field="*{cpfOuCnpj}"
+                      autocomplete="off">
                   </div>
                   <div class="col-md-6">
                     <label>RG ou IE *</label>
                     <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
-                      required="required" maxlength="15" th:field="*{rgOuIe}">
+                      required="required" maxlength="15" th:field="*{rgOuIe}" autocomplete="off">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <label>Data de nascimento *</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                      </div>
-                      <input type="text" class="form-control datetimepicker-input" id="datepicker"
-                        data-toggle="datetimepicker" data-target="#datepicker" th:field="*{dataNascimento}" />
-                    </div>
+                    <input type="date" class="form-control datetimepicker-input" id="datepicker"
+                      th:field="*{dataNascimento}" autocomplete="off" />
                   </div>
                   <div class="col-md-6">
                     <label>RGP *</label>
                     <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
-                      required="required" th:field="*{rgp}">
+                      required="required" th:field="*{rgp}" autocomplete="off">
                   </div>
                 </div>
                 <div class="row">
@@ -108,7 +99,7 @@
                   <div class="col-6">
                     <label>Número </label>
                     <input type="number" name="numero" id="numero" class="form-control" placeholder="Digite o Número"
-                      th:field="*{endereco.numero}">
+                      th:field="*{endereco.numero}" autocomplete="off">
                   </div>
                 </div>
                 <div class="row">
@@ -135,13 +126,15 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label>Telefone *</label>
-                    <input type="text" name="telefone" class="form-control js-phone" placeholder="Digite o telefone do pescador"
-                      maxlength="15" th:field="*{contato.telefone}">
+                    <input type="text" name="telefone" class="form-control js-phone"
+                      placeholder="Digite o telefone do pescador" maxlength="15" th:field="*{contato.telefone}"
+                      autocomplete="off">
                   </div>
                   <div class="col-md-6">
                     <label>Celular *</label>
                     <input type="text" name="celular" class="form-control js-cell-phone"
-                      placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}">
+                      placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}"
+                      autocomplete="off">
                   </div>
                 </div>
                 <div class="form-group">
@@ -149,7 +142,6 @@
                   <input type="email" name="email" class="form-control" placeholder="Digite um e-mail"
                     th:field="*{contato.email}">
                 </div>
-
               </div>
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
@@ -165,18 +157,7 @@
 <div layout:fragment="scripts">
   <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
   <script th:src=@{/js/jquery/jquery.inputmask.min.js}></script>
-  <script th:src=@{/js/moment/moment.min.js}></script>
-  <script th:src=@{/js/moment/moment-with-locales.min.js}></script>
-  <script th:src=@{/js/tempusdominus-bootstrap-4.min.js}></script>
   <script th:src=@{/js/scripts/EnableMasks.js}></script>
-  <script>
-    $(function () {
-      $('#datepicker').datetimepicker({
-        format: 'L',
-        locale: 'pt'
-      });
-    })
-  </script>
 </div>
 
 </html>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class PescadorController {
   public String salvar(Pescador pescador) {
     pescadorService.salvar(pescador);
     return "redirect:/pescadores/novo";
+  }
+
+  @GetMapping("/editar/{codigo}")
+  public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
+    model.addAttribute("pescador", pescadorService.buscarUm(codigo));
+    return "pages/Pescadores/CadastroPescador";
   }
 
   @PostMapping("/excluir/{codigo}")

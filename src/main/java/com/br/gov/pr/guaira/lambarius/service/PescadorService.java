@@ -3,6 +3,7 @@ package com.br.gov.pr.guaira.lambarius.service;
 import com.br.gov.pr.guaira.lambarius.repository.PescadorRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Pescador;
 
@@ -26,5 +27,9 @@ public class PescadorService {
 
   public void excluir(Long codigo) {
     pescadorRepository.deleteById(codigo);
+  }
+
+  public Optional<Pescador> buscarUm(Long codigo) {
+    return pescadorRepository.findById(codigo);
   }
 }
