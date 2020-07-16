@@ -12,12 +12,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Cadastrar novo Porto</h1>
+            <h1 th:if="${codigo} == null">Cadastrar novo Porto</h1>
+            <h1 th:if="${codigo} != null">Editar Porto</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">Portos</li>
-              <li class="breadcrumb-item active">Cadastrar Porto</li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Porto</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Porto</li>
             </ol>
           </div>
         </div>
@@ -28,8 +30,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
-              <form role="form" class="form" method="POST" th:action="@{/portos/salvar}"
-              th:object="${porto}">
+              <form role="form" class="form" method="POST" th:action="@{/portos/salvar}" th:object="${porto}">
                 <div class="card-body">
                   <label>Nome do porto *</label>
                   <div class="form-group">

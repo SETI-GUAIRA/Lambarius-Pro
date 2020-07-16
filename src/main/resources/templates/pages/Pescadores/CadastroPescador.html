@@ -8,12 +8,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Cadastrar novo pescador</h1>
+            <h1 th:if="${codigo} == null">Cadastrar novo pescador</h1>
+            <h1 th:if="${codigo} != null">Editar pescador</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item">Pescadores</li>
-              <li class="breadcrumb-item active">Cadastrar Pescador</li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Pescador</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Pescador</li>
             </ol>
           </div>
         </div>
@@ -37,31 +39,6 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>CPF ou CNPJ *</label>
-                    <input type="text" name="cpf_cnpj" class="form-control js-documento"
-                      placeholder="Digite o CPF ou CNPJ" required="required" maxlength="18" th:field="*{cpfOuCnpj}"
-                      autocomplete="off">
-                  </div>
-                  <div class="col-md-6">
-                    <label>RG ou IE *</label>
-                    <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
-                      required="required" maxlength="15" th:field="*{rgOuIe}" autocomplete="off">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <label>Data de nascimento *</label>
-                    <input type="date" class="form-control"
-                      th:field="*{dataNascimento}" autocomplete="off" />
-                  </div>
-                  <div class="col-md-6">
-                    <label>RGP *</label>
-                    <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
-                      required="required" th:field="*{rgp}" autocomplete="off">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
                     <div class="form-group">
                       <label>Associação *</label>
                       <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
@@ -79,6 +56,30 @@
                         <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
                       </select>
                     </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>CPF ou CNPJ *</label>
+                    <input type="text" name="cpf_cnpj" class="form-control js-documento"
+                      placeholder="Digite o CPF ou CNPJ" required="required" maxlength="18" th:field="*{cpfOuCnpj}"
+                      autocomplete="off">
+                  </div>
+                  <div class="col-md-6">
+                    <label>RG ou IE *</label>
+                    <input type="text" name="rg_ie" class="form-control" placeholder="Digite o RG ou IE"
+                      required="required" maxlength="15" th:field="*{rgOuIe}" autocomplete="off">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Data de nascimento *</label>
+                    <input type="date" class="form-control" th:field="*{dataNascimento}" autocomplete="off" />
+                  </div>
+                  <div class="col-md-6">
+                    <label>RGP *</label>
+                    <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP" maxlength="15"
+                      required="required" th:field="*{rgp}" autocomplete="off">
                   </div>
                 </div>
               </div>
