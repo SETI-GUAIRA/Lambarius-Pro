@@ -106,16 +106,16 @@
                       placeholder="Digite o Logradouro" required th:field="*{endereco.logradouro}">
                   </div>
                   <div class="col-6">
-                    <label>Número *</label>
+                    <label>Número </label>
                     <input type="number" name="numero" id="numero" class="form-control" placeholder="Digite o Número"
-                      required="required" th:field="*{endereco.numero}">
+                      th:field="*{endereco.numero}">
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-6">
                     <label>Bairro *</label>
                     <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Digite o Bairro"
-                      required th:field="*{endereco.bairro}">
+                      th:field="*{endereco.bairro}">
                   </div>
                   <div class="col-6">
                     <label>Complemento</label>
@@ -135,12 +135,12 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label>Telefone *</label>
-                    <input type="text" name="telefone" class="form-control" placeholder="Digite o telefone do pescador"
+                    <input type="text" name="telefone" class="form-control js-phone" placeholder="Digite o telefone do pescador"
                       maxlength="15" th:field="*{contato.telefone}">
                   </div>
                   <div class="col-md-6">
                     <label>Celular *</label>
-                    <input type="text" name="celular" class="form-control"
+                    <input type="text" name="celular" class="form-control js-cell-phone"
                       placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}">
                   </div>
                 </div>
