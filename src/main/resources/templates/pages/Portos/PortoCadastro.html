@@ -36,6 +36,7 @@
                     <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
                       placeholder="Digite o nome" required="required" />
                   </div>
+                  <input type="hidden" name="id" th:field="*{codigo}">
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                   </div>

@@ -1,6 +1,7 @@
 package com.br.gov.pr.guaira.lambarius.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
 import com.br.gov.pr.guaira.lambarius.repository.PortoRepository;
@@ -20,6 +21,10 @@ public class PortoService {
 
   public List<Porto> buscarTodos() {
     return portoRepository.findAll();
+  }
+
+  public Optional<Porto> buscarUm(Long codigo){
+    return portoRepository.findById(codigo);
   }
 
   public void excluir(Long codigo) {

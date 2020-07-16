@@ -26,16 +26,22 @@ public class PortoController {
     return mv;
   }
 
+  @PostMapping("/salvar")
+  public String salvar(Porto porto) {
+    portoService.salvar(porto);
+    return "redirect:/portos/novo";
+  }
+
   @GetMapping("/lista")
   public String listar(ModelMap model) {
     model.addAttribute("portos", portoService.buscarTodos());
     return "/pages/Portos/PortoLista";
   }
 
-  @PostMapping("/salvar")
-  public String salvar(Porto porto) {
-    portoService.salvar(porto);
-    return "redirect:/portos/novo";
+  @GetMapping("/editar/{codigo}")
+  public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
+    model.addAttribute("porto", portoService.buscarUm(codigo));
+    return "pages/Portos/PortoCadastro";
   }
 
   @PostMapping("/excluir/{codigo}")

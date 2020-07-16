@@ -26,16 +26,22 @@ public class AssociacaoController {
     return mv;
   }
 
+  @PostMapping("/salvar")
+  public String salvar(Associacao associacao) {
+    associacaoService.salvar(associacao);
+    return "redirect:/associacoes/novo";
+  }
+
   @GetMapping("/lista")
   public String listar(ModelMap model) {
     model.addAttribute("associacoes", associacaoService.buscarTodos());
     return "/pages/Associacoes/AssociacaoLista";
   }
 
-  @PostMapping("/salvar")
-  public String salvar(Associacao associacao) {
-    associacaoService.salvar(associacao);
-    return "redirect:/associacoes/novo";
+  @GetMapping("/editar/{codigo}")
+  public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
+    model.addAttribute("associacao", associacaoService.buscarUm(codigo));
+    return "pages/Associacoes/AssociacaoCadastro";
   }
 
   @PostMapping("/excluir/{codigo}")

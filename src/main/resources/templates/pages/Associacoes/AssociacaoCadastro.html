@@ -33,9 +33,10 @@
                   <label>Nome da associação *</label>
                   <div class="form-group">
                     <input type="text" id="nome" class="form-control" autofocus placeholder="Digite o nome"
-                      required="required" th:field="*{nome}">
+                      required="required" th:field="*{nome}" autocomplete="off">
                   </div>
                 </div>
+                <input type="hidden" name="id" th:field="*{codigo}">
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>

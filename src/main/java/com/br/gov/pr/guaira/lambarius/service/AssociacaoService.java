@@ -1,6 +1,7 @@
 package com.br.gov.pr.guaira.lambarius.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
 import com.br.gov.pr.guaira.lambarius.repository.AssociacaoRepository;
@@ -24,5 +25,9 @@ public class AssociacaoService {
 
   public void excluir(Long codigo) {
     associacaoRepository.deleteById(codigo);
+  }
+
+  public Optional<Associacao> buscarUm(Long codigo){
+    return associacaoRepository.findById(codigo);
   }
 }
