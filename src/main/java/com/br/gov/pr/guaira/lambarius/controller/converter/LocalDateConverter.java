@@ -13,10 +13,10 @@ public class LocalDateConverter implements Converter<String, LocalDate> {
   @Override
   public LocalDate convert(String date) {
     if (!StringUtils.isEmpty(date)) {
-      DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-      LocalDate FormattedDate = LocalDate.parse(date, format);
+      DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+      LocalDate formattedDate = LocalDate.parse(date, format);
 
-      return FormattedDate;
+      return formattedDate;
     }
 
     return null;
