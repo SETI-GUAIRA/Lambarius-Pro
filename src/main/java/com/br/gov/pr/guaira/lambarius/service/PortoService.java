@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
+import com.br.gov.pr.guaira.lambarius.exception.PortoExistentException;
 import com.br.gov.pr.guaira.lambarius.repository.PortoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,13 @@ public class PortoService {
   private PortoRepository portoRepository;
 
   public void salvar(Porto porto) {
+
+    Optional<Porto> portoOp = portoRepository.findByIgnoreCaseNome(porto.getNome());
+
+    if (portoOp.isPresent()) {
+      throw new PortoExistentException("Porto já cadastrado");
+    }
+
     portoRepository.save(porto);
   }
 

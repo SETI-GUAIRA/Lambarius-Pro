@@ -1,11 +1,15 @@
 package com.br.gov.pr.guaira.lambarius.controller;
 
+import javax.validation.Valid;
+
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
+import com.br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
 import com.br.gov.pr.guaira.lambarius.service.AssociacaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +32,26 @@ public class AssociacaoController {
   }
 
   @PostMapping("/salvar")
-  public String salvar(Associacao associacao, RedirectAttributes attr) {
-    associacaoService.salvar(associacao);
-    attr.addFlashAttribute("success", "");
+  public String salvar(@Valid Associacao associacao, BindingResult result, RedirectAttributes attr) {
+    try {
 
-    return "redirect:/associacoes/novo";
+      if (result.hasErrors()) {
+
+        attr.addFlashAttribute("error", "");
+        return "redirect:/associacoes/novo";
+      }
+
+      associacaoService.salvar(associacao);
+      attr.addFlashAttribute("success", "");
+
+      return "redirect:/associacoes/novo";
+
+    } catch (AssociacaoExistentException exception) {
+
+      attr.addFlashAttribute("error", exception.getMessage());
+      return "redirect:/associacoes/novo";
+    }
+
   }
 
   @GetMapping("/lista")

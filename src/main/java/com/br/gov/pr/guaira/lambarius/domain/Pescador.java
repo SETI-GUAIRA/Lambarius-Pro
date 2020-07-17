@@ -9,6 +9,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -27,13 +30,17 @@ public class Pescador extends Pessoa {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codigo;
 
+  @NotBlank(message = "O campo RGP é obrigatório.")
+  @Size(max = 20, message = "O campo RGP deve conter no máximo 20 caracteres.")
   @Column(unique = true)
   private String rgp;
 
+  @NotNull(message = "Selecione uma associação para o pescador")
   @ManyToOne()
   @JoinColumn(name = "associacao", referencedColumnName = "codigo")
   private Associacao associacao;
 
+  @NotNull(message = "Selecione um porto para o pescador")
   @ManyToOne()
   @JoinColumn(name = "porto", referencedColumnName = "codigo")
   private Porto porto;

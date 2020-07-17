@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Pescador;
+import com.br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,13 @@ public class PescadorService {
   private PescadorRepository pescadorRepository;
 
   public void salvar(Pescador pescador) {
+
+    Optional<Pescador> pescadorOp = pescadorRepository.findBycpfOuCnpj(pescador.getCpfOuCnpj());
+
+    if (pescadorOp.isPresent()) {
+      throw new PescadorExistentException("Pescador já cadastrado");
+    }
+
     pescadorRepository.save(pescador);
   }
 

@@ -3,6 +3,7 @@ package com.br.gov.pr.guaira.lambarius.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
 import com.br.gov.pr.guaira.lambarius.domain.Pescador;
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
+import com.br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 import com.br.gov.pr.guaira.lambarius.service.AssociacaoService;
 import com.br.gov.pr.guaira.lambarius.service.PescadorService;
 import com.br.gov.pr.guaira.lambarius.service.PortoService;
@@ -48,10 +52,23 @@ public class PescadorController {
   }
 
   @PostMapping("/salvar")
-  public String salvar(Pescador pescador, RedirectAttributes attr) {
-    pescadorService.salvar(pescador);
-    attr.addFlashAttribute("success", "");
-    return "redirect:/pescadores/novo";
+  public String salvar(@Valid Pescador pescador, BindingResult result, RedirectAttributes attr) {
+    try {
+
+      if (result.hasErrors()) {
+        attr.addFlashAttribute("error", "");
+        return "redirect:/pescadores/novo";
+      }
+
+      pescadorService.salvar(pescador);
+      attr.addFlashAttribute("success", "");
+      return "redirect:/pescadores/novo";
+
+    } catch (PescadorExistentException exception) {
+
+      attr.addFlashAttribute("error", exception.getMessage());
+      return "redirect:/pescadores/novo";
+    }
   }
 
   @GetMapping("/editar/{codigo}")

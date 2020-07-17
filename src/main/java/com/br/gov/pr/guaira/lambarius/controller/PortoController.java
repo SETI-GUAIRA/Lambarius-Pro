@@ -1,11 +1,15 @@
 package com.br.gov.pr.guaira.lambarius.controller;
 
+import javax.validation.Valid;
+
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
+import com.br.gov.pr.guaira.lambarius.exception.PortoExistentException;
 import com.br.gov.pr.guaira.lambarius.service.PortoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +32,24 @@ public class PortoController {
   }
 
   @PostMapping("/salvar")
-  public String salvar(Porto porto, RedirectAttributes attr) {
-    portoService.salvar(porto);
-    attr.addFlashAttribute("success", "");
+  public String salvar(@Valid Porto porto, BindingResult result, RedirectAttributes attr) {
+    try {
 
-    return "redirect:/portos/novo";
+      if (result.hasErrors()) {
+        attr.addFlashAttribute("error", "");
+        return "redirect:/portos/novo";
+      }
+
+      portoService.salvar(porto);
+      attr.addFlashAttribute("success", "");
+
+      return "redirect:/portos/novo";
+
+    } catch (PortoExistentException exception) {
+
+      attr.addFlashAttribute("error", exception.getMessage());
+      return "redirect:/portos/novo";
+    }
   }
 
   @GetMapping("/lista")

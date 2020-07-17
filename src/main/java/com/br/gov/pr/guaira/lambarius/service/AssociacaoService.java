@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
+import com.br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
 import com.br.gov.pr.guaira.lambarius.repository.AssociacaoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,13 @@ public class AssociacaoService {
   private AssociacaoRepository associacaoRepository;
 
   public void salvar(Associacao associacao) {
+
+    Optional<Associacao> associacaoOp = associacaoRepository.findByIgnoreCaseNome(associacao.getNome());
+
+    if (associacaoOp.isPresent()) {
+      throw new AssociacaoExistentException("Associação já cadastrada");
+    }
+
     associacaoRepository.save(associacao);
   }
 
