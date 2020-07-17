@@ -74,7 +74,7 @@ public class PescadorController {
   @GetMapping("/editar/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("pescador", pescadorService.buscarUm(codigo));
-    return "layout/pages/Pescadores/CadastroPescador";
+    return "layout/pages/Pescadores/PescadorCadastro";
   }
 
   @PostMapping("/excluir/{codigo}")

@@ -35,7 +35,6 @@ public class PortoController {
   @PostMapping("/salvar")
   public String salvar(@Valid Porto porto, BindingResult result, RedirectAttributes attr) {
     try {
-
       if (result.hasErrors()) {
         attr.addFlashAttribute("error", "Preencha todos os campos");
         return "redirect:/portos/novo";
