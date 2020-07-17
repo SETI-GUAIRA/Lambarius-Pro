@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
 import com.br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
+import com.br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import com.br.gov.pr.guaira.lambarius.repository.AssociacaoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,10 +34,15 @@ public class AssociacaoService {
   }
 
   public void excluir(Long codigo) {
-    associacaoRepository.deleteById(codigo);
+    try {
+      associacaoRepository.deleteById(codigo);
+    } catch (DataIntegrityViolationException e) {
+
+      throw new ImpossivelExcluirEntidade("Não foi possível excluir a associação, há pescadores associados");
+    }
   }
 
-  public Optional<Associacao> buscarUm(Long codigo){
+  public Optional<Associacao> buscarUm(Long codigo) {
     return associacaoRepository.findById(codigo);
   }
 }

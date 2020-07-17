@@ -165,11 +165,13 @@
   <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
   <script th:src=@{/js/scripts/EnableMasks.js}></script>
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
-  <script th:if="${success}">
-    toastr.success("Pescador registradp com sucesso.")
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+    toastr.success(`${message}`)
   </script>
-  <script th:if="${error}">
-    toastr.error("Erro ao cadastrar o pescador! Tente novamente.")
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+    toastr.error(`${message}`)
   </script>
 </div>
 

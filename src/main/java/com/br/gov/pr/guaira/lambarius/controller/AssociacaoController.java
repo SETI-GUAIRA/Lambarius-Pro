@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import com.br.gov.pr.guaira.lambarius.domain.Associacao;
 import com.br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
+import com.br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import com.br.gov.pr.guaira.lambarius.service.AssociacaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,12 @@ public class AssociacaoController {
 
       if (result.hasErrors()) {
 
-        attr.addFlashAttribute("error", "");
+        attr.addFlashAttribute("error", "Preencha todos os campos");
         return "redirect:/associacoes/novo";
       }
 
       associacaoService.salvar(associacao);
-      attr.addFlashAttribute("success", "");
+      attr.addFlashAttribute("success", "Associação cadastrada com sucesso");
 
       return "redirect:/associacoes/novo";
 
@@ -68,9 +69,15 @@ public class AssociacaoController {
 
   @PostMapping("/excluir/{codigo}")
   public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
-    associacaoService.excluir(codigo);
-    attr.addFlashAttribute("success", "");
+    try {
+      associacaoService.excluir(codigo);
+      attr.addFlashAttribute("success", "Associação excluída com sucesso.");
 
-    return "redirect:/associacoes/lista";
+      return "redirect:/associacoes/lista";
+
+    } catch (ImpossivelExcluirEntidade exception) {
+      attr.addFlashAttribute("error", exception.getMessage());
+      return "redirect:/associacoes/lista";
+    }
   }
 }

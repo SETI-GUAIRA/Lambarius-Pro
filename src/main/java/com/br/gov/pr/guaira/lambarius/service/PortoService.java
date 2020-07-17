@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
+import com.br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import com.br.gov.pr.guaira.lambarius.exception.PortoExistentException;
 import com.br.gov.pr.guaira.lambarius.repository.PortoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,7 +38,11 @@ public class PortoService {
   }
 
   public void excluir(Long codigo) {
-    portoRepository.deleteById(codigo);
+    try {
+      portoRepository.deleteById(codigo);
+    } catch (DataIntegrityViolationException e){
+      throw new ImpossivelExcluirEntidade("Não foi possível excluir o porto, há pescadores associados");
+    }
   }
 
 }

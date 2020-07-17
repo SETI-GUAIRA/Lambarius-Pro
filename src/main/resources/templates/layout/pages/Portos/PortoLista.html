@@ -80,11 +80,13 @@
   <script th:src="@{/layout/js/datatables/responsive.bootstrap4.min.js}"></script>
   <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
-  <script th:if="${success}">
-    toastr.success("Porto excluído com sucesso.")
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+    toastr.success(`${message}`)
   </script>
-  <script th:if="${error}">
-    toastr.error("Erro ao excluir o porto! Tente novamente.")
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+    toastr.error(`${message}`)
   </script>
   <script>
     $(function () {

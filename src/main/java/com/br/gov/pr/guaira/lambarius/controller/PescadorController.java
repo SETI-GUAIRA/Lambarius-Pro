@@ -56,12 +56,12 @@ public class PescadorController {
     try {
 
       if (result.hasErrors()) {
-        attr.addFlashAttribute("error", "");
+        attr.addFlashAttribute("error", "Preencha todos os campos");
         return "redirect:/pescadores/novo";
       }
 
       pescadorService.salvar(pescador);
-      attr.addFlashAttribute("success", "");
+      attr.addFlashAttribute("success", "Pescador cadastrado com sucesso.");
       return "redirect:/pescadores/novo";
 
     } catch (PescadorExistentException exception) {
@@ -80,7 +80,7 @@ public class PescadorController {
   @PostMapping("/excluir/{codigo}")
   public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     pescadorService.excluir(codigo);
-    attr.addFlashAttribute("success", "");
+    attr.addFlashAttribute("success", "Pescador excluído com sucesso.");
     return "redirect:/pescadores/lista";
   }
 

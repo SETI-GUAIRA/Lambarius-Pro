@@ -53,11 +53,13 @@
 
 <div layout:fragment="scripts">
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
-  <script th:if="${success}">
-    toastr.success("Associação registrada com sucesso.")
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+    toastr.success(`${message}`)
   </script>
-  <script th:if="${error}">
-    toastr.error("Erro ao cadastrar a associação! Tente novamente.")
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+    toastr.error(`${message}`)
   </script>
 </div>
 

@@ -3,6 +3,7 @@ package com.br.gov.pr.guaira.lambarius.controller;
 import javax.validation.Valid;
 
 import com.br.gov.pr.guaira.lambarius.domain.Porto;
+import com.br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import com.br.gov.pr.guaira.lambarius.exception.PortoExistentException;
 import com.br.gov.pr.guaira.lambarius.service.PortoService;
 
@@ -36,12 +37,12 @@ public class PortoController {
     try {
 
       if (result.hasErrors()) {
-        attr.addFlashAttribute("error", "");
+        attr.addFlashAttribute("error", "Preencha todos os campos");
         return "redirect:/portos/novo";
       }
 
       portoService.salvar(porto);
-      attr.addFlashAttribute("success", "");
+      attr.addFlashAttribute("success", "Porto cadastrado com sucesso.");
 
       return "redirect:/portos/novo";
 
@@ -66,9 +67,16 @@ public class PortoController {
 
   @PostMapping("/excluir/{codigo}")
   public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
-    portoService.excluir(codigo);
-    attr.addFlashAttribute("success", "");
+    try {
+      portoService.excluir(codigo);
+      attr.addFlashAttribute("success", "Porto excluído com sucesso.");
 
-    return "redirect:/portos/lista";
+      return "redirect:/portos/lista";
+
+    } catch (ImpossivelExcluirEntidade exception) {
+      attr.addFlashAttribute("error", exception.getMessage());
+      return "redirect:/portos/lista";
+    }
+
   }
 }
