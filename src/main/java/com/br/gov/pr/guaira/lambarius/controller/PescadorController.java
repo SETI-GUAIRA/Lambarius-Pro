@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class PescadorController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Pescador pescador) {
-    ModelAndView mv = new ModelAndView("pages/Pescadores/CadastroPescador");
+    ModelAndView mv = new ModelAndView("layout/pages/Pescadores/PescadorCadastro");
 
     return mv;
   }
@@ -42,26 +43,28 @@ public class PescadorController {
   @GetMapping("/lista")
   public String listar(ModelMap model) {
     model.addAttribute("pescadores", pescadorService.buscarTodos());
-    return "pages/Pescadores/PescadorLista";
+
+    return "layout/pages/Pescadores/PescadorLista";
   }
 
   @PostMapping("/salvar")
-  public String salvar(Pescador pescador) {
+  public String salvar(Pescador pescador, RedirectAttributes attr) {
     pescadorService.salvar(pescador);
+    attr.addFlashAttribute("success", "");
     return "redirect:/pescadores/novo";
   }
 
   @GetMapping("/editar/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("pescador", pescadorService.buscarUm(codigo));
-    return "pages/Pescadores/CadastroPescador";
+    return "layout/pages/Pescadores/CadastroPescador";
   }
 
   @PostMapping("/excluir/{codigo}")
-  public String excluir(@PathVariable("codigo") Long codigo, ModelMap model) {
+  public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     pescadorService.excluir(codigo);
-
-    return listar(model);
+    attr.addFlashAttribute("success", "");
+    return "redirect:/pescadores/lista";
   }
 
   @ModelAttribute("associacoes")

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{/layout/layout}">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/css/datatables/dataTables.bootstrap4.min.css}">
-  <link rel="stylesheet" th:href="@{/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
 </head>
 
 <body>
@@ -13,13 +14,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listar Associações</h1>
+            <h1>Listar Portos</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">Associações
+              <li class="breadcrumb-item">Portos
               </li>
-              <li class="breadcrumb-item active">Listar Associações</li>
+              <li class="breadcrumb-item active">Listar Portos</li>
             </ol>
           </div>
         </div>
@@ -43,17 +44,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="associacao : ${associacoes}">
-                      <td th:text="${associacao.nome}">Nome</td>
+                    <tr th:each="porto : ${portos}">
+                      <td th:text="${porto.nome}">Nome</td>
+                      </td>
                       <td>
                         <div class="row">
-                          <a class="mr-1" th:href="@{/associacoes/editar/{codigo} (codigo=${associacao.codigo})}">
+                          <a class="mr-1" th:href="@{/portos/editar/{codigo} (codigo=${porto.codigo})}">
                             <button class="btn btn-primary btn-xs">
                               <i class="fas fa-pencil-alt"></i>
                             </button>
                           </a>
                           <form class="ToDelete" method="POST"
-                            th:action="@{/associacoes/excluir/{codigo} (codigo=${associacao.codigo})}">
+                            th:action="@{/portos/excluir/{codigo} (codigo=${porto.codigo})}">
                             <button class="btn btn-danger btn-xs" type="submit">
                               <i class="fas fa-trash"></i>
                             </button>
@@ -70,19 +72,25 @@
       </div>
     </section>
   </div>
-
-  <div layout:fragment="scripts">
-    <script th:src="@{/js/datatables/jquery.dataTables.js}"></script>
-    <script th:src="@{/js/datatables/dataTables.bootstrap4.min.js}"></script>
-    <script th:src="@{/js/datatables/dataTables.responsive.min.js}"></script>
-    <script th:src="@{/js/datatables/responsive.bootstrap4.min.js}"></script>
-    <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
-    <script>
-      $(function () {
-        $("#table").DataTable({ "responsive": true, "autoWidth": false });
-      });
-    </script>
-  </div>
 </body>
+<div layout:fragment="scripts">
+  <script th:src="@{/layout/js/datatables/jquery.dataTables.js}"></script>
+  <script th:src="@{/layout/js/datatables/dataTables.bootstrap4.min.js}"></script>
+  <script th:src="@{/layout/js/datatables/dataTables.responsive.min.js}"></script>
+  <script th:src="@{/layout/js/datatables/responsive.bootstrap4.min.js}"></script>
+  <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}">
+    toastr.success("Porto excluído com sucesso.")
+  </script>
+  <script th:if="${error}">
+    toastr.error("Erro ao excluir o porto! Tente novamente.")
+  </script>
+  <script>
+    $(function () {
+      $("#table").DataTable({ "responsive": true, "autoWidth": false });
+    });
+  </script>
+</div>
 
 </html>

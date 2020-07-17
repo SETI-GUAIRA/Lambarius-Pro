@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout}">
+  layout:decorate="~{/layout/layout}">
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
 </head>
 
 <body>
@@ -49,5 +50,15 @@
     </section>
   </div>
 </body>
+
+<div layout:fragment="scripts">
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}">
+    toastr.success("Porto cadastrado com sucesso.")
+  </script>
+  <script th:if="${error}">
+    toastr.error("Erro ao cadastrar o porto! Tente novamente.")
+  </script>
+</div>
 
 </html>

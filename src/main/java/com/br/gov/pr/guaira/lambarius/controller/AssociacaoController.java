@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/associacoes")
@@ -21,33 +22,36 @@ public class AssociacaoController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Associacao associacao) {
-    ModelAndView mv = new ModelAndView("pages/Associacoes/AssociacaoCadastro");
+    ModelAndView mv = new ModelAndView("layout/pages/Associacoes/AssociacaoCadastro");
 
     return mv;
   }
 
   @PostMapping("/salvar")
-  public String salvar(Associacao associacao) {
+  public String salvar(Associacao associacao, RedirectAttributes attr) {
     associacaoService.salvar(associacao);
+    attr.addFlashAttribute("success", "");
+
     return "redirect:/associacoes/novo";
   }
 
   @GetMapping("/lista")
   public String listar(ModelMap model) {
     model.addAttribute("associacoes", associacaoService.buscarTodos());
-    return "/pages/Associacoes/AssociacaoLista";
+    return "layout/pages/Associacoes/AssociacaoLista";
   }
 
   @GetMapping("/editar/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("associacao", associacaoService.buscarUm(codigo));
-    return "pages/Associacoes/AssociacaoCadastro";
+    return "/layout/pages/Associacoes/AssociacaoCadastro";
   }
 
   @PostMapping("/excluir/{codigo}")
-  public String excluir(@PathVariable("codigo") Long codigo, ModelMap model) {
+  public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     associacaoService.excluir(codigo);
+    attr.addFlashAttribute("success", "");
 
-    return listar(model);
+    return "redirect:/associacoes/lista";
   }
 }

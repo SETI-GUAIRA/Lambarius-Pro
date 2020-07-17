@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Lambarius</title>
+  <title>Lambarius - Pro</title>
 
   <link rel="shortcut icon" href="/images/logo_municipio_preto.png" />
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" th:href="@{/css/fontawesome/css/all.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/fontawesome/css/all.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" th:href="@{/css/adminlte.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/adminlte.css}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -21,17 +21,17 @@
 
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
-    <nav th:replace="fragments/navbar :: navbar"></nav>
-    <aside th:replace="fragments/sidebar :: sidebar"></aside>
+    <nav th:replace="layout/fragments/navbar :: navbar"></nav>
+    <aside th:replace="layout/fragments/sidebar :: sidebar"></aside>
     <div class="content-wrapper">
       <div layout:fragment="corpo"></div>
     </div>
-    <footer th:replace="fragments/footer :: footer"></footer>
+    <footer th:replace="layout/fragments/footer :: footer"></footer>
   </div>
 
-  <script th:src="@{/js/jquery/jquery.min.js}"></script>
-  <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
-  <script th:src="@{/js/adminlte.js}"></script>
+  <script th:src="@{/layout/js/jquery/jquery.min.js}"></script>
+  <script th:src="@{/layout/js/bootstrap/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/layout/js/adminlte.js}"></script>
   <div layout:fragment="scripts"></div>
 </body>
 

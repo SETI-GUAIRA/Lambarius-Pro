@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/portos")
@@ -21,33 +22,36 @@ public class PortoController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Porto porto) {
-    ModelAndView mv = new ModelAndView("pages/Portos/PortoCadastro");
+    ModelAndView mv = new ModelAndView("layout/pages/Portos/PortoCadastro");
 
     return mv;
   }
 
   @PostMapping("/salvar")
-  public String salvar(Porto porto) {
+  public String salvar(Porto porto, RedirectAttributes attr) {
     portoService.salvar(porto);
+    attr.addFlashAttribute("success", "");
+
     return "redirect:/portos/novo";
   }
 
   @GetMapping("/lista")
   public String listar(ModelMap model) {
     model.addAttribute("portos", portoService.buscarTodos());
-    return "/pages/Portos/PortoLista";
+    return "layout/pages/Portos/PortoLista";
   }
 
   @GetMapping("/editar/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("porto", portoService.buscarUm(codigo));
-    return "pages/Portos/PortoCadastro";
+    return "layout/pages/Portos/PortoCadastro";
   }
 
   @PostMapping("/excluir/{codigo}")
-  public String excluir(@PathVariable("codigo") Long codigo, ModelMap model) {
+  public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     portoService.excluir(codigo);
+    attr.addFlashAttribute("success", "");
 
-    return listar(model);
+    return "redirect:/portos/lista";
   }
 }

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{/layout/layout}">
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" th:href="@{/css/datatables/dataTables.bootstrap4.min.css}">
-  <link rel="stylesheet" th:href="@{/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
 </head>
 
 <body>
@@ -82,19 +83,26 @@
       </div>
     </section>
   </div>
-
-  <div layout:fragment="scripts">
-    <script th:src="@{/js/datatables/jquery.dataTables.js}"></script>
-    <script th:src="@{/js/datatables/dataTables.bootstrap4.min.js}"></script>
-    <script th:src="@{/js/datatables/dataTables.responsive.min.js}"></script>
-    <script th:src="@{/js/datatables/responsive.bootstrap4.min.js}"></script>
-    <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
-    <script>
-      $(function () {
-        $("#table").DataTable({ "responsive": true, "autoWidth": false });
-      });
-    </script>
-  </div>
 </body>
+
+<div layout:fragment="scripts">
+  <script th:src="@{/layout/js/datatables/jquery.dataTables.js}"></script>
+  <script th:src="@{/layout/js/datatables/dataTables.bootstrap4.min.js}"></script>
+  <script th:src="@{/layout/js/datatables/dataTables.responsive.min.js}"></script>
+  <script th:src="@{/layout/js/datatables/responsive.bootstrap4.min.js}"></script>
+  <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}">
+    toastr.success("Associação excluída com sucesso.")
+  </script>
+  <script th:if="${error}">
+    toastr.error("Erro ao excluir a associação! Tente novamente.")
+  </script>
+  <script>
+    $(function () {
+      $("#table").DataTable({ "responsive": true, "autoWidth": false });
+    });
+  </script>
+</div>
 
 </html>
