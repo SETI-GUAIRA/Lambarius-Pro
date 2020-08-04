@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -44,5 +45,10 @@ public class Pescador extends Pessoa {
   @ManyToOne()
   @JoinColumn(name = "porto", referencedColumnName = "codigo")
   private Porto porto;
+  
+  @PrePersist
+  private void toUpperCase() {
+	  this.getNome().toUpperCase();
+  }
 
 }

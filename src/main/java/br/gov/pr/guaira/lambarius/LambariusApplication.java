@@ -1,4 +1,4 @@
-package com.br.gov.pr.guaira.lambarius;
+package br.gov.pr.guaira.lambarius;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

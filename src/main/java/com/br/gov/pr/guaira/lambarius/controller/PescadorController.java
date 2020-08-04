@@ -40,11 +40,11 @@ public class PescadorController {
   @GetMapping("/novo")
   public ModelAndView novo(Pescador pescador) {
     ModelAndView mv = new ModelAndView("layout/pages/Pescadores/PescadorCadastro");
-
+    
     return mv;
   }
 
-  @GetMapping("/lista")
+  @GetMapping
   public String listar(ModelMap model) {
     model.addAttribute("pescadores", pescadorService.buscarTodos());
 
