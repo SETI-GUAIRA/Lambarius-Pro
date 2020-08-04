@@ -7,7 +7,7 @@
     <version>2.3.1.RELEASE</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.br.gov.pr.guaira.lambarius</groupId>
+  <groupId>br.gov.pr.guaira.lambarius</groupId>
   <artifactId>lambarius</artifactId>
   <version>2.3.1</version>
   <name>lambarius</name>

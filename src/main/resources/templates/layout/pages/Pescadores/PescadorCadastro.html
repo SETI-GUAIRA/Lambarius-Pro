@@ -18,7 +18,7 @@
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item">Pescadores</li>
+							<li class="breadcrumb-item"><a th:href="@{/pescadores}">Pescadores</a></li>
 							<li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar
 								Pescador</li>
 							<li class="breadcrumb-item active" th:if="${codigo} != null">Editar
@@ -49,7 +49,7 @@
 													th:value="${associacao.codigo}"
 													th:text="${associacao.nome}"></option>
 											</select>
-											
+
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -147,10 +147,10 @@
 										<label>Telefone *</label> <input type="text" name="telefone"
 											class="form-control js-phone"
 											placeholder="Digite o telefone do pescador" maxlength="15"
-											th:field="*{contato.telefone}" autocomplete="off">
+											th:field="*{contato.telefone}" autocomplete="off" required>
 									</div>
 									<div class="col-md-6">
-										<label>Celular *</label> <input type="text" name="celular"
+										<label>Celular </label> <input type="text" name="celular"
 											class="form-control js-cell-phone"
 											placeholder="Digite o número de celular do pescador"
 											maxlength="15" th:field="*{contato.celular}"
@@ -158,7 +158,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label>E-mail*</label> <input type="email" name="email"
+									<label>E-mail</label> <input type="email" name="email"
 										class="form-control" placeholder="Digite um e-mail"
 										th:field="*{contato.email}">
 								</div>
