@@ -1,38 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+  lang="pt-br"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Lambarius - Pro</title>
 
-  <title>Lambarius - Pro</title>
+    <link rel="shortcut icon" href="/images/logo_municipio_preto.png" />
 
-  <link rel="shortcut icon" href="/images/logo_municipio_preto.png" />
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" th:href="@{/layout/css/fontawesome/css/all.min.css}">
-  <!-- Theme style -->
-  <link rel="stylesheet" th:href="@{/layout/css/adminlte.css}">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      th:href="@{/layout/css/fontawesome/css/all.min.css}"
+    />
 
-</head>
+    <link rel="stylesheet" th:href="@{/layout/css/adminlte.css}" />
 
-<body class="hold-transition sidebar-mini">
-  <div class="wrapper">
-    <nav th:replace="layout/fragments/navbar :: navbar"></nav>
-    <aside th:replace="layout/fragments/sidebar :: sidebar"></aside>
-    <div class="content-wrapper">
-      <div layout:fragment="corpo"></div>
+    <link
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <nav th:replace="layout/fragments/navbar :: navbar"></nav>
+      <aside th:replace="layout/fragments/sidebar :: sidebar"></aside>
+      <div class="content-wrapper">
+        <div layout:fragment="corpo"></div>
+      </div>
+      <footer th:replace="layout/fragments/footer :: footer"></footer>
     </div>
-    <footer th:replace="layout/fragments/footer :: footer"></footer>
-  </div>
 
-  <script th:src="@{/layout/js/jquery/jquery.min.js}"></script>
-  <script th:src="@{/layout/js/bootstrap/bootstrap.bundle.min.js}"></script>
-  <script th:src="@{/layout/js/adminlte.js}"></script>
-  <div layout:fragment="scripts"></div>
-</body>
-
+    <script th:src="@{/layout/js/jquery/jquery.min.js}"></script>
+    <script th:src="@{/layout/js/bootstrap/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/layout/js/adminlte.js}"></script>
+    <div layout:fragment="scripts"></div>
+  </body>
 </html>
