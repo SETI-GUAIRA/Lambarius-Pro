@@ -65,9 +65,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>CPF ou CNPJ *</label> <input type="text" name="cpf_cnpj" class="form-control js-documento"
-                      placeholder="Digite o CPF ou CNPJ" required="required" maxlength="18" th:field="*{cpfOuCnpj}"
-                      autocomplete="off">
+                    <label>CPF ou CNPJ *</label> <input type="text" name="cpf_cnpj"
+                      class="form-control js-documento cpf_cnpj" placeholder="Digite o CPF ou CNPJ" required="required"
+                      maxlength="18" th:field="*{cpfOuCnpj}" autocomplete="off">
                   </div>
                   <div class="col-md-6">
                     <label>RG ou IE *</label> <input type="text" name="rg_ie" class="form-control"
@@ -180,9 +180,9 @@
 
 <div layout:fragment="scripts">
   <script th:src=@{/layout/js/jquery/jquery.inputmask.min.js}></script>
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
   <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
   <script th:src=@{/js/scripts/EnableMasks.js}></script>
-  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
   <script th:src="@{/js/webcam/webcam.js}"></script>
   <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
@@ -195,19 +195,21 @@
   <script>
     Webcam.attach('#preview');
 
+    const cpfCnpj = $('.cpf_cnpj')
+
     Webcam.set({
       width: 340,
       height: 240,
       dest_width: 340,
       dest_height: 240,
       image_format: 'png',
-      png_quality: 200,
-      fps: 60
+      fps: 60,
+      // upload_name: `${Date.now().toString()}-${cpfCnpj}`
     });
 
     function take_snapshot() {
       Webcam.snap(function (data_uri) {
-        document.getElementById('photo').innerHTML = `<img src="${data_uri}"/>`;
+        document.getElementById('photo').innerHTML = `<img src="${data_uri}" />`;
       });
     }
   </script>
