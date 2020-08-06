@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html layout:decorate="~{/layout/layout}" 
-xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{/layout/layout}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -35,8 +34,8 @@ xmlns:th="http://www.thymeleaf.org">
                 <table id="table" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                    <th>
-                        <i class="fas fa-user-alt"></i>
+                      <th>
+                        <i class="fas fa-image"></i>
                         Foto</th>
                       <th>
                         <i class="fas fa-user-alt"></i>
@@ -48,20 +47,21 @@ xmlns:th="http://www.thymeleaf.org">
                         <i class="far fa-id-card"></i>
                         CPF ou CNPJ</th>
                       <th>
-                        <i class="far fa-envelope"></i>
-                        E-mail</th>
-                      <th>
                         <i class="fa fa-edit">
                           Ações</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr th:each="pescador : ${pescadores}">
-                    <td><img class="img-fluid  img-thumb" th:src="${pescador.foto}"/></td>
+                      <td class="img-container">
+                        <img class="img-fluid img-thumb" th:src="${pescador.foto}" />
+                        <div class="bigImg" style="display: none;">
+                          <img class="img-thumb-big" th:src="${pescador.foto}" />
+                        </div>
+                      </td>
                       <td th:text="${pescador.nome}">Nome</td>
                       <td th:text="${pescador.rgp}">rgp</td>
                       <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>
-                      <td th:text="${pescador.contato.email}">email</td>
                       <td>
                         <div class="row">
                           <a class="mr-1" th:href="@{/pescadores/editar/{codigo} (codigo=${pescador.codigo})}">
@@ -95,19 +95,20 @@ xmlns:th="http://www.thymeleaf.org">
   <script th:src="@{/layout/js/datatables/dataTables.responsive.min.js}"></script>
   <script th:src="@{/layout/js/datatables/responsive.bootstrap4.min.js}"></script>
   <script th:src="@{/js/scripts/ConfirmDelete.js}"></script>
+  <script th:src="@{/js/scripts/ImageOverlay.js}"></script>
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
-  <script th:if="${success}" th:inline="javascript">
-    const message = /*[[${success}]]*/
-    toastr.success(`${message}`)
-  </script>
-  <script th:if="${error}" th:inline="javascript">
-    const message = /*[[${error}]]*/
-    toastr.error(`${message}`)
-  </script>
   <script>
     $(function () {
       $("#table").DataTable({ "responsive": true, "autoWidth": false });
     });
+  </script>
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+      toastr.success(`${message}`)
+  </script>
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+      toastr.error(`${message}`)
   </script>
 </div>
 

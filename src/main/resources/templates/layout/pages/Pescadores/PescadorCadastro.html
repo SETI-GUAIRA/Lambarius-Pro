@@ -174,7 +174,7 @@
               </div>
             </div>
           </div>
-          
+
         </form>
       </div>
     </section>
@@ -196,13 +196,13 @@
       toastr.error(`${message}`)
   </script>
   <script>
-  
+
   	if($('#foto').val()){
   		console.log('tem foto');
   		var foto = $('#foto').val();
   		document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
   	}
-  	
+
     Webcam.attach('#preview');
 
     const cpfCnpj = $('.cpf_cnpj')
@@ -220,11 +220,11 @@
     function take_snapshot() {
       Webcam.snap(function (data_uri) {
         document.getElementById('photo').innerHTML = `<img id="img" src="${data_uri}" />`;
-        
+
         var imagem = $("#img").prop('src');
         $('#foto').val(imagem);
-        
-        
+
+
       });
     }
   </script>
