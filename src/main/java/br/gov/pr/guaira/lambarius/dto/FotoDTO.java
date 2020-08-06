@@ -2,12 +2,10 @@ package br.gov.pr.guaira.lambarius.dto;
 
 public class FotoDTO {
   private String nome;
-  private String contentType;
   private boolean fotoNova;
 
   public FotoDTO(String nome, String contentType, boolean fotoNova) {
     this.nome = nome;
-    this.contentType = contentType;
     this.fotoNova = fotoNova;
   }
 
@@ -19,13 +17,6 @@ public class FotoDTO {
     this.nome = nome;
   }
 
-  public String getContentType() {
-    return contentType;
-  }
-
-  public void setContentType(String contentType) {
-    this.contentType = contentType;
-  }
 
   public boolean isFotoNova() {
     return fotoNova;

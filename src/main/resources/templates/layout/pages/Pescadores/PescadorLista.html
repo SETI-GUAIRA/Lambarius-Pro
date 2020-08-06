@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html layout:decorate="~{/layout/layout}">
+<html layout:decorate="~{/layout/layout}" 
+xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -34,6 +35,9 @@
                 <table id="table" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+                    <th>
+                        <i class="fas fa-user-alt"></i>
+                        Foto</th>
                       <th>
                         <i class="fas fa-user-alt"></i>
                         Nome</th>
@@ -53,6 +57,7 @@
                   </thead>
                   <tbody>
                     <tr th:each="pescador : ${pescadores}">
+                    <td><img class="img-fluid  img-thumb" th:src="${pescador.foto}"/></td>
                       <td th:text="${pescador.nome}">Nome</td>
                       <td th:text="${pescador.rgp}">rgp</td>
                       <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>

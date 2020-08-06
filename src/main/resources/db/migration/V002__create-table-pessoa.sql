@@ -4,7 +4,7 @@ CREATE TABLE pessoa (
   data_nascimento timestamp not null,
 	cpf_cnpj character varying(20) not null,
   rg_ie character varying(20) not null,
-  foto character varying(100) not null,
+  foto character varying(10000),
 
 	logradouro character varying(255),
 	numero character varying(20),

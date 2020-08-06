@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -42,8 +43,9 @@ public class Pessoa {
   @Column(name="rg_ie")
   private String rgOuIe;
 
+  @Lob
   @Column
-  private String foto = "/resources/uploads";
+  private String foto;
 
   @Embedded
   private Contato contato;
