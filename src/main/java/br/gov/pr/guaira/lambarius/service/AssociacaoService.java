@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import br.gov.pr.guaira.lambarius.domain.Associacao;
 import br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.repository.AssociacaoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class AssociacaoService {
     try {
       associacaoRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e) {
-      throw new ImpossivelExcluirEntidade("Não foi possível excluir a associação, há pescadores associados");
+      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir a associação, há pescadores associados");
     }
   }
 
