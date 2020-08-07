@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.exception.IlhaExistentException;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.service.IlhaService;
 
 @Controller
@@ -72,7 +73,7 @@ public class IlhaController {
 
       return "redirect:/ilhas";
 
-    } catch (ImpossivelExcluirEntidade exception) {
+    } catch (ImpossivelExcluirEntidadeException exception) {
       attr.addFlashAttribute("error", exception.getMessage());
       return "redirect:/ilhas";
     }
