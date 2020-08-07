@@ -29,3 +29,14 @@
 
   object-fit: contain;
 }
+
+.btn-custom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.btn-custom i {
+  margin-right: 12px;
+}

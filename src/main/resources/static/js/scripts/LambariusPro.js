@@ -1,5 +1,26 @@
 var LambariusPro = LambariusPro || {}
 
+LambariusPro.MaskCpf = (function () {
+
+  class MaskCpf {
+    constructor() {
+    }
+    enable() {
+      var options = {
+        onKeyPress: function (cpf, e, field, options) {
+          var mask = ['000.000.000-09']
+          $('.js-documento-cpf').mask(mask, options)
+        }
+      }
+
+      $('.js-documento-cpf').mask('000.000.000-09', options)
+    }
+  }
+
+  return MaskCpf
+
+}())
+
 LambariusPro.MaskCpfCnpj = (function () {
 
   class MaskCpfCnpj {
@@ -79,6 +100,9 @@ LambariusPro.MaskPhone = (function () {
 
 
 $(() => {
+  var maskCpf = new LambariusPro.MaskCpf()
+  maskCpf.enable()
+
   var maskCpfCnpj = new LambariusPro.MaskCpfCnpj()
   maskCpfCnpj.enable()
 

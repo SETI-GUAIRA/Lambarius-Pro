@@ -17,11 +17,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.gov.pr.guaira.lambarius.domain.Associacao;
+import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.domain.Pescador;
 import br.gov.pr.guaira.lambarius.domain.Porto;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 import br.gov.pr.guaira.lambarius.service.AssociacaoService;
+import br.gov.pr.guaira.lambarius.service.IlhaService;
 import br.gov.pr.guaira.lambarius.service.PescadorService;
 import br.gov.pr.guaira.lambarius.service.PortoService;
 
@@ -37,6 +39,9 @@ public class PescadorController {
 
   @Autowired
   private PortoService portoService;
+
+  @Autowired
+  private IlhaService ilhaService;
 
   @GetMapping("/novo")
   public ModelAndView novo(Pescador pescador) {
@@ -100,5 +105,10 @@ public class PescadorController {
   @ModelAttribute("portos")
   public List<Porto> listaDePortos() {
     return portoService.buscarTodos();
+  }
+
+  @ModelAttribute("ilhas")
+  public List<Ilha> listaDeIlhas() {
+    return ilhaService.buscarTodos();
   }
 }

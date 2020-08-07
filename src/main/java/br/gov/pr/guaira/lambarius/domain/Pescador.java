@@ -46,6 +46,10 @@ public class Pescador extends Pessoa {
   @JoinColumn(name = "porto", referencedColumnName = "codigo")
   private Porto porto;
 
+  @ManyToOne()
+  @JoinColumn(name = "ilha", referencedColumnName = "codigo")
+  private Ilha ilha;
+
   public boolean isNovo() {
     return this.codigo == null;
   }

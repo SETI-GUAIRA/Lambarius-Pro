@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -16,17 +15,16 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "associacao")
-public class Associacao {
+@Table(name = "ilha")
+public class Ilha {
 
   @EqualsAndHashCode.Include
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long codigo;
 
-  @NotBlank(message = "O nome da associação é obrigatória")
-  @Size(max = 200, message = "O nome da associação deve conter no máximo 200 caracteres")
-  @Column(nullable = false)
+  @Size(max = 200, message = "O nome da ilha deve conter no máximo 200 caracteres")
+  @Column(nullable = true)
   private String nome;
 
   public boolean isNovo() {
