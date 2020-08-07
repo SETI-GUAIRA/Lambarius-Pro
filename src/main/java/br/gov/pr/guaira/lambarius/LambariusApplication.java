@@ -9,6 +9,4 @@ public class LambariusApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LambariusApplication.class, args);
 	}
-
-
 }

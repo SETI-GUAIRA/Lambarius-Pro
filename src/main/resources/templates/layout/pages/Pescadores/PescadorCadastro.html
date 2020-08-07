@@ -3,6 +3,7 @@
   layout:decorate="~{/layout/layout}">
 
 <head>
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
   <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
 </head>
 
@@ -30,7 +31,7 @@
     <section class="content">
       <div class="container-fluid">
         <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
-         <input type="hidden" th:field="*{foto}" id="foto"/>
+          <input type="hidden" th:field="*{foto}" id="foto" />
           <div class="col-md-12">
             <div class="card card-navy">
               <div class="card-header">
@@ -39,10 +40,10 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
+                    <label>Associação </label>
                     <div class="form-group">
-                      <label>Associação *</label> <select class="form-control select2" th:field="*{associacao}"
-                        style="width: 100%;">
-                        <option selected value="">Selecione uma associação</option>
+                      <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
+                        <option selected value="" disabled>Selecione uma associação</option>
                         <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
                           th:text="${associacao.nome}"></option>
                       </select>
@@ -50,9 +51,9 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Porto *</label> <select class="form-control select2" th:field="*{porto}"
-                        style="width: 100%;">
-                        <option selected value="">Selecione um porto</option>
+                      <label>Porto </label>
+                      <select class="form-control select2" th:field="*{porto}" style="width: 100%;">
+                        <option selected value="" disabled>Selecione um porto</option>
                         <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
                       </select>
                     </div>
@@ -66,9 +67,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>CPF ou CNPJ *</label> <input type="text" name="cpf_cnpj"
-                      class="form-control js-documento cpf_cnpj" placeholder="Digite o CPF ou CNPJ" required="required"
-                      maxlength="18" th:field="*{cpfOuCnpj}" autocomplete="off">
+                    <label>CPF *</label> <input type="text" name="cpf_cnpj"
+                      class="form-control js-documento-cpf cpf_cnpj" placeholder="Digite o CPF" required="required"
+                      maxlength="11" th:field="*{cpfOuCnpj}" autocomplete="off">
                   </div>
                   <div class="col-md-6">
                     <label>RG ou IE *</label> <input type="text" name="rg_ie" class="form-control"
@@ -95,25 +96,57 @@
                 <h3 class="card-title">Endereço</h3>
               </div>
               <div class="card-body">
-                <div class="row">
-                  <div class="col-6">
-                    <label>Logradouro *</label> <input type="text" name="logradouro" id="lougradouro"
-                      class="form-control" placeholder="Digite o Logradouro" required th:field="*{endereco.logradouro}">
-                  </div>
-                  <div class="col-6">
-                    <label>Número </label> <input type="number" name="numero" id="numero" class="form-control"
-                      placeholder="Digite o Número" th:field="*{endereco.numero}" autocomplete="off">
+                <div class="form-group">
+                  <label>Reside em ilha?</label>
+                  <div class="row">
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-sim" type="radio" name="radio1">
+                      <label class="form-check-label">Sim</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-nao" type="radio" name="radio1" checked>
+                      <label class="form-check-label">Não</label>
+                    </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-6">
-                    <label>Bairro *</label> <input type="text" name="bairro" id="bairro" class="form-control"
-                      placeholder="Digite o Bairro" th:field="*{endereco.bairro}">
+                <div class="content-endereco" style="display: block;">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Logradouro </label> <input type="text" name="logradouro" id="lougradouro"
+                        class="form-control" placeholder="Digite o Logradouro" th:field="*{endereco.logradouro}">
+                    </div>
+                    <div class="col-6">
+                      <label>Número </label> <input type="number" name="numero" id="numero" class="form-control"
+                        placeholder="Digite o Número" th:field="*{endereco.numero}" autocomplete="off">
+                    </div>
                   </div>
-                  <div class="col-6">
-                    <label>Complemento</label> <input type="text" name="complemento" id="complemento"
-                      class="form-control" placeholder="Digite um complemento para o endereço"
-                      th:field="*{endereco.complemento}">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Bairro </label> <input type="text" name="bairro" id="bairro" class="form-control"
+                        placeholder="Digite o Bairro" th:field="*{endereco.bairro}">
+                    </div>
+                    <div class="col-6">
+                      <label>Complemento</label> <input type="text" name="complemento" id="complemento"
+                        class="form-control" placeholder="Digite um complemento para o endereço"
+                        th:field="*{endereco.complemento}">
+                    </div>
+                  </div>
+                </div>
+                <div class="ilha" style="display: none;">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Ilha </label>
+                      <select class="form-control select2" th:field="*{ilha}" style="width: 100%;">
+                        <option selected value="">Selecione uma ilha</option>
+                        <option th:each="ilha : ${ilhas}" th:value="${ilha.codigo}" th:text="${ilha.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="margin-top: 32px;">
+                    <button type="button" class="btn btn-primary btn-custom">
+                      <i class="fa fa-plus"></i>
+                       Cadastrar ilha
+                    </button>
                   </div>
                 </div>
               </div>
@@ -168,13 +201,12 @@
                 <a href="javascript:void(take_snapshot())" class="btn btn-dark">Tirar foto</a>
               </div>
               <input type="hidden" name="id" th:field="*{codigo}">
-              
               <div class="card-footer">
                 <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
             </div>
           </div>
-          
+
         </form>
       </div>
     </section>
@@ -185,7 +217,7 @@
   <script th:src=@{/layout/js/jquery/jquery.inputmask.min.js}></script>
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
   <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
-  <script th:src=@{/js/scripts/EnableMasks.js}></script>
+  <script th:src=@{/js/scripts/LambariusPro.js}></script>
   <script th:src="@{/js/webcam/webcam.js}"></script>
   <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
@@ -196,13 +228,13 @@
       toastr.error(`${message}`)
   </script>
   <script>
-  
-  	if($('#foto').val()){
-  		console.log('tem foto');
-  		var foto = $('#foto').val();
-  		document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
-  	}
-  	
+
+    if ($('#foto').val()) {
+      console.log('tem foto');
+      var foto = $('#foto').val();
+      document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
+    }
+
     Webcam.attach('#preview');
 
     const cpfCnpj = $('.cpf_cnpj')
@@ -220,13 +252,29 @@
     function take_snapshot() {
       Webcam.snap(function (data_uri) {
         document.getElementById('photo').innerHTML = `<img id="img" src="${data_uri}" />`;
-        
+
         var imagem = $("#img").prop('src');
         $('#foto').val(imagem);
-        
-        
+
+
       });
     }
+  </script>
+  <script>
+    $(".check-sim").on('change', () => {
+      if ($(".check-sim").prop('checked')) {
+        $(".content-endereco").css({ display: "none" })
+        $('.ilha').css({ display: "block" })
+      }
+    })
+
+    $(".check-nao").on('change', () => {
+      if ($(".check-nao").prop('checked')) {
+        $('.ilha').css({ display: "none" })
+        $(".content-endereco").css({ display: "block" })
+      }
+    })
+
   </script>
 </div>
 
