@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.gov.pr.guaira.lambarius.domain.Pescador;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class PescadorService {
     try {
       pescadorRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e) {
-      throw new ImpossivelExcluirEntidade("Não foi possível excluir o pescador, há registros associados");
+      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o pescador, há registros associados");
     }
   }
 

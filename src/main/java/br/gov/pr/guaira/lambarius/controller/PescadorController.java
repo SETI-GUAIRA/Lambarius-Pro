@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import br.gov.pr.guaira.lambarius.domain.Associacao;
 import br.gov.pr.guaira.lambarius.domain.Pescador;
 import br.gov.pr.guaira.lambarius.domain.Porto;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 import br.gov.pr.guaira.lambarius.service.AssociacaoService;
 import br.gov.pr.guaira.lambarius.service.PescadorService;
@@ -86,7 +86,7 @@ public class PescadorController {
 
       return "redirect:/pescadores";
 
-    } catch (ImpossivelExcluirEntidade exception) {
+    } catch (ImpossivelExcluirEntidadeException exception) {
       attr.addFlashAttribute("error", exception.getMessage());
       return "redirect:/pescadores";
     }

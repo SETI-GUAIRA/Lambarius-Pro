@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import br.gov.pr.guaira.lambarius.domain.Porto;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.PortoExistentException;
 import br.gov.pr.guaira.lambarius.repository.PortoRepository;
 
@@ -41,7 +41,7 @@ public class PortoService {
     try {
       portoRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e){
-      throw new ImpossivelExcluirEntidade("Não foi possível excluir o porto, há pescadores associados");
+      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o porto, há pescadores associados");
     }
   }
 
