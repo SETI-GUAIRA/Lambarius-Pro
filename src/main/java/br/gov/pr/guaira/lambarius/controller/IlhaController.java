@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.exception.IlhaExistentException;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.service.IlhaService;
 

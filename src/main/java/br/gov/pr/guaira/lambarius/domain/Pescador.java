@@ -36,12 +36,10 @@ public class Pescador extends Pessoa {
   @Column(unique = true)
   private String rgp;
 
-  @NotNull(message = "Selecione uma associação para o pescador")
   @ManyToOne()
   @JoinColumn(name = "associacao", referencedColumnName = "codigo")
   private Associacao associacao;
 
-  @NotNull(message = "Selecione um porto para o pescador")
   @ManyToOne()
   @JoinColumn(name = "porto", referencedColumnName = "codigo")
   private Porto porto;
