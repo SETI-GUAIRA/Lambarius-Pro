@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.exception.IlhaExistentException;
-import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidade;
+import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.repository.IlhaRepository;
 
 @Service
@@ -41,7 +41,7 @@ public class IlhaService {
     try {
       ilhaRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e) {
-      throw new ImpossivelExcluirEntidade("Não foi possível excluir o porto, há pescadores associados");
+      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o porto, há pescadores associados");
     }
   }
 }
