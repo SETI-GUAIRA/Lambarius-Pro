@@ -1,24 +1,23 @@
 var LambariusPro = LambariusPro || {}
 
 LambariusPro.MaskCpf = (function () {
-
   class MaskCpf {
     constructor() {
     }
     enable() {
       var options = {
-        onKeyPress: function (cpf, e, field, options) {
-          var mask = ['000.000.000-09']
+        onKeyPress: function (cpfcnpj, e, field, options) {
+          var mask = '000.000.000-09'
           $('.js-documento-cpf').mask(mask, options)
         }
       }
 
       $('.js-documento-cpf').mask('000.000.000-09', options)
+
     }
   }
 
   return MaskCpf
-
 }())
 
 LambariusPro.MaskCpfCnpj = (function () {

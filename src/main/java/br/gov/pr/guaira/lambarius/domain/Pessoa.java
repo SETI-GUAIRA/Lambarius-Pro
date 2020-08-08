@@ -34,14 +34,20 @@ public class Pessoa {
   @Column(nullable = false)
   private String nome;
 
-  @Column(name="data_nascimento")
+  @Column(name = "data_nascimento")
   private LocalDate dataNascimento;
 
-  @Column(name="cpf_cnpj",nullable = false)
+  @Column(name = "cpf_cnpj", nullable = false)
   private String cpfOuCnpj;
 
-  @Column(name="rg_ie")
+  @Column(name = "rg_ie")
   private String rgOuIe;
+
+  @Column(name="hora_cadastro")
+  private LocalDate horaCadastro;
+
+  @Column(name="hora_atualizacao")
+  private LocalDate horaAtualizacao;
 
   @Lob
   @Column
