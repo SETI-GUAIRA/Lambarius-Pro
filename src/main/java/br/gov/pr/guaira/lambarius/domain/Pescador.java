@@ -15,10 +15,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @PrimaryKeyJoinColumn(name = "codigo")
 @Entity
 @Table(name = "pescador")
@@ -57,7 +59,6 @@ public class Pescador extends Pessoa {
   @PrePersist
   private void toUpperCase() {
     this.getNome().toUpperCase();
-    this.getRgp().toUpperCase();
   }
 
 }
