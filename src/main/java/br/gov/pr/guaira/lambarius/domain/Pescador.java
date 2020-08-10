@@ -2,6 +2,8 @@ package br.gov.pr.guaira.lambarius.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,18 +40,23 @@ public class Pescador extends Pessoa {
   private String rgp;
 
   @Size(max = 255, message = "O campo Observação deve conter no máximo 255 caracteres.")
+  @Column(nullable = true)
   private String observacao;
 
+  @Column(name = "local_pesca", nullable = true)
+  @Enumerated(EnumType.STRING)
+  private LocalPesca localPesca;
+
   @ManyToOne()
-  @JoinColumn(name = "associacao", referencedColumnName = "codigo")
+  @JoinColumn(name = "associacao", referencedColumnName = "codigo", nullable = true)
   private Associacao associacao;
 
   @ManyToOne()
-  @JoinColumn(name = "porto", referencedColumnName = "codigo")
+  @JoinColumn(name = "porto", referencedColumnName = "codigo", nullable = true)
   private Porto porto;
 
   @ManyToOne()
-  @JoinColumn(name = "ilha", referencedColumnName = "codigo")
+  @JoinColumn(name = "ilha", referencedColumnName = "codigo", nullable = true)
   private Ilha ilha;
 
   public boolean isNovo() {

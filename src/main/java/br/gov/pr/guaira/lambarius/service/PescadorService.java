@@ -2,6 +2,7 @@ package br.gov.pr.guaira.lambarius.service;
 
 import br.gov.pr.guaira.lambarius.repository.PescadorRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,12 @@ public class PescadorService {
   public void salvar(Pescador pescador) {
 
     Optional<Pescador> pescadorOp = pescadorRepository.findBycpfOuCnpj(pescador.getCpfOuCnpj());
+
+    if (pescador.isNovo()) {
+      pescador.setHoraCadastro(LocalDate.now());
+    } else {
+      pescador.setHoraAtualizacao(LocalDate.now());
+    }
 
     if (pescadorOp.isPresent() && pescador.isNovo()) {
       throw new PescadorExistentException("Pescador já cadastrado");

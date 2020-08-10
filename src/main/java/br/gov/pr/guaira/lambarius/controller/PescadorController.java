@@ -18,6 +18,7 @@ import javax.validation.Valid;
 
 import br.gov.pr.guaira.lambarius.domain.Associacao;
 import br.gov.pr.guaira.lambarius.domain.Ilha;
+import br.gov.pr.guaira.lambarius.domain.LocalPesca;
 import br.gov.pr.guaira.lambarius.domain.Pescador;
 import br.gov.pr.guaira.lambarius.domain.Porto;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
@@ -62,7 +63,7 @@ public class PescadorController {
     try {
 
       if (result.hasErrors()) {
-        attr.addFlashAttribute("error", "Preencha todos os campos");
+        attr.addFlashAttribute("error", result.getFieldError());
         return "redirect:/pescadores/novo";
       }
 
@@ -100,6 +101,11 @@ public class PescadorController {
   @ModelAttribute("associacoes")
   public List<Associacao> listaDeAssociacoes() {
     return associacaoService.buscarTodos();
+  }
+
+  @ModelAttribute("locais")
+  public LocalPesca[] getLocaisPesca() {
+    return LocalPesca.values();
   }
 
   @ModelAttribute("portos")
