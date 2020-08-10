@@ -67,9 +67,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>CPF *</label> <input type="text" name="cpf_cnpj"
-                      class="form-control js-documento-cpf" placeholder="Digite o CPF" required="required"
-                      maxlength="11" th:field="*{cpfOuCnpj}" autocomplete="off">
+                    <label>CPF *</label> <input type="text" name="cpf_cnpj" class="form-control js-documento-cpf"
+                      placeholder="Digite o CPF" required="required" maxlength="11" th:field="*{cpfOuCnpj}"
+                      autocomplete="off">
                   </div>
                   <div class="col-md-6">
                     <label>RG ou IE *</label> <input type="text" name="rg_ie" class="form-control"
@@ -112,7 +112,7 @@
                 <div class="content-endereco" style="display: block;">
                   <div class="row">
                     <div class="col-6">
-                      <label>Logradouro </label> <input type="text" name="logradouro" id="lougradouro"
+                      <label>Logradouro </label> <input type="text" name="logradouro" id="logradouro"
                         class="form-control" placeholder="Digite o Logradouro" th:field="*{endereco.logradouro}">
                     </div>
                     <div class="col-6">
@@ -132,20 +132,43 @@
                     </div>
                   </div>
                 </div>
-                <div class="ilha" style="display: none;">
+                <div class="content-ilha" style="display: none;">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Ilha </label>
-                      <select class="form-control select2" th:field="*{ilha}" style="width: 100%;">
+                      <select class="form-control select2" th:field="*{ilha}" id="ilha" style="width: 100%;">
                         <option selected value="">Selecione uma ilha</option>
                         <option th:each="ilha : ${ilhas}" th:value="${ilha.codigo}" th:text="${ilha.nome}"></option>
                       </select>
                     </div>
                   </div>
+                  <div class="modal fade" id="modal-lg">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title">Cadastrar Ilha</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="col-md-12">
+                            <label>Nome *</label> <input type="text" name="nome_ilha" id="nome_ilha"
+                              class="form-control" placeholder="Digite o nome da ilha">
+                          </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-primary" id="submit_ilha">Salvar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-md-1" style="margin-top: 32px;">
-                    <button type="button" class="btn btn-primary btn-custom">
+                    <button type="button" class="btn btn-primary btn-custom" data-toggle="modal"
+                      data-target="#modal-lg">
                       <i class="fa fa-plus"></i>
-                       Cadastrar ilha
+                      Cadastrar ilha
                     </button>
                   </div>
                 </div>
@@ -184,7 +207,8 @@
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <textarea class="form-control" rows="3"  style="min-height: 80px;" placeholder="Digite aqui..."></textarea>
+                  <textarea class="form-control" th:field="*{observacao}" rows="3" style="min-height: 80px;"
+                    placeholder="Digite aqui..."></textarea>
                 </div>
               </div>
             </div>
@@ -230,6 +254,7 @@
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
   <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
   <script th:src=@{/js/scripts/lambariuspro.js}></script>
+  <script th:src=@{/js/scripts/ToggleEndereco_Ilha.js}></script>
   <script th:src="@{/js/webcam/webcam.js}"></script>
   <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
@@ -242,7 +267,6 @@
   <script>
 
     if ($('#foto').val()) {
-      console.log('tem foto');
       var foto = $('#foto').val();
       document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
     }
@@ -272,22 +296,25 @@
       });
     }
   </script>
-  <script>
-    $(".check-sim").on('change', () => {
-      if ($(".check-sim").prop('checked')) {
-        $(".content-endereco").css({ display: "none" })
-        $('.ilha').css({ display: "block" })
+  <!-- <script>
+    //teste
+    $('#submit_ilha').on('click', () => {
+      console.log($('#nome_ilha').val());
+      if ($('#nome_ilha').val() != '') {
+        try {
+          $.ajax({
+            type: "POST",
+            url: 'http://localhost:8080/ilhas/salvar',
+            data: $('#nome_ilha').val()
+          })
+        } catch (error) {
+          toastr.error('Erro ao cadastrar a ilha')
+        }
+      } else {
+        toastr.error('Preencha o campo de nome da ilha')
       }
     })
-
-    $(".check-nao").on('change', () => {
-      if ($(".check-nao").prop('checked')) {
-        $('.ilha').css({ display: "none" })
-        $(".content-endereco").css({ display: "block" })
-      }
-    })
-
-  </script>
+  </script> -->
 </div>
 
 </html>

@@ -11,7 +11,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -35,6 +34,9 @@ public class Pescador extends Pessoa {
   @Size(max = 20, message = "O campo RGP deve conter no máximo 20 caracteres.")
   @Column(unique = true)
   private String rgp;
+
+  @Size(max = 255, message = "O campo Observação deve conter no máximo 255 caracteres.")
+  private String observacao;
 
   @ManyToOne()
   @JoinColumn(name = "associacao", referencedColumnName = "codigo")
