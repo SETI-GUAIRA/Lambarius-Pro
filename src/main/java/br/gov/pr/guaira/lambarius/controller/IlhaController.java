@@ -1,13 +1,17 @@
 package br.gov.pr.guaira.lambarius.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,9 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.gov.pr.guaira.lambarius.controller.page.PageWrapper;
 import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.exception.IlhaExistentException;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
+import br.gov.pr.guaira.lambarius.repository.IlhaRepository;
+import br.gov.pr.guaira.lambarius.repository.filter.IlhaFilter;
 import br.gov.pr.guaira.lambarius.service.IlhaService;
 
 @Controller
@@ -29,6 +36,8 @@ public class IlhaController {
 
   @Autowired
   private IlhaService ilhaService;
+  @Autowired
+  private IlhaRepository ilhaRepository;
 
   @GetMapping("/novo")
   public ModelAndView novo(Ilha ilha) {
@@ -37,7 +46,7 @@ public class IlhaController {
     return mv;
   }
 
-  @PostMapping("/salvar")
+  @PostMapping(value = {"/novo", "/codigo"})
   public String salvar(@Valid Ilha ilha, BindingResult result, RedirectAttributes attr) {
     try {
       if (result.hasErrors()) {
@@ -75,28 +84,29 @@ public class IlhaController {
 	}
 
   @GetMapping
-  public String listar(ModelMap model) {
-    model.addAttribute("ilhas", ilhaService.buscarTodos());
-    return "layout/pages/Ilhas/IlhaLista";
-  }
+	public ModelAndView pesquisar(IlhaFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView mv = new ModelAndView("layout/pages/Ilhas/IlhaLista");
+		
+		PageWrapper<Ilha> paginaWrapper = new PageWrapper<>(this.ilhaRepository.filtrar(filter, pageable),
+				httpServletRequest);
+		mv.addObject("pagina", paginaWrapper);
+		return mv;
+	}
 
-  @GetMapping("/editar/{codigo}")
+  @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
-    model.addAttribute("porto", ilhaService.buscarUm(codigo));
+    model.addAttribute("ilha", ilhaService.buscarUm(codigo));
     return "layout/pages/Ilhas/IlhaCadastro";
   }
 
-  @PostMapping("/excluir/{codigo}")
-  public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
-    try {
-      ilhaService.excluir(codigo);
-      attr.addFlashAttribute("success", "Ilha excluída com sucesso.");
-
-      return "redirect:/ilhas";
-
-    } catch (ImpossivelExcluirEntidadeException exception) {
-      attr.addFlashAttribute("error", exception.getMessage());
-      return "redirect:/ilhas";
-    }
+  @DeleteMapping("/{codigo}")
+  public ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
+    
+	  try {
+			this.ilhaService.excluir(codigo);	
+		}catch (ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok().build();
   }
 }
