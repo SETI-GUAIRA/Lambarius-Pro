@@ -37,77 +37,78 @@ import br.gov.pr.guaira.lambarius.service.UsuarioService;
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
-	@Autowired
-	private Grupos grupos;
-	@Autowired
-	private UsuarioService usuarioService;
-	@Autowired
-	private Usuarios usuarios;
+  @Autowired
+  private Grupos grupos;
+  @Autowired
+  private UsuarioService usuarioService;
+  @Autowired
+  private Usuarios usuarios;
 
-	@RequestMapping("/novo")
-	public ModelAndView novo(Usuario usuario) {
-		ModelAndView mv = new ModelAndView("layout/pages/usuario/CadastroUsuario");
-		mv.addObject("grupos", grupos.findAll());
-		return mv;
-	}
+  @RequestMapping("/novo")
+  public ModelAndView novo(Usuario usuario) {
+    ModelAndView mv = new ModelAndView("layout/pages/usuario/CadastroUsuario");
+    mv.addObject("grupos", grupos.findAll());
+    return mv;
+  }
 
-	@PostMapping({"/novo", "{\\d+}"})
-	public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
-		if (result.hasErrors()) {
-			return novo(usuario);
-		}
-		try {
-			this.usuarioService.salvar(usuario);
-		} catch (EmailUsuarioJaCadastrado e) {
-			result.rejectValue("email", e.getMessage(), e.getMessage());
-			return novo(usuario);
-		} catch (SenhaObrigatorioUsuarioException e) {
-			result.rejectValue("senha", e.getMessage(), e.getMessage());
-			return novo(usuario);
-		}
-		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
-		return new ModelAndView("redirect:/usuarios/novo");
+  @PostMapping({ "/novo", "{\\d+}" })
+  public ModelAndView salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
+    if (result.hasErrors()) {
+      return novo(usuario);
+    }
+    try {
+      this.usuarioService.salvar(usuario);
+    } catch (EmailUsuarioJaCadastrado e) {
+      result.rejectValue("email", e.getMessage(), e.getMessage());
+      return novo(usuario);
+    } catch (SenhaObrigatorioUsuarioException e) {
+      result.rejectValue("senha", e.getMessage(), e.getMessage());
+      return novo(usuario);
+    }
+    attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso!");
+    return new ModelAndView("redirect:/usuarios/novo");
 
-	}
-	
-	@GetMapping
-	public ModelAndView pesquisar(UsuarioFilter usuarioFilter, @PageableDefault(size=2) Pageable pageable,
-			HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("layout/pages/usuario/PesquisaUsuarios");
-		mv.addObject("grupos", grupos.findAll());
-		
-		PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(this.usuarios.filtrar(usuarioFilter, pageable), httpServletRequest);
-		mv.addObject("pagina", paginaWrapper);
-		
-		return mv;
-	}
-	
-	@PutMapping("/status")
-	@ResponseStatus(HttpStatus.OK)
-	public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos, @RequestParam("status") StatusUsuario status) {
-		usuarioService.alterarStatus(codigos, status);
-	}
-	
-	@DeleteMapping("/{codigo}")
-	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Usuario usuario){
-		
-		try {
-			this.usuarioService.excluir(usuario);
-		}catch (ImpossivelExcluirEntidadeException e) {
-			
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-				
-		return ResponseEntity.ok().build();
-		
-	}
-	
-	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable Long codigo) {
-		Usuario usuario = this.usuarios.buscarComGrupos(codigo);
-		ModelAndView mv = novo(usuario);
-		mv.addObject(usuario);
-		
-		return mv;
-	}
+  }
+
+  @GetMapping
+  public ModelAndView pesquisar(UsuarioFilter usuarioFilter, @PageableDefault(size = 2) Pageable pageable,
+      HttpServletRequest httpServletRequest) {
+    ModelAndView mv = new ModelAndView("layout/pages/usuario/ListaUsuarios");
+    mv.addObject("grupos", grupos.findAll());
+
+    PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(this.usuarios.filtrar(usuarioFilter, pageable),
+        httpServletRequest);
+    mv.addObject("pagina", paginaWrapper);
+
+    return mv;
+  }
+
+  @PutMapping("/status")
+  @ResponseStatus(HttpStatus.OK)
+  public void atualizarStatus(@RequestParam("codigos[]") Long[] codigos, @RequestParam("status") StatusUsuario status) {
+    usuarioService.alterarStatus(codigos, status);
+  }
+
+  @DeleteMapping("/{codigo}")
+  public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Usuario usuario) {
+
+    try {
+      this.usuarioService.excluir(usuario);
+    } catch (ImpossivelExcluirEntidadeException e) {
+
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    return ResponseEntity.ok().build();
+
+  }
+
+  @GetMapping("/{codigo}")
+  public ModelAndView editar(@PathVariable Long codigo) {
+    Usuario usuario = this.usuarios.buscarComGrupos(codigo);
+    ModelAndView mv = novo(usuario);
+    mv.addObject(usuario);
+
+    return mv;
+  }
 }
