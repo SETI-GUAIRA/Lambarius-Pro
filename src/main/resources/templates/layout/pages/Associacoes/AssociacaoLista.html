@@ -1,100 +1,94 @@
 <!DOCTYPE html>
-<html layout:decorate="~{/layout/layout}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:lambarius="http://ti.guaira.pr.gov.br">
+<html layout:decorate="~{/layout/layout}" xmlns:th="http://www.thymeleaf.org"
+  xmlns:lambarius="http://ti.guaira.pr.gov.br">
 
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet"
-	th:href="@{/layout/css/datatables/dataTables.bootstrap4.min.css}">
-<link rel="stylesheet"
-	th:href="@{/layout/css/datatables/responsive.bootstrap4.min.css}">
-<link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
 </head>
 
 <body>
-	<div layout:fragment="corpo">
-		<section class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>Listar Associações</h1>
-					</div>
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a th:href="@{/associacoes}">Associações</a></li>
-							<li class="breadcrumb-item active">Listar Associações</li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</section>
-		<section class="content">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-12">
-						<div class="card">
-							<div class="card-body">
-								<form method="GET" th:object="${associacaoFilter}">
-									<div class="row">
-										<div class="form-group  col-sm-12">
-											<label class="control-label" for="nome">Nome</label> <input
-												type="text" class="form-control" id="nome"
-												th:field="*{nome}" />
-										</div>
-									</div>
+  <div layout:fragment="corpo">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Listar Associações</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{/associacoes}">Associações</a></li>
+              <li class="breadcrumb-item active">Listar Associações</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <form method="GET" th:object="${associacaoFilter}">
+                  <div class="row">
+                    <div class="form-group  col-sm-12">
+                      <label class="control-label" for="nome">Nome</label> <input type="text" class="form-control"
+                        id="nome" th:field="*{nome}" />
+                    </div>
+                  </div>
 
-									<button type="submit" class="btn  btn-primary">
-										Pesquisar</button>
-								</form>
-								<table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th><i class="fas fa-user-alt"></i> <lambarius:order
-													page="${pagina}" field="nome" text="Nome" /></th>
-											<th class="text-center"><i class="fa fa-edit"></i> Ações
-											</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="associacao : ${pagina.conteudo}">
-											<td th:text="${associacao.nome}">Nome</td>
-											<td class="text-center"><a
-												class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
-												th:href="@{/associacoes/{codigo}(codigo=${associacao.codigo})}"> <i
-													class="far fa-edit fa-lg"></i>
-											</a> <a
-												class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn"
-												title="Excluir" href="#"
-												th:attr="data-codigo=${associacao.codigo}, 
-												data-url=@{/associacoes/{codigo}(codigo=${associacao.codigo})}, 
+                  <button type="submit" class="btn  btn-primary">
+                    Pesquisar</button>
+                </form>
+                <table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th><i class="fas fa-user-alt"></i>
+                        <lambarius:order page="${pagina}" field="nome" text="Nome" />
+                      </th>
+                      <th class="text-center"><i class="fa fa-edit"></i> Ações
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="associacao : ${pagina.conteudo}">
+                      <td th:text="${associacao.nome}">Nome</td>
+                      <td class="text-center"><a class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
+                          th:href="@{/associacoes/{codigo}(codigo=${associacao.codigo})}"> <i
+                            class="far fa-edit fa-lg"></i>
+                        </a> <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#"
+                          th:attr="data-codigo=${associacao.codigo},
+												data-url=@{/associacoes/{codigo}(codigo=${associacao.codigo})},
 												data-objeto=${associacao.nome}">
-													<i class="fas fa-trash fa-lg"></i>
-											</a></td>
-										</tr>
-										<tr th:if="${pagina.vazia}">
-											<td colspan="4">Nenhuma associação encontrada</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<lambarius:pagination page="${pagina}" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
+                          <i class="fas fa-trash fa-lg"></i>
+                        </a></td>
+                    </tr>
+                    <tr th:if="${pagina.vazia}">
+                      <td colspan="4">Nenhuma associação encontrada</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <lambarius:pagination page="${pagina}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </body>
 <div layout:fragment="scripts">
-	<script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
-	<script th:if="${success}" th:inline="javascript">
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
-    toastr.success(`${message}`)
+      toastr.success(`${message}`)
   </script>
-	<script th:if="${error}" th:inline="javascript">
+  <script th:if="${error}" th:inline="javascript">
     const message = /*[[${error}]]*/
-    toastr.error(`${message}`)
+      toastr.error(`${message}`)
   </script>
 
 </div>
