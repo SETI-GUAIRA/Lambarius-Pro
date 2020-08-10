@@ -41,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.antMatchers("/pescadores/**").hasRole("ADMIN")
-				.antMatchers("/usuarios/novo").hasRole("ADMIN")
+				.antMatchers("/usuarios/**").hasRole("ADMIN")
+				.antMatchers("/ilhas/**").hasRole("ADMIN")
 				.anyRequest().denyAll()//pra funcionar o denyAll deve retirar o authenticated
 				//anyRequest().denyAll()
 				.and()

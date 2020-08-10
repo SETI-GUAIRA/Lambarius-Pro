@@ -18,7 +18,7 @@ public class IlhaService {
   @Autowired
   private IlhaRepository ilhaRepository;
 
-  public void salvar(Ilha ilha) {
+  public Ilha salvar(Ilha ilha) {
 
     Optional<Ilha> ilhaOp = ilhaRepository.findByIgnoreCaseNome(ilha.getNome());
 
@@ -26,7 +26,7 @@ public class IlhaService {
       throw new IlhaExistentException("Ilha já cadastrada");
     }
 
-    ilhaRepository.save(ilha);
+    return ilhaRepository.save(ilha);
   }
 
   public List<Ilha> buscarTodos() {

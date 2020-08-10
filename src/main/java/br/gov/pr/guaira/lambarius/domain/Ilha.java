@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Ilha {
 
   @Size(max = 200, message = "O nome da ilha deve conter no máximo 200 caracteres")
   @Column(nullable = true)
+  @NotBlank(message = "Informe o nome da Ilha")
   private String nome;
 
   public boolean isNovo() {
