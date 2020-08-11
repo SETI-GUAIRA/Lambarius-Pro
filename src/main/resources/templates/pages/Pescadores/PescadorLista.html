@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout/layout}">
+  layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
 
 <head>
   <meta charset="UTF-8">
@@ -19,8 +19,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/pescadores}">Pescadores</a></li>
-              <li class="breadcrumb-item active">Listar Pescadores</li>
+              <li class="breadcrumb-item"><a th:href="@{/pescadores/novo}">Novo Pescador</a></li>
             </ol>
           </div>
         </div>
@@ -76,7 +75,7 @@
                         </a></td>
                     </tr>
                     <tr th:if="${pagina.vazia}">
-                      <td colspan="4">Nenhum pescador encontrado</td>
+                      <td colspan="5">Nenhum pescador encontrado</td>
                     </tr>
                   </tbody>
                 </table>

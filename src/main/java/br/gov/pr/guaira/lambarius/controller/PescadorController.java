@@ -69,23 +69,24 @@ public class PescadorController {
  	}
 
   @PostMapping(value = {"/novo", "/{codigo}"})
-  public String salvar(@Valid Pescador pescador, BindingResult result, RedirectAttributes attr) {
-    try {
-
-      if (result.hasErrors()) {
-        attr.addFlashAttribute("error", result.getFieldError());
-        return "redirect:/pescadores/novo";
-      }
+  public ModelAndView salvar(@Valid Pescador pescador, BindingResult result, RedirectAttributes attr) {
+    
+	  if (result.hasErrors()) {
+	        attr.addFlashAttribute("error", "Erro");
+	        return novo(pescador);
+	   }
+	  
+	try {
 
       pescadorService.salvar(pescador);
       attr.addFlashAttribute("success", "Pescador cadastrado com sucesso.");
-      return "redirect:/pescadores/novo";
 
     } catch (PescadorExistentException exception) {
 
       attr.addFlashAttribute("error", exception.getMessage());
-      return "redirect:/pescadores/novo";
+      return novo(pescador);
     }
+    return new ModelAndView("redirect:/pescadores/novo");
   }
 
   @GetMapping("/{codigo}")

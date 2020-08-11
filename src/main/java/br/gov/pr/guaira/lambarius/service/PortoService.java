@@ -30,7 +30,7 @@ public class PortoService {
   }
 
   public List<Porto> buscarTodos() {
-    return portoRepository.findAll();
+    return portoRepository.findAllByOrderByNomeAsc();
   }
 
   public Optional<Porto> buscarUm(Long codigo){

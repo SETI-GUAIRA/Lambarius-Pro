@@ -30,7 +30,7 @@ public class AssociacaoService {
   }
 
   public List<Associacao> buscarTodos() {
-    return associacaoRepository.findAll();
+    return associacaoRepository.findAllByOrderByNomeAsc();
   }
 
   public void excluir(Long codigo) {

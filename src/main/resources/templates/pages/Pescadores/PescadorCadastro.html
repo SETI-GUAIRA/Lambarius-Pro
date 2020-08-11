@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout/layout}">
+  layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
 
 <head>
   <link rel="stylesheet" th:href="@{/css/custom.css}">
@@ -19,10 +19,6 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a th:href="@{/pescadores}">Pescadores</a></li>
-              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar
-                Pescador</li>
-              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar
-                Pescador</li>
             </ol>
           </div>
         </div>
@@ -30,7 +26,9 @@
     </section>
     <section class="content">
       <div class="container-fluid">
-        <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/salvar}">
+        <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/novo}">
+        <div layout:insert="~{fragments/Mensagem}"></div>
+		<div layout:insert="~{fragments/MensagemErro}"></div>
           <input type="hidden" th:field="*{foto}" id="foto" />
           <div class="col-md-12">
             <div class="card card-navy">
@@ -72,7 +70,7 @@
                       autocomplete="off">
                   </div>
                   <div class="col-md-6">
-                    <label>RG ou IE *</label> <input type="text" name="rg_ie" class="form-control"
+                    <label>RG *</label> <input type="text" name="rg_ie" class="form-control"
                       placeholder="Digite o RG ou IE" required="required" maxlength="15" th:field="*{rgOuIe}"
                       autocomplete="off">
                   </div>
@@ -83,7 +81,7 @@
                       th:field="*{dataNascimento}" autocomplete="off" />
                   </div>
                   <div class="col-md-6">
-                    <label>RGP *</label> <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP"
+                    <label>RGP/Protocolo *</label> <input type="text" name="rgp" class="form-control" placeholder="Digite o RGP"
                       maxlength="15" required="required" th:field="*{rgp}" autocomplete="off">
                   </div>
                 </div>

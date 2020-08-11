@@ -17,39 +17,44 @@ import org.springframework.stereotype.Service;
 @Service
 public class PescadorService {
 
-  @Autowired
-  private PescadorRepository pescadorRepository;
+	@Autowired
+	private PescadorRepository pescadorRepository;
 
-  public void salvar(Pescador pescador) {
+	public void salvar(Pescador pescador) {
 
-    Optional<Pescador> pescadorOp = pescadorRepository.findBycpfOuCnpj(pescador.getCpfOuCnpj());
+		Optional<Pescador> pescadorOp = pescadorRepository.findBycpfOuCnpj(pescador.getCpfOuCnpj());
 
-    if (pescador.isNovo()) {
-      pescador.setHoraCadastro(LocalDate.now());
-    } else {
-      pescador.setHoraAtualizacao(LocalDate.now());
-    }
+		if (pescadorOp.isPresent() && pescador.isNovo()) {
+			throw new PescadorExistentException("Pescador já cadastrado");
+		}
 
-    if (pescadorOp.isPresent() && pescador.isNovo()) {
-      throw new PescadorExistentException("Pescador já cadastrado");
-    }
+		if (pescador.isNovo()) {
+			pescador.setHoraCadastro(LocalDate.now());
+		} else {
+			pescador.setHoraAtualizacao(LocalDate.now());
+		}
+		
+		if(pescador.getAposentado() == null) {
+			pescador.setAposentado(false);
+		}
 
-    pescadorRepository.save(pescador);
-  }
+		pescadorRepository.save(pescador);
+	}
 
-  public List<Pescador> buscarTodos() {
-    return pescadorRepository.findAll();
-  }
+	public List<Pescador> buscarTodos() {
+		return pescadorRepository.findAll();
+	}
 
-  public void excluir(Long codigo) {
-    try {
-      pescadorRepository.deleteById(codigo);
-    } catch (DataIntegrityViolationException e) {
-      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o pescador, há registros associados");
-    }
-  }
+	public void excluir(Long codigo) {
+		try {
+			pescadorRepository.deleteById(codigo);
+		} catch (DataIntegrityViolationException e) {
+			throw new ImpossivelExcluirEntidadeException(
+					"Não foi possível excluir o pescador, há registros associados");
+		}
+	}
 
-  public Optional<Pescador> buscarUm(Long codigo) {
-    return pescadorRepository.findById(codigo);
-  }
+	public Optional<Pescador> buscarUm(Long codigo) {
+		return pescadorRepository.findById(codigo);
+	}
 }

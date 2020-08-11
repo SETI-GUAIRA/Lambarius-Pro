@@ -14,6 +14,7 @@ import javax.persistence.Lob;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -51,6 +52,7 @@ public class Pessoa {
   @Column(name="hora_atualizacao")
   private LocalDate horaAtualizacao;
 
+  @NotBlank(message = "Foto é obrigatória")
   @Lob
   @Column
   private String foto;
