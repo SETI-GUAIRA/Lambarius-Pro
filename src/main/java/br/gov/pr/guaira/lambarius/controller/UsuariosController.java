@@ -46,7 +46,7 @@ public class UsuariosController {
 
   @RequestMapping("/novo")
   public ModelAndView novo(Usuario usuario) {
-    ModelAndView mv = new ModelAndView("layout/pages/usuario/CadastroUsuario");
+    ModelAndView mv = new ModelAndView("layout/pages/Usuarios/CadastroUsuario");
     mv.addObject("grupos", grupos.findAll());
     return mv;
   }
@@ -73,7 +73,7 @@ public class UsuariosController {
   @GetMapping
   public ModelAndView pesquisar(UsuarioFilter usuarioFilter, @PageableDefault(size = 2) Pageable pageable,
       HttpServletRequest httpServletRequest) {
-    ModelAndView mv = new ModelAndView("layout/pages/usuario/ListaUsuarios");
+    ModelAndView mv = new ModelAndView("layout/pages/Usuarios/ListaUsuarios");
     mv.addObject("grupos", grupos.findAll());
 
     PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(this.usuarios.filtrar(usuarioFilter, pageable),
