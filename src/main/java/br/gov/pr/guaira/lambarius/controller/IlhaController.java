@@ -41,7 +41,7 @@ public class IlhaController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Ilha ilha) {
-    ModelAndView mv = new ModelAndView("layout/pages/Ilhas/IlhaCadastro");
+    ModelAndView mv = new ModelAndView("pages/Ilhas/IlhaCadastro");
 
     return mv;
   }
@@ -85,7 +85,7 @@ public class IlhaController {
 
   @GetMapping
 	public ModelAndView pesquisar(IlhaFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("layout/pages/Ilhas/IlhaLista");
+		ModelAndView mv = new ModelAndView("pages/Ilhas/IlhaLista");
 		
 		PageWrapper<Ilha> paginaWrapper = new PageWrapper<>(this.ilhaRepository.filtrar(filter, pageable),
 				httpServletRequest);
@@ -96,7 +96,7 @@ public class IlhaController {
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("ilha", ilhaService.buscarUm(codigo));
-    return "layout/pages/Ilhas/IlhaCadastro";
+    return "pages/Ilhas/IlhaCadastro";
   }
 
   @DeleteMapping("/{codigo}")

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html layout:decorate="~{/layout/layout}"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:lambarius="http://ti.guaira.pr.gov.br">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}">
 
 <head>
 <meta charset="UTF-8">
@@ -18,12 +17,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Listar Ilhas</h1>
+						<h1>Listar Portos</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a th:href="@{/ilhas}">Ilhas</a></li>
-							<li class="breadcrumb-item active">Listar Ilhas</li>
+							<li class="breadcrumb-item"><a th:href="@{/portos}">Portos</a></li>
+							<li class="breadcrumb-item active">Listar Portos</li>
 						</ol>
 					</div>
 				</div>
@@ -35,7 +34,7 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
-								<form method="GET" th:object="${ilhaFilter}">
+								<form method="GET" th:object="${portoFilter}">
 									<div class="row">
 										<div class="form-group  col-sm-12">
 											<label class="control-label" for="nome">Nome</label> <input
@@ -57,23 +56,23 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="ilha : ${pagina.conteudo}">
-											<td th:text="${ilha.nome}">Nome</td>
+										<tr th:each="porto : ${pagina.conteudo}">
+											<td th:text="${porto.nome}">Nome</td>
 											<td class="text-center"><a
 												class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
-												th:href="@{/ilhas/{codigo}(codigo=${ilha.codigo})}"> <i
+												th:href="@{/portos/{codigo}(codigo=${porto.codigo})}"> <i
 													class="far fa-edit fa-lg"></i>
 											</a> <a
 												class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn"
 												title="Excluir" href="#"
-												th:attr="data-codigo=${ilha.codigo}, 
-												data-url=@{/ilhas/{codigo}(codigo=${ilha.codigo})}, 
-												data-objeto=${ilha.nome}">
+												th:attr="data-codigo=${porto.codigo}, 
+												data-url=@{/portos/{codigo}(codigo=${porto.codigo})}, 
+												data-objeto=${porto.nome}">
 													<i class="fas fa-trash fa-lg"></i>
 											</a></td>
 										</tr>
 										<tr th:if="${pagina.vazia}">
-											<td colspan="4">Nenhuma ilha encontrada</td>
+											<td colspan="4">Nenhum porto encontrado</td>
 										</tr>
 									</tbody>
 								</table>
@@ -90,13 +89,14 @@
 
 	<script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
 	<script th:if="${success}" th:inline="javascript">
-    const message = /*[[${success}]]*/
-    toastr.success(`${message}`)
-  </script>
+		const message = /*[[${success}]]*/
+		toastr.success(`${message}`)
+	</script>
 	<script th:if="${error}" th:inline="javascript">
-    const message = /*[[${error}]]*/
-    toastr.error(`${message}`)
-  </script>
+		const message = /*[[${error}]]*/
+		toastr.error(`${message}`)
+	</script>
+
 </div>
 
 </html>

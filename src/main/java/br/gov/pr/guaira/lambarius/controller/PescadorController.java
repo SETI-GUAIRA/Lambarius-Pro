@@ -53,14 +53,14 @@ public class PescadorController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Pescador pescador) {
-    ModelAndView mv = new ModelAndView("layout/pages/Pescadores/PescadorCadastro");
+    ModelAndView mv = new ModelAndView("pages/Pescadores/PescadorCadastro");
 
     return mv;
   }
 
   @GetMapping
  	public ModelAndView pesquisar(PescadorFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
- 		ModelAndView mv = new ModelAndView("layout/pages/Pescadores/PescadorLista");
+ 		ModelAndView mv = new ModelAndView("pages/Pescadores/PescadorLista");
  		
  		PageWrapper<Pescador> paginaWrapper = new PageWrapper<>(this.pescadorRepository.filtrar(filter, pageable),
  				httpServletRequest);
@@ -91,7 +91,7 @@ public class PescadorController {
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("pescador", pescadorService.buscarUm(codigo));
-    return "layout/pages/Pescadores/PescadorCadastro";
+    return "pages/Pescadores/PescadorCadastro";
   }
 
   @DeleteMapping("/{codigo}")

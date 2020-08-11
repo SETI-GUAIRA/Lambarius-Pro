@@ -37,7 +37,7 @@ public class AssociacaoController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Associacao associacao) {
-    ModelAndView mv = new ModelAndView("layout/pages/Associacoes/AssociacaoCadastro");
+    ModelAndView mv = new ModelAndView("pages/Associacoes/AssociacaoCadastro");
 
     return mv;
   }
@@ -66,7 +66,7 @@ public class AssociacaoController {
 
   @GetMapping
 	public ModelAndView pesquisar(AssociacaoFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("layout/pages/Associacoes/AssociacaoLista");
+		ModelAndView mv = new ModelAndView("pages/Associacoes/AssociacaoLista");
 		
 		PageWrapper<Associacao> paginaWrapper = new PageWrapper<>(this.associacaoRepository.filtrar(filter, pageable),
 				httpServletRequest);
@@ -77,7 +77,7 @@ public class AssociacaoController {
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("associacao", associacaoService.buscarUm(codigo));
-    return "/layout/pages/Associacoes/AssociacaoCadastro";
+    return "pages/Associacoes/AssociacaoCadastro";
   }
   
   @DeleteMapping("/{codigo}")

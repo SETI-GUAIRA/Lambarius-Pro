@@ -37,7 +37,7 @@ public class PortoController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Porto porto) {
-    ModelAndView mv = new ModelAndView("layout/pages/Portos/PortoCadastro");
+    ModelAndView mv = new ModelAndView("pages/Portos/PortoCadastro");
 
     return mv;
   }
@@ -64,7 +64,7 @@ public class PortoController {
 
   @GetMapping
 	public ModelAndView pesquisar(PortoFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("layout/pages/Portos/PortoLista");
+		ModelAndView mv = new ModelAndView("pages/Portos/PortoLista");
 		
 		PageWrapper<Porto> paginaWrapper = new PageWrapper<>(this.portoRepository.filtrar(filter, pageable),
 				httpServletRequest);
@@ -75,7 +75,7 @@ public class PortoController {
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("porto", portoService.buscarUm(codigo));
-    return "layout/pages/Portos/PortoCadastro";
+    return "pages/Portos/PortoCadastro";
   }
 
   @DeleteMapping("/{codigo}")
