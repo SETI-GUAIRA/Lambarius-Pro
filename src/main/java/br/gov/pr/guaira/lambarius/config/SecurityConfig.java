@@ -40,7 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-				.antMatchers("/pescadores/**", "/usuarios/**", "/ilhas/**", "/portos/**", "/associacoes/**").hasRole("ADMIN")
+				.antMatchers("/pescadores/**").hasRole("CAD_PESCADOR")
+				.antMatchers("/portos/**").hasRole("CAD_PORTO")
+				.antMatchers("/associacoes/**").hasRole("CAD_ASSOCIACAO")
+				.antMatchers("/ilhas/**").hasRole("CAD_ILHA")
+				.antMatchers("/usuarios/**").hasRole("CAD_USUARIO")
 				.anyRequest().denyAll()//pra funcionar o denyAll deve retirar o authenticated
 				//anyRequest().denyAll()
 				.and()

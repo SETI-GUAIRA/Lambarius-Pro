@@ -1,7 +1,7 @@
 package br.gov.pr.guaira.lambarius.domain;
 
 public enum LocalPesca {
-  LAGO("Lago"), ILHA_GRANDE("Ilha Grande");
+  LAGO("Lago de Itaipu"), ILHA_GRANDE("Parque Nacional de Ilha Grande");
 
   private String nome;
 

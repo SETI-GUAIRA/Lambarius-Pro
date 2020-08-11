@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -58,4 +60,10 @@ public class Pessoa {
 
   @Embedded
   private Endereco endereco;
+  
+  @PrePersist
+  @PreUpdate
+  private void toUpperCase() {
+   this.nome = this.nome.toUpperCase();
+  }
 }

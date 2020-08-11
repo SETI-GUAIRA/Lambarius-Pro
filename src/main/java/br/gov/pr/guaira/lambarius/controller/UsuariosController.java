@@ -1,5 +1,7 @@
 package br.gov.pr.guaira.lambarius.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -71,9 +73,9 @@ public class UsuariosController {
   }
 
   @GetMapping
-  public ModelAndView pesquisar(UsuarioFilter usuarioFilter, @PageableDefault(size = 2) Pageable pageable,
+  public ModelAndView pesquisar(UsuarioFilter usuarioFilter, @PageableDefault(size = 10) Pageable pageable,
       HttpServletRequest httpServletRequest) {
-    ModelAndView mv = new ModelAndView("pages/Usuarios/ListaUsuarios");
+    ModelAndView mv = new ModelAndView("pages/Usuarios/ListaUsuario");
     mv.addObject("grupos", grupos.findAll());
 
     PageWrapper<Usuario> paginaWrapper = new PageWrapper<>(this.usuarios.filtrar(usuarioFilter, pageable),
@@ -90,10 +92,12 @@ public class UsuariosController {
   }
 
   @DeleteMapping("/{codigo}")
-  public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Usuario usuario) {
+  public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo) {
 
+	 
     try {
-      this.usuarioService.excluir(usuario);
+      Optional<Usuario> user = this.usuarios.findById(codigo);
+      this.usuarioService.excluir(user.get());
     } catch (ImpossivelExcluirEntidadeException e) {
 
       return ResponseEntity.badRequest().body(e.getMessage());

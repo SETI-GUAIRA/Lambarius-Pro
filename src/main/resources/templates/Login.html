@@ -25,15 +25,11 @@
 
 <form th:action="@{/login}" method="POST">
 	<div class="aw-simple-panel">
-		<img alt="AlgaWorks" th:src="@{/images/log.png}"/>
+		<img alt="AlgaWorks" th:src="@{/images/peixe.png}"/>
 		
-		<div class="aw-simple-panel__message">
-			Por favor, faça o login.
-		</div>
 		
 		<div class="aw-simple-panel__message  is-error" th:if=${#bools.isTrue(param.error)}>
 			<p>O e-mail e/ou senha não conferem</p>
-			<p>Lembre-se que a senha é o número do seu CPF</p>
 		</div>
 		
 		<div class="aw-simple-panel__box">
