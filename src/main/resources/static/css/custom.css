@@ -1,3 +1,5 @@
+@import url(https://allfont.net/allfont.css?fonts=beyond-wonderland);
+
 .img-thumb {
   margin-left: 30%;
   width: 50px;
@@ -39,5 +41,9 @@
 
 .btn-custom i {
   margin-right: 12px;
+}
+
+.brand-text {
+  font-family: 'Beyond Wonderland';
 }
 
