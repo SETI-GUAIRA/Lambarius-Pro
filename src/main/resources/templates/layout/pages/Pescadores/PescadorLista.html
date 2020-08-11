@@ -51,18 +51,18 @@
 									class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th><i class="fas fa-image"></i> Foto</th>
+											<th><i class="fas fa-image table-column-imagem"></i> Foto</th>
 											<th><i class="fas fa-user-alt"></i><lambarius:order
 													page="${pagina}" field="nome" text="Nome" /></th>
 											<th><i class="far fa-id-card"></i> RGP</th>
-											<th><i class="far fa-id-card"></i> CPF ou CNPJ</th>
+											<th><i class="far fa-id-card"></i> CPF</th>
 											<th><i class="fa fa-edit text-center"></i> Ações</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="pescador : ${pagina.conteudo}">
 											<td class="img-container"><img
-												class="img-fluid img-thumb" th:src="${pescador.foto}" />
+												class="img-fluid img-thumb " th:src="${pescador.foto}" />
 												<div class="bigImg" style="display: none;">
 													<img class="img-thumb-big" th:src="${pescador.foto}" />
 												</div></td>
@@ -97,7 +97,7 @@
 	</div>
 </body>
 <div layout:fragment="scripts">
-
+	<script th:src="@{/js/scripts/ImageOverlay.js}"></script>
 	<script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
 	<script th:if="${success}" th:inline="javascript">
 		const message = /*[[${success}]]*/
