@@ -87,6 +87,19 @@
                       maxlength="15" required="required" th:field="*{rgp}" autocomplete="off">
                   </div>
                 </div>
+                <div class="form-group" style="margin-top: 18px;">
+                  <label>É aposentado?</label>
+                  <div class="row">
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-sim-tired" type="radio" name="radio" value="true" th:field="*{aposentado}"> <label
+                        class="form-check-label">Sim</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-nao-tired" type="radio" name="radio" value="false" th:field="*{aposentado}" checked> <label
+                        class="form-check-label">Não</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

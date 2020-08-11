@@ -43,6 +43,9 @@ public class Pescador extends Pessoa {
   @Column(nullable = true)
   private String observacao;
 
+  @Column(nullable = false)
+  private Boolean aposentado;
+
   @Column(name = "local_pesca", nullable = true)
   @Enumerated(EnumType.STRING)
   private LocalPesca localPesca;
