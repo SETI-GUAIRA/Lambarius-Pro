@@ -59,31 +59,30 @@ public class PescadorController {
   }
 
   @GetMapping
- 	public ModelAndView pesquisar(PescadorFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
- 		ModelAndView mv = new ModelAndView("pages/Pescadores/PescadorLista");
- 		
- 		PageWrapper<Pescador> paginaWrapper = new PageWrapper<>(this.pescadorRepository.filtrar(filter, pageable),
- 				httpServletRequest);
- 		mv.addObject("pagina", paginaWrapper);
- 		return mv;
- 	}
+  public ModelAndView pesquisar(PescadorFilter filter, @PageableDefault(size = 10) Pageable pageable,
+      HttpServletRequest httpServletRequest) {
+    ModelAndView mv = new ModelAndView("pages/Pescadores/PescadorLista");
 
-  @PostMapping(value = {"/novo", "/{codigo}"})
+    PageWrapper<Pescador> paginaWrapper = new PageWrapper<>(this.pescadorRepository.filtrar(filter, pageable),
+        httpServletRequest);
+    mv.addObject("pagina", paginaWrapper);
+    return mv;
+  }
+
+  @PostMapping(value = { "/novo", "/{codigo}" })
   public ModelAndView salvar(@Valid Pescador pescador, BindingResult result, RedirectAttributes attr) {
-    
-	  if (result.hasErrors()) {
-	        attr.addFlashAttribute("error", "Erro");
-	        return novo(pescador);
-	   }
-	  
-	try {
+    try {
+
+      if (result.hasErrors()) {
+        attr.addFlashAttribute("error", "Erro");
+        return novo(pescador);
+      }
 
       pescadorService.salvar(pescador);
       attr.addFlashAttribute("success", "Pescador cadastrado com sucesso.");
 
     } catch (PescadorExistentException exception) {
-
-      //attr.addFlashAttribute("error", exception.getMessage());
+      // attr.addFlashAttribute("error", exception.getMessage());
       result.rejectValue("cpfOuCnpj", exception.getMessage(), exception.getMessage());
       return novo(pescador);
     }
@@ -98,13 +97,12 @@ public class PescadorController {
 
   @DeleteMapping("/{codigo}")
   public ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
-    
-	  try {
-			this.pescadorService.excluir(codigo);	
-		}catch (ImpossivelExcluirEntidadeException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-		return ResponseEntity.ok().build();
+    try {
+      this.pescadorService.excluir(codigo);
+    } catch (ImpossivelExcluirEntidadeException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+    return ResponseEntity.ok().build();
   }
 
   @ModelAttribute("associacoes")
