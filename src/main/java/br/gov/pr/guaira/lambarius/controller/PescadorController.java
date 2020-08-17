@@ -83,7 +83,8 @@ public class PescadorController {
 
     } catch (PescadorExistentException exception) {
 
-      attr.addFlashAttribute("error", exception.getMessage());
+      //attr.addFlashAttribute("error", exception.getMessage());
+      result.rejectValue("cpfOuCnpj", exception.getMessage(), exception.getMessage());
       return novo(pescador);
     }
     return new ModelAndView("redirect:/pescadores/novo");

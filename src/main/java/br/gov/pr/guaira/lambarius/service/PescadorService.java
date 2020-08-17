@@ -25,7 +25,7 @@ public class PescadorService {
 		Optional<Pescador> pescadorOp = pescadorRepository.findBycpfOuCnpj(pescador.getCpfOuCnpj());
 
 		if (pescadorOp.isPresent() && pescador.isNovo()) {
-			throw new PescadorExistentException("Pescador já cadastrado");
+			throw new PescadorExistentException("Pescador já cadastrado verifique o CPF informado!");
 		}
 
 		if (pescador.isNovo()) {
