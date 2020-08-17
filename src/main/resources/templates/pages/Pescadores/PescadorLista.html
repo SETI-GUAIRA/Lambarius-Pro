@@ -56,7 +56,8 @@
                   </thead>
                   <tbody>
                     <tr th:each="pescador : ${pagina.conteudo}">
-                      <td class="img-container"><img class="img-fluid img-thumb " th:src="${pescador.foto}" />
+                      <td class="img-container">
+                        <img class="img-fluid img-thumb " th:src="${pescador.foto}" />
                         <div class="bigImg" style="display: none;">
                           <img class="img-thumb-big" th:src="${pescador.foto}" />
                         </div>
@@ -64,15 +65,18 @@
                       <td th:text="${pescador.nome}">Nome</td>
                       <td th:text="${pescador.rgp}">rgp</td>
                       <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>
-                      <td class="text-center"><a class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
+                      <td class="text-center">
+                        <a class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
                           th:href="@{/pescadores/{codigo}(codigo=${pescador.codigo})}">
                           <i class="far fa-edit fa-lg"></i>
-                        </a> <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#"
+                        </a>
+                        <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#"
                           th:attr="data-codigo=${pescador.codigo},
-												data-url=@{/pescadores/{codigo}(codigo=${pescador.codigo})},
-												data-objeto=${pescador.nome}">
+												  data-url=@{/pescadores/{codigo}(codigo=${pescador.codigo})},
+												  data-objeto=${pescador.nome}">
                           <i class="fas fa-trash fa-lg"></i>
-                        </a></td>
+                        </a>
+                      </td>
                     </tr>
                     <tr th:if="${pagina.vazia}">
                       <td colspan="5">Nenhum pescador encontrado</td>

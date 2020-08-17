@@ -62,7 +62,7 @@ public class Pessoa {
 
   @Embedded
   private Endereco endereco;
-  
+
   @PrePersist
   @PreUpdate
   private void toUpperCase() {
