@@ -27,6 +27,7 @@ import br.gov.pr.guaira.lambarius.domain.Ilha;
 import br.gov.pr.guaira.lambarius.domain.LocalPesca;
 import br.gov.pr.guaira.lambarius.domain.Pescador;
 import br.gov.pr.guaira.lambarius.domain.Porto;
+import br.gov.pr.guaira.lambarius.domain.Sexo;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.PescadorExistentException;
 import br.gov.pr.guaira.lambarius.repository.PescadorRepository;
@@ -113,6 +114,11 @@ public class PescadorController {
   @ModelAttribute("locais")
   public LocalPesca[] getLocaisPesca() {
     return LocalPesca.values();
+  }
+
+  @ModelAttribute("sexos")
+  public Sexo[] getNomeSexos() {
+    return Sexo.values();
   }
 
   @ModelAttribute("portos")

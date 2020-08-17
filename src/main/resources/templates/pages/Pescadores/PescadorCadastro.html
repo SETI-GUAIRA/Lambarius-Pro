@@ -78,7 +78,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <label>Data de nascimento *</label> <input type="date" class="form-control"
-                      th:field="*{dataNascimento}" autocomplete="off" max="9999-12-31" />
+                      th:field="*{dataNascimento}" autocomplete="off" max="9999-12-31" required />
                   </div>
                   <div class="col-md-6">
                     <label>RGP/Protocolo *</label> <input type="text" name="rgp" class="form-control"
@@ -86,16 +86,26 @@
                       autocomplete="off">
                   </div>
                 </div>
-                <div class="form-group" style="margin-top: 18px;">
-                  <label>É aposentado?</label>
-                  <div class="row">
-                    <div class="form-check" style="margin-left: 10px;">
-                      <input class="form-check-input check-sim-tired" type="radio" name="radio" value="true"
-                        th:field="*{aposentado}"> <label class="form-check-label">Sim</label>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Sexo </label> <select class="form-control select2" th:field="*{sexo}" style="width: 100%;">
+                        <option value="" selected>Selecione um sexo</option>
+                        <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo.nome}"></option>
+                      </select>
                     </div>
-                    <div class="form-check" style="margin-left: 10px;">
-                      <input class="form-check-input check-nao-tired" type="radio" name="radio" value="false"
-                        th:field="*{aposentado}" checked> <label class="form-check-label">Não</label>
+                  </div>
+                  <div class="form-group" style="margin: 18px;">
+                    <label>É aposentado?</label>
+                    <div class="row">
+                      <div class="form-check" style="margin-left: 10px;">
+                        <input class="form-check-input check-sim-tired" type="radio" name="radio" value="true"
+                          th:field="*{aposentado}"> <label class="form-check-label">Sim</label>
+                      </div>
+                      <div class="form-check" style="margin-left: 10px;">
+                        <input class="form-check-input check-nao-tired" type="radio" name="radio" value="false"
+                          th:field="*{aposentado}" checked> <label class="form-check-label">Não</label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -172,13 +182,13 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
-                    <label>Telefone *</label> <input type="text" name="telefone" class="form-control js-phone"
-                      placeholder="Digite o telefone do pescador" maxlength="15" th:field="*{contato.telefone}"
-                      autocomplete="off" required>
-                  </div>
-                  <div class="col-md-6">
                     <label>Celular </label> <input type="text" name="celular" class="form-control js-cell-phone"
                       placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}"
+                      autocomplete="off">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Telefone </label> <input type="text" name="telefone" class="form-control js-phone"
+                      placeholder="Digite o telefone do pescador" maxlength="15" th:field="*{contato.telefone}"
                       autocomplete="off">
                   </div>
                 </div>
@@ -241,7 +251,6 @@
               </div>
             </div>
           </div>
-
         </form>
       </div>
       <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog">

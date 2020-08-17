@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,11 +48,15 @@ public class Pessoa {
   @Column(name = "rg_ie")
   private String rgOuIe;
 
-  @Column(name="hora_cadastro")
+  @Column(name = "hora_cadastro")
   private LocalDate horaCadastro;
 
-  @Column(name="hora_atualizacao")
+  @Column(name = "hora_atualizacao")
   private LocalDate horaAtualizacao;
+
+  @Column(name = "sexo", nullable = true)
+  @Enumerated(EnumType.STRING)
+  private Sexo sexo;
 
   @NotBlank(message = "Foto é obrigatória")
   @Lob
@@ -66,6 +72,6 @@ public class Pessoa {
   @PrePersist
   @PreUpdate
   private void toUpperCase() {
-   this.nome = this.nome.toUpperCase();
+    this.nome = this.nome.toUpperCase();
   }
 }
