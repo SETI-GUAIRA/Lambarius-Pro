@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
+
+<head>
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
+</head>
+
+<body>
+  <div layout:fragment="corpo">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 th:if="${codigo} == null">Cadastrar novo pescador</h1>
+            <h1 th:if="${codigo} != null">Editar pescador</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{/pescadores}">Pescadores</a></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/novo}">
+          <div layout:insert="~{fragments/Mensagem}"></div>
+          <div layout:insert="~{fragments/MensagemErro}"></div>
+          <input type="hidden" th:field="*{foto}" id="foto" />
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Dados do pescador</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Associação </label>
+                    <div class="form-group">
+                      <select class="form-control select2" th:field="*{associacao}" style="width: 100%;">
+                        <option selected value="">Selecione uma associação</option>
+                        <option th:each="associacao : ${associacoes}" th:value="${associacao.codigo}"
+                          th:text="${associacao.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Porto </label> <select class="form-control select2" th:field="*{porto}"
+                        style="width: 100%;">
+                        <option value="" selected>Selecione um porto</option>
+                        <option th:each="porto : ${portos}" th:value="${porto.codigo}" th:text="${porto.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <label>Nome *</label> <input type="text" th:field="*{nome}" class="form-control"
+                      placeholder="Digite o nome do pescador" required="required" autofocus autocomplete="off">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>CPF *</label> <input type="text" name="cpf_cnpj" class="form-control js-documento-cpf"
+                      placeholder="Digite o CPF" required="required" maxlength="11" th:field="*{cpfOuCnpj}"
+                      autocomplete="off">
+                  </div>
+                  <div class="col-md-6">
+                    <label>RG *</label> <input type="text" name="rg_ie" class="form-control"
+                      placeholder="Digite o RG ou IE" required="required" maxlength="15" th:field="*{rgOuIe}"
+                      autocomplete="off">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Data de nascimento *</label> <input type="date" class="form-control"
+                      th:field="*{dataNascimento}" autocomplete="off" max="9999-12-31" required />
+                  </div>
+                  <div class="col-md-6">
+                    <label>RGP/Protocolo *</label> <input type="text" name="rgp" class="form-control"
+                      placeholder="Digite o RGP" maxlength="15" required="required" th:field="*{rgp}"
+                      autocomplete="off">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Sexo </label> <select class="form-control select2" th:field="*{sexo}" style="width: 100%;">
+                        <option value="" selected>Selecione um sexo</option>
+                        <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin: 18px;">
+                    <label>É aposentado?</label>
+                    <div class="row">
+                      <div class="form-check" style="margin-left: 10px;">
+                        <input class="form-check-input check-sim-tired" type="radio" name="radio" value="true"
+                          th:field="*{aposentado}"> <label class="form-check-label">Sim</label>
+                      </div>
+                      <div class="form-check" style="margin-left: 10px;">
+                        <input class="form-check-input check-nao-tired" type="radio" name="radio" value="false"
+                          th:field="*{aposentado}" checked> <label class="form-check-label">Não</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Endereço</h3>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label>Reside em ilha?</label>
+                  <div class="row">
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-sim" type="radio" name="radio1"> <label
+                        class="form-check-label">Sim</label>
+                    </div>
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input check-nao" type="radio" name="radio1" checked> <label
+                        class="form-check-label">Não</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-endereco" style="display: block;">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Logradouro </label> <input type="text" name="logradouro" id="logradouro"
+                        class="form-control" placeholder="Digite o Logradouro" th:field="*{endereco.logradouro}">
+                    </div>
+                    <div class="col-6">
+                      <label>Número </label> <input type="number" name="numero" id="numero" class="form-control"
+                        placeholder="Digite o Número" th:field="*{endereco.numero}" autocomplete="off">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Bairro </label> <input type="text" name="bairro" id="bairro" class="form-control"
+                        placeholder="Digite o Bairro" th:field="*{endereco.bairro}">
+                    </div>
+                    <div class="col-6">
+                      <label>Complemento</label> <input type="text" name="complemento" id="complemento"
+                        class="form-control" placeholder="Digite um complemento para o endereço"
+                        th:field="*{endereco.complemento}">
+                    </div>
+                  </div>
+                </div>
+                <div class="content-ilha" style="display: none;">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Ilha </label> <select class="form-control select2" th:field="*{ilha}" id="ilha"
+                        style="width: 100%;">
+                        <option selected value="">Selecione uma ilha</option>
+                        <option th:each="ilha : ${ilhas}" th:value="${ilha.codigo}" th:text="${ilha.nome}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-1" style="margin-top: 32px;">
+                    <button type="button" class="btn btn-primary btn-custom" data-toggle="modal"
+                      data-target="#modal-lg">
+                      <i class="fa fa-plus"></i> Cadastrar ilha
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Contato</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label>Celular </label> <input type="text" name="celular" class="form-control js-cell-phone"
+                      placeholder="Digite o número de celular do pescador" maxlength="15" th:field="*{contato.celular}"
+                      autocomplete="off">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Telefone </label> <input type="text" name="telefone" class="form-control js-phone"
+                      placeholder="Digite o telefone do pescador" maxlength="15" th:field="*{contato.telefone}"
+                      autocomplete="off">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>E-mail</label> <input type="email" name="email" class="form-control"
+                    placeholder="Digite um e-mail" th:field="*{contato.email}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Observações</h3>
+              </div>
+              <div class="card-body">
+                <div class="col-md-6">
+                  <label>Local de pesca </label>
+                  <div class="form-group">
+                    <select class="form-control select2" th:field="*{localPesca}" style="width: 100%;">
+                      <option selected value="">Selecione um local de pesca</option>
+                      <option th:each="local : ${locais}" th:value="${local}" th:text="${local.nome}"></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" th:field="*{observacao}" rows="3" style="min-height: 80px;"
+                    placeholder="Digite aqui..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <div class="card-header">
+                <h3 class="card-title">Foto</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group text-center"
+                      style="display: flex; flex-direction: column; align-items: center;">
+                      <label>Pré-visualização</label>
+                      <div id="preview" style="width: 340px; height: 240px;"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group text-center">
+                      <label>Foto</label>
+                      <div class="text-center" id="photo"></div>
+                    </div>
+                  </div>
+                </div>
+                <a href="javascript:void(take_snapshot())" class="btn btn-dark">Tirar
+                  foto</a>
+              </div>
+              <input type="hidden" name="id" th:field="*{codigo}">
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Cadastrar Ilha</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="alert alert-danger alert-dissmisable d-none js-mensagem-cadastro-rapido-ilha" role="alert">
+              </div>
+
+              <form class="form-horizontal" th:action="@{/ilhas}">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="nomeIlha">Nome</label>
+                  <div class="col-sm-12">
+                    <input id="nomeIlha" type="text" class="form-control" required="required">
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary  js-modal-ilha-salvar-btn">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+<div layout:fragment="scripts">
+  <script th:src=@{/layout/js/jquery/jquery.inputmask.min.js}></script>
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:src=@{/js/jquery/jquery.mask.min.js}></script>
+  <script th:src=@{/js/scripts/lambariuspro.js}></script>
+  <script th:src=@{/js/scripts/ToggleEndereco_Ilha.js}></script>
+  <script th:src=@{/js/scripts/lambariuspro.cadastro-rapido-ilha.js}></script>
+  <script th:src="@{/js/webcam/webcam.js}"></script>
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+      toastr.success(`${message}`)
+  </script>
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+      toastr.error(`${message}`)
+  </script>
+  <script>
+
+    if ($('#foto').val()) {
+      var foto = $('#foto').val();
+      document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
+    }
+
+    Webcam.attach('#preview');
+
+    const cpfCnpj = $('.cpf_cnpj')
+
+    Webcam.set({
+      width: 340,
+      height: 240,
+      dest_width: 340,
+      dest_height: 240,
+      image_format: 'png',
+      fps: 60,
+      upload_name: `${Date.now().toString()}-${cpfCnpj}`,
+    });
+
+    function take_snapshot() {
+      Webcam.snap(function (data_uri) {
+        document.getElementById('photo').innerHTML = `<img id="img" src="${data_uri}" />`;
+
+        var imagem = $("#img").prop('src');
+        $('#foto').val(imagem);
+
+
+      });
+    }
+  </script>
+</div>
+
+</html>

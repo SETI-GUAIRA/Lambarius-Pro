@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/datatables/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
+</head>
+
+<body>
+  <div layout:fragment="corpo">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Listar Pescadores</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{/pescadores/novo}">Novo Pescador</a></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <form method="GET" th:object="${pescadorFilter}">
+                  <div class="row">
+                    <div class="form-group  col-sm-12">
+                      <label class="control-label" for="nome">Nome</label> <input type="text" class="form-control"
+                        id="nome" th:field="*{nome}" />
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn  btn-primary">
+                    Pesquisar</button>
+                </form>
+                <table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th><i class="fas fa-image table-column-imagem"></i> Foto</th>
+                      <th><i class="fas fa-user-alt"></i>
+                        <lambarius:order page="${pagina}" field="nome" text="Nome" />
+                      </th>
+                      <th><i class="far fa-id-card"></i> RGP</th>
+                      <th><i class="far fa-id-card"></i> CPF</th>
+                      <th><i class="fa fa-edit text-center"></i> Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="pescador : ${pagina.conteudo}">
+                      <td class="img-container">
+                        <img class="img-fluid img-thumb " th:src="${pescador.foto}" />
+                        <div class="bigImg" style="display: none;">
+                          <img class="img-thumb-big" th:src="${pescador.foto}" />
+                        </div>
+                      </td>
+                      <td th:text="${pescador.nome}">Nome</td>
+                      <td th:text="${pescador.rgp}">rgp</td>
+                      <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>
+                      <td class="text-center">
+                        <a class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
+                          th:href="@{/pescadores/{codigo}(codigo=${pescador.codigo})}">
+                          <i class="far fa-edit fa-lg"></i>
+                        </a>
+                        <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#"
+                          th:attr="data-codigo=${pescador.codigo},
+												  data-url=@{/pescadores/{codigo}(codigo=${pescador.codigo})},
+												  data-objeto=${pescador.nome}">
+                          <i class="fas fa-trash fa-lg"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr th:if="${pagina.vazia}">
+                      <td colspan="5">Nenhum pescador encontrado</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <lambarius:pagination page="${pagina}" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<div layout:fragment="scripts">
+  <script th:src="@{/js/scripts/ImageOverlay.js}"></script>
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+      toastr.success(`${message}`)
+  </script>
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+      toastr.error(`${message}`)
+  </script>
+
+</div>
+
+</html>
