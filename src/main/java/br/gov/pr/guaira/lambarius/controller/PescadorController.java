@@ -67,6 +67,7 @@ public class PescadorController {
     PageWrapper<Pescador> paginaWrapper = new PageWrapper<>(this.pescadorRepository.filtrar(filter, pageable),
         httpServletRequest);
     mv.addObject("pagina", paginaWrapper);
+    
     return mv;
   }
 

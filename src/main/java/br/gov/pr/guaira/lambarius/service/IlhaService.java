@@ -41,7 +41,7 @@ public class IlhaService {
     try {
       ilhaRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e) {
-      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o porto, há pescadores associados");
+      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir a Ilha, há pescadores associados");
     }
   }
 }

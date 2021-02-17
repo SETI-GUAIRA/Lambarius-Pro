@@ -15,11 +15,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Listar Pescadores</h1>
+            <h1>Listar Produtores</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/pescadores/novo}">Novo Pescador</a></li>
+              <li class="breadcrumb-item"><a th:href="@{/produtores/novo}">Novo Produtor</a></li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <form method="GET" th:object="${pescadorFilter}">
+                <form method="GET" th:object="${produtorFilter}">
                   <div class="row">
                     <div class="form-group  col-sm-12">
                       <label class="control-label" for="nome">Nome</label> <input type="text" class="form-control"
@@ -48,42 +48,44 @@
                       <th><i class="fas fa-image table-column-imagem"></i> Foto</th>
                       <th><i class="fas fa-user-alt"></i>
                         <lambarius:order page="${pagina}" field="nome" text="Nome" />
-                      </th>
-                      <th><i class="far fa-id-card"></i> RGP</th>
+                      </th>                      
                       <th><i class="far fa-id-card"></i> CPF</th>
+                      <th><i class="far fa-id-card"></i> Feirante</th>
                       <th><i class="fa fa-edit text-center"></i> Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr th:each="pescador : ${pagina.conteudo}">
+                    <tr th:each="produtor : ${pagina.conteudo}">
                       <td class="img-container">
-                        <img class="img-fluid img-thumb " th:src="${pescador.foto}" />
+                        <img class="img-fluid img-thumb " th:src="${produtor.foto}" />
                         <div class="bigImg" style="display: none;">
-                          <img class="img-thumb-big" th:src="${pescador.foto}" />
+                          <img class="img-thumb-big" th:src="${produtor.foto}" />
                         </div>
                       </td>
-                      <td th:text="${pescador.nome}">Nome</td>
-                      <td th:text="${pescador.rgp}">rgp</td>
-                      <td th:text="${pescador.cpfOuCnpj}">cpf_cnpj</td>
+                      <td th:text="${produtor.nome}">Nome</td>                      
+                      <td th:text="${produtor.cpfOuCnpj}">cpf_cnpj</td>
+                      <td th:text="${not produtor.feirante ? 'Não' : 'Sim'}">feirante</td>
                       <td class="text-center">
                         <a class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
-                          th:href="@{/pescadores/{codigo}(codigo=${pescador.codigo})}">
+                          th:href="@{/produtores/{codigo}(codigo=${produtor.codigo})}">
                           <i class="far fa-edit fa-lg"></i>
                         </a>
                         <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#"
-                          th:attr="data-codigo=${pescador.codigo},
-												  data-url=@{/pescadores/{codigo}(codigo=${pescador.codigo})},
-												  data-objeto=${pescador.nome}">
+                          th:attr="data-codigo=${produtor.codigo},
+												  data-url=@{/produtores/{codigo}(codigo=${produtor.codigo})},
+												  data-objeto=${produtor.nome}">
                           <i class="fas fa-trash fa-lg"></i>
                         </a>
+                        
                         <a class="btn  btn-dark  btn-xs  js-tooltip  js-carterinha-btn" title="Carterinha"
-                             th:href="@{/relatorios/pdf/jr3/03/{codigo}(codigo=${pescador.codigo})}">
+                        
+                         th:href="@{/relatorios/pdf/jr1(code='01', acao='V')}">
                           	<i class="fas fa-address-card fa-lg"></i>
-                        </a>   
+                        </a>                        
                       </td>
                     </tr>
                     <tr th:if="${pagina.vazia}">
-                      <td colspan="5">Nenhum pescador encontrado!</td>
+                      <td colspan="5">Nenhum pescador encontrado</td>
                     </tr>
                   </tbody>
                 </table>

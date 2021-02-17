@@ -12,5 +12,5 @@ import br.gov.pr.guaira.lambarius.repository.helper.IlhaQueries;
 public interface IlhaRepository extends JpaRepository<Ilha, Long>, IlhaQueries {
 
   Optional<Ilha> findByIgnoreCaseNome(String nome);
-
+  
 }
