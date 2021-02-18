@@ -48,12 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/ilhas/**").hasRole("CAD_ILHA")
 				.antMatchers("/usuarios/**").hasRole("CAD_USUARIO")
 				.antMatchers("/tipoProdutos/**").hasRole("CAD_TIPO_PRODUTO")
+				.antMatchers("/principal/**").hasRole("CAD_TIPO_PRODUTO")
 				.anyRequest().denyAll()//pra funcionar o denyAll deve retirar o authenticated
 				//anyRequest().denyAll()
 				.and()
 				
 			.formLogin()
-				.loginPage("/login").defaultSuccessUrl("/pescadores/novo", true)
+				.loginPage("/login").defaultSuccessUrl("/principal", true)
 				.permitAll()
 				.and()
 			.logout()
