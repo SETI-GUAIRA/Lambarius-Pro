@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/associacoes/**").hasRole("CAD_ASSOCIACAO")
 				.antMatchers("/ilhas/**").hasRole("CAD_ILHA")
 				.antMatchers("/usuarios/**").hasRole("CAD_USUARIO")
+				.antMatchers("/tipoProdutos/**").hasRole("CAD_TIPO_PRODUTO")
 				.anyRequest().denyAll()//pra funcionar o denyAll deve retirar o authenticated
 				//anyRequest().denyAll()
 				.and()
