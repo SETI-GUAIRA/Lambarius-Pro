@@ -15,7 +15,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQjYmlp9JDeNMaFZzw9S3G1dVztGqF_2vq9nA&usqp=CAU"
+            src="https://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
             class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
@@ -26,27 +26,109 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <img src="/svgs/fisher.svg" alt="pescador" width="24" style="margin-right: 6px;">
+               <i class="fas fa-plus nav-icon"></i>
               <p>
-                Pescadores
+                Menu Pescadores
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+		              <li class="nav-item has-treeview">
+		            <a href="#" class="nav-link">
+		              <i class="fas fa-fish nav-icon"></i>
+		              <p>
+		                Pescadores
+		                <i class="right fas fa-angle-left"></i>
+		              </p>
+		            </a>
+		            <ul class="nav nav-treeview">
+		              <li class="nav-item">
+		                <a href="/pescadores/novo" class="nav-link">
+		                  <i class="fas fa-plus nav-icon"></i>
+		                  <p>Novo</p>
+		                </a>
+		              </li>
+		              <li class="nav-item">
+		                <a href="/pescadores" class="nav-link">
+		                  <i class="far fa-list-alt nav-icon"></i>
+		                  <p>Listar</p>
+		                </a>
+		              </li>
+		            </ul>
+		          </li>
+		          
+		          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Associações
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/pescadores/novo" class="nav-link">
+                <a href="/associacoes/novo" class="nav-link">
                   <i class="fas fa-plus nav-icon"></i>
-                  <p>Cadastrar pescador</p>
+                  <p>Novo</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/pescadores" class="nav-link">
+                <a href="/associacoes" class="nav-link">
                   <i class="far fa-list-alt nav-icon"></i>
-                  <p>Listar pescadores</p>
+                  <p>Listar</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-anchor"></i>
+              <p>
+                Portos
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/portos/novo" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Novo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/portos" class="nav-link">
+                  <i class="far fa-list-alt nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <img src="/svgs/island.svg" alt="ilha" width="24" style="margin-right: 6px;">
+              <p>
+                Ilhas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/ilhas/novo" class="nav-link">
+                  <i class="fas fa-plus nav-icon"></i>
+                  <p>Novo</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/ilhas" class="nav-link">
+                  <i class="far fa-list-alt nav-icon"></i>
+                  <p>Listar</p>
+                </a>
+              </li>
+            </ul>
+          </li>   
+            </ul>  
+          </li>
+           <div class="user-panel "></div>  
           <!-- MENU PRODUTORES----------------------------------------------------------->  
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -71,76 +153,66 @@
               </li>
             </ul>
           </li>
+           <div class="user-panel "></div>  
           <!-- FIM MENU PRODUTORES----------------------------------------------------------->  
+            
+          <div class="user-panel "></div>  
+          <li class="nav-item has-treeview">
+	            <a href="#" class="nav-link">
+	              <i class="fas fa-plus nav-icon"></i>
+	              <p>
+	                Cadastrar Notas
+	                <i class="right fas fa-angle-left"></i>
+	              </p>
+	            </a>
+                <ul class="nav nav-treeview">           
+                	<li class="nav-item">                  
+                    	<li class="nav-item has-treeview">
+	            			<a href="#" class="nav-link">
+	              				<i class="fas fa-dolly nav-icon"></i>
+						        <p>Tipo de produtos<i class="right fas fa-angle-left"></i></p>
+	                        </a>
+				            <ul class="nav nav-treeview">              
+					              <li class="nav-item">                  
+						                <a href="/tipoProdutos/novo" class="nav-link">
+						                  <i class="fas fa-plus nav-icon"></i>
+						                  <p>Novo</p>
+						                </a>                
+					             </li>
+				            </ul>
+				            <ul class="nav nav-treeview">              
+					              <li class="nav-item">                  
+						                <a href="/tipoProdutos" class="nav-link">
+						                  <i class="far fa-list-alt nav-icon"></i>
+						                  <p>Listar</p>
+						                </a>                
+					             </li>
+				            </ul>
+                       </li>
+                    </li>
+                </ul>
+          </li>
+          
+          <div class="user-panel "></div>  
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="far fa-list-alt nav-icon"></i>
               <p>
-                Associações
+                Relatorios
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview">              
               <li class="nav-item">
-                <a href="/associacoes/novo" class="nav-link">
-                  <i class="fas fa-plus nav-icon"></i>
-                  <p>Cadastrar Associação</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/associacoes" class="nav-link">
-                  <i class="far fa-list-alt nav-icon"></i>
-                  <p>Listar Associações</p>
+                <a href="/relatorios" class="nav-link">
+                  <i class="fas fa-address-card"></i>
+                  <p>Carteirinhas</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-anchor"></i>
-              <p>
-                Portos
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/portos/novo" class="nav-link">
-                  <i class="fas fa-plus nav-icon"></i>
-                  <p>Cadastrar Porto</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/portos" class="nav-link">
-                  <i class="far fa-list-alt nav-icon"></i>
-                  <p>Listar Portos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <img src="/svgs/island.svg" alt="ilha" width="24" style="margin-right: 6px;">
-              <p>
-                Ilhas
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/ilhas/novo" class="nav-link">
-                  <i class="fas fa-plus nav-icon"></i>
-                  <p>Cadastrar Ilha</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/ilhas" class="nav-link">
-                  <i class="far fa-list-alt nav-icon"></i>
-                  <p>Listar Ilhas</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <div class="user-panel "></div>  
+          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-user-circle"></i>
@@ -164,23 +236,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="far fa-list-alt nav-icon"></i>
-              <p>
-                Relatorios
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">              
-              <li class="nav-item">
-                <a href="/relatorios" class="nav-link">
-                  <i class="fas fa-address-card"></i>
-                  <p>Carteirinhas</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <div class="user-panel "></div>  
         </ul>
       </nav>
     </div>
