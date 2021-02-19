@@ -3,7 +3,6 @@ package br.gov.pr.guaira.lambarius.service;
 import java.util.List;
 import java.util.Optional;
 
-import br.gov.pr.guaira.lambarius.domain.Porto;
 import br.gov.pr.guaira.lambarius.domain.TipoProduto;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.TipoProdutoExistentException;

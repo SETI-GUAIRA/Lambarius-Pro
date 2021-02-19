@@ -17,12 +17,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1>Tipo de produto</h1>
+						<h1>Produtos</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a th:href="@{/tipoProdutos/novo}">Tipo de produto</a></li>
-							<li class="breadcrumb-item active">Listar Tipo de produto</li>
+							<li class="breadcrumb-item"><a th:href="@{/produtos/novo}">Cadastrar produtos</a></li>
+							<li class="breadcrumb-item active">Listar produtos</li>
 						</ol>
 					</div>
 				</div>
@@ -34,7 +34,7 @@
 					<div class="col-12">
 						<div class="card">
 							<div class="card-body">
-								<form method="GET" th:object="${tipoProdutoFilter}">
+								<form method="GET" th:object="${produtoFilter}">
 									<div class="row">
 										<div class="form-group  col-sm-12">
 											<label class="control-label" for="nome">Nome</label> <input
@@ -49,30 +49,33 @@
 								<table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th><i class="fas fa-user-alt"></i> <lambarius:order
-													page="${pagina}" field="nome" text="Nome" /></th>
-											<th class="text-center"><i class="fa fa-edit"></i> Ações
-											</th>
+											<th><i class="fas fa-dolly nav-icon"></i>
+											<lambarius:order page="${pagina}" field="nome" text="" />Produto</th>
+											<th class="text-center"><i class="fa fa-edit"></i>Tipo Produto</th>
+											<th class="text-center"><i class="fa fa-edit"></i> Unidade Medida</th>
+											<th class="text-center"><i class="fa fa-edit"></i> Ações</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="tipoProduto : ${pagina.conteudo}">
-											<td th:text="${tipoProduto.nome}">Nome</td>
+										<tr th:each="produto : ${pagina.conteudo}">
+											<td th:text="${produto.nome}">Nome</td>
+											<td class="text-center" th:text="${produto.tipoproduto.nome}">Tipo Produto</td>
+											<td class="text-center" th:text="${produto.unidadesMedidas}">Unidades de Medidas</td>
 											<td class="text-center"><a
 												class="btn  btn-primary  btn-xs  js-tooltip" title="Editar"
-												th:href="@{/tipoProdutos/{codigo}(codigo=${tipoProduto.codigo})}"> <i
+												th:href="@{/produtos/{codigo}(codigo=${produto.codigo})}"> <i
 													class="far fa-edit fa-lg"></i>
 											</a> <a
 												class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn"
 												title="Excluir" href="#"
-												th:attr="data-codigo=${tipoProduto.codigo}, 
-												data-url=@{/tipoProdutos/{codigo}(codigo=${tipoProduto.codigo})}, 
-												data-objeto=${tipoProduto.nome}">
+												th:attr="data-codigo=${produto.codigo}, 
+												data-url=@{/produtos/{codigo}(codigo=${produto.codigo})}, 
+												data-objeto=${produto.nome}">
 													<i class="fas fa-trash fa-lg"></i>
 											</a></td>
 										</tr>
 										<tr th:if="${pagina.vazia}">
-											<td colspan="4">Nenhum tipo de Produto encontrado!</td>
+											<td colspan="4">Nenhum Produto encontrado!</td>
 										</tr>
 									</tbody>
 								</table>
