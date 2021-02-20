@@ -4,7 +4,6 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import br.gov.pr.guaira.lambarius.domain.Porto;
 import br.gov.pr.guaira.lambarius.domain.TipoProduto;
 
 @Component

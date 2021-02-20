@@ -67,7 +67,17 @@ public class PescadorController {
     PageWrapper<Pescador> paginaWrapper = new PageWrapper<>(this.pescadorRepository.filtrar(filter, pageable),
         httpServletRequest);
     mv.addObject("pagina", paginaWrapper);
-    
+    /*
+    this.pescadorRepository.findAll().stream()
+    	.filter(p -> p.getFotoBase64() == null)
+    		.forEach(p -> {
+    			
+    			 String fotoBase64 = p.getFoto().replaceAll("data:image/png;base64,", "");
+    			
+    			p.setFotoBase64(fotoBase64);
+    			this.pescadorService.salvarProvisorio(p);
+    });
+    */
     return mv;
   }
 

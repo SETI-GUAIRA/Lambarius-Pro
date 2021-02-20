@@ -57,9 +57,9 @@
                   <tbody>
                     <tr th:each="pescador : ${pagina.conteudo}">
                       <td class="img-container">
-                        <img class="img-fluid img-thumb " th:src="${pescador.foto}" />
+                        <img class="img-fluid img-thumb " th:src="|data:image/png;base64,${pescador.fotoBase64}|" />
                         <div class="bigImg" style="display: none;">
-                          <img class="img-thumb-big" th:src="${pescador.foto}" />
+                          <img class="img-thumb-big" th:src="|data:image/png;base64,${pescador.fotoBase64}|" />
                         </div>
                       </td>
                       <td th:text="${pescador.nome}">Nome</td>

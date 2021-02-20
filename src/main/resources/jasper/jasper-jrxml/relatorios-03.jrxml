@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorios-03" printOrder="Horizontal" pageWidth="240" pageHeight="155" orientation="Landscape" columnWidth="240" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="94d2cdcd-3546-4c63-97f5-dd3073ecda44">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="conexao.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="Cod_Pescador" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT pescador.codigo,
+	pessoa.nome,
+	pessoa.cpf_cnpj,
+	pessoa.sexo,
+	pessoa.foto_base_64,
+	pessoa.data_nascimento,
+	associacao.codigo as associacao_codigo,
+	associacao.nome as associacao_nome
+FROM pescador
+	INNER JOIN associacao ON 
+	 pescador.associacao = associacao.codigo 
+	INNER JOIN pessoa ON 
+	 pescador.codigo = pessoa.codigo 
+WHERE 
+	pescador.codigo = $P{Cod_Pescador}]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pescador"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="cpf_cnpj" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cpf_cnpj"/>
+		<property name="com.jaspersoft.studio.field.label" value="cpf_cnpj"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="foto_base_64" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="foto_base_64"/>
+		<property name="com.jaspersoft.studio.field.label" value="foto_base_64"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="data_nascimento" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.name" value="data_nascimento"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_nascimento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pessoa"/>
+	</field>
+	<field name="associacao_codigo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="associacao"/>
+	</field>
+	<field name="associacao_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="associacao"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="155" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="240" height="155" uuid="5bc5adca-9f58-408d-a36c-47db5ed015a8"/>
+				<imageExpression><![CDATA["imagens/fundo_carteirinha.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="7" y="9" width="163" height="19" forecolor="#FFFFFC" backcolor="#CF2421" uuid="3b92e4ac-6619-49f9-adec-eceab45f6927"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICAÇÃO DE PESCADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="23" width="158" height="17" forecolor="#FFFFFA" uuid="02e88f7e-06a4-4052-be94-fbc7d6439f3d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROFISSIONAL DE GUAÍRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="51" width="32" height="17" forecolor="#3E4095" uuid="50ee0057-64cf-4e55-9fc7-bce87ef3fc0d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="71" width="32" height="17" forecolor="#3E4095" uuid="9d08fb39-b329-4e62-81e5-3fbfeaccfefc">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NASC:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="91" width="32" height="17" forecolor="#3E4095" uuid="31d39b9f-b5c9-4cf5-8a2b-8cf4bdaf4660"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="111" width="32" height="17" forecolor="#3E4095" uuid="08fec9e8-50c7-4593-a866-2a8d4655203f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXO:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="43" y="71" width="115" height="17" forecolor="#3E4095" uuid="27609d3f-b30f-414b-894d-24e1fc475170">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_nascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="91" width="115" height="17" forecolor="#3E4095" uuid="9f460490-9c86-4516-8bd2-73b5603bef4b">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf_cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="111" width="115" height="17" forecolor="#3E4095" uuid="f7ca2658-e284-4978-9117-de5f8d60a2c7">
+					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement mode="Opaque" x="170" y="90" width="56" height="50" backcolor="#FFFFFF" uuid="7c51ce39-e9e1-4c34-b5c4-9a49a8183703"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA["http://ti.guaira.pr.gov.br/lambarius/transparencia/consulta/pescador" + $F{codigo}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="170" y="32" width="56" height="52" uuid="17253079-91a9-4132-b05e-83fc5a750e85"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.engine.util.JRImageLoader.getInstance(new SimpleJasperReportsContext()).loadAwtImageFromBytes(javax.xml.bind.DatatypeConverter.parseBase64Binary($F{foto_base_64}))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="43" y="51" width="115" height="17" forecolor="#3E4095" uuid="8847e564-2794-4681-9225-291320fde234"/>
+				<box padding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="44" y="140" width="112" height="12" forecolor="#FFFFFF" uuid="ef74f000-8fac-4039-b0fe-a4db3eb78ce9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{associacao_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="142" width="38" height="10" forecolor="#FFFFFF" uuid="1b337c83-6e6c-4bd7-bd93-1ea2ecc4207e"/>
+				<textElement>
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Associação:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

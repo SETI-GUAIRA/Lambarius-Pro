@@ -29,7 +29,7 @@
         <form role="form" class="form" th:object="${pescador}" method="POST" th:action="@{/pescadores/novo}">
           <div layout:insert="~{fragments/Mensagem}"></div>
           <div layout:insert="~{fragments/MensagemErro}"></div>
-          <input type="hidden" th:field="*{foto}" id="foto" />
+          <input type="hidden" th:field="*{fotoBase64}" id="foto" />
           <div class="col-md-12">
             <div class="card card-navy">
               <div class="card-header">

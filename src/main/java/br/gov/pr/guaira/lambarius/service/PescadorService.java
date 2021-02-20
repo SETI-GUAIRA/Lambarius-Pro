@@ -37,7 +37,14 @@ public class PescadorService {
 		if(pescador.getAposentado() == null) {
 			pescador.setAposentado(false);
 		}
+		
+		tratarStringFoto(pescador);
 
+		pescadorRepository.save(pescador);
+	}
+	
+	//TODO RETIRAR ESTE MÉTODO APÓS MIGRAR AS FOTOS
+	public void salvarProvisorio(Pescador pescador) {
 		pescadorRepository.save(pescador);
 	}
 
@@ -56,5 +63,10 @@ public class PescadorService {
 
 	public Optional<Pescador> buscarUm(Long codigo) {
 		return pescadorRepository.findById(codigo);
+	}
+	
+	private void tratarStringFoto(Pescador pescador) {
+		 String fotoBase64 = pescador.getFotoBase64().replaceAll("data:image/png;base64,", "");
+		 pescador.setFotoBase64(fotoBase64);
 	}
 }

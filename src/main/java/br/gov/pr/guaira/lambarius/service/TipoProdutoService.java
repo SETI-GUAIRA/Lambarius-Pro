@@ -3,15 +3,14 @@ package br.gov.pr.guaira.lambarius.service;
 import java.util.List;
 import java.util.Optional;
 
-import br.gov.pr.guaira.lambarius.domain.Porto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
 import br.gov.pr.guaira.lambarius.domain.TipoProduto;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 import br.gov.pr.guaira.lambarius.exception.TipoProdutoExistentException;
 import br.gov.pr.guaira.lambarius.repository.TipoProdutoRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TipoProdutoService {
