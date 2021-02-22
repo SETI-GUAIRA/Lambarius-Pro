@@ -44,11 +44,16 @@
                   </div>
                   <div class="col-md-4">  
 	                  <label>Tipo de Produto *</label>                                  				
-							<select  class="form-control select2"  required="required"  th:field="*{tipoproduto}" >									            
-							    <option selected value="" >Selecione tipo de produto</option>
+							<select  class="select3 form-control " id="tipoProduto"  
+							 th:field="*{tipoproduto}" >									            
+							    <option value="" >Selecione tipo de produto</option>
 							    <option th:each="tipoProduto : ${tipoProdutos}" th:value="${tipoProduto.codigo}"
 							     th:text="${tipoProduto.nome}"></option>
 							</select> 	
+							
+							
+							
+							
 	                  </div> 
 	                  <div class="col-md-4">
 	                      <label>Unidades de Medidas *</label>

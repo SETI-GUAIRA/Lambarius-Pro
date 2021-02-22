@@ -19,11 +19,6 @@ import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class JasperService {
-	
-	private static final String JASPER_DIRETORIO = "classpath:jasper/";
-	private static final String JASPER_PREFIXO = "relatorios-";
-	private static final String JASPER_SUFIXO = ".jasper";
-    
 	@Autowired
 	private Connection connection;
 	
@@ -34,11 +29,38 @@ public class JasperService {
 		this.params.put(Key, value);
 	}
 	
-	public byte[] exportarPDF(String code){
+	public byte[] exportar_Carteirinha_Individual_PDF(){
 		byte[] bytes = null;
-		try {
-			File file = ResourceUtils.getFile(JASPER_DIRETORIO.concat(JASPER_PREFIXO).concat(code).concat(JASPER_SUFIXO));
-			//File file = ResourceUtils.getFile("classpath:jasper/relatorios-01.jasper");
+		try {			
+			File file = ResourceUtils.getFile("classpath:jasper/carteirinha_individual.jasper");
+			JasperPrint print = JasperFillManager.fillReport(file.getAbsolutePath(), params, connection);
+		    bytes = JasperExportManager.exportReportToPdf(print);
+		} catch (FileNotFoundException | JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bytes;
+	
+	}
+	
+	public byte[] exportar_Carteirinha_Associacao_PDF(){
+		byte[] bytes = null;
+		try {			
+			File file = ResourceUtils.getFile("classpath:jasper/carteirinha_associacao.jasper");
+			JasperPrint print = JasperFillManager.fillReport(file.getAbsolutePath(), params, connection);
+		    bytes = JasperExportManager.exportReportToPdf(print);
+		} catch (FileNotFoundException | JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return bytes;
+	
+	}
+	
+	public byte[] exportar_Carteirinha_Todas_PDF(){
+		byte[] bytes = null;
+		try {			
+			File file = ResourceUtils.getFile("classpath:jasper/carteirinha_todas.jasper");
 			JasperPrint print = JasperFillManager.fillReport(file.getAbsolutePath(), params, connection);
 		    bytes = JasperExportManager.exportReportToPdf(print);
 		} catch (FileNotFoundException | JRException e) {

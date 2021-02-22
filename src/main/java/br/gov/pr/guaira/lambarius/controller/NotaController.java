@@ -19,56 +19,53 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.pr.guaira.lambarius.controller.page.PageWrapper;
-import br.gov.pr.guaira.lambarius.domain.TipoProduto;
+import br.gov.pr.guaira.lambarius.domain.Nota;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
-
-import br.gov.pr.guaira.lambarius.exception.TipoProdutoExistentException;
-
-import br.gov.pr.guaira.lambarius.repository.TipoProdutoRepository;
-import br.gov.pr.guaira.lambarius.repository.filter.TipoProdutoFilter;
-import br.gov.pr.guaira.lambarius.service.TipoProdutoService;
+import br.gov.pr.guaira.lambarius.exception.NotaExistentException;
+import br.gov.pr.guaira.lambarius.repository.NotaRepository;
+import br.gov.pr.guaira.lambarius.repository.filter.NotaFilter;
+import br.gov.pr.guaira.lambarius.service.NotaService;
 
 @Controller
-@RequestMapping("/tipoProdutos")
-public class TipoProdutoController {
+@RequestMapping("/notafiscal")
+public class NotaController {
 
   @Autowired
-  private TipoProdutoService tipoProdutoService;
+  private NotaService notaService;
   @Autowired
-  private TipoProdutoRepository tipoProdutoRepository;
+  private NotaRepository notaRepository;
 
   @GetMapping("/novo")
-  public ModelAndView novo(TipoProduto tipoProduto) {
-    ModelAndView mv = new ModelAndView("pages/TipoProduto/TipoProdutoCadastro");
-
+  public ModelAndView novo(Nota nota) {
+    ModelAndView mv = new ModelAndView("pages/NotaFiscal/NotaCadastro");
     return mv;
   }
 
   @PostMapping(value = {"/novo", "/codigo"})
-  public String salvar(@Valid TipoProduto tipoProduto, BindingResult result, RedirectAttributes attr) {
+  public String salvar(@Valid Nota nota, BindingResult result, RedirectAttributes attr) {
     try {
       if (result.hasErrors()) {
         attr.addFlashAttribute("error", "Preencha todos os campos");
-        return "redirect:/tipoProdutos/novo";
+        return "redirect:/notas/novo";
       }
 
-      this.tipoProdutoService.salvar(tipoProduto);
-      attr.addFlashAttribute("success", "Tipo Produto cadastrado com sucesso.");
+      this.notaService.salvar(nota);
+      attr.addFlashAttribute("success", "Nota cadastrado com sucesso.");
 
-      return "redirect:/tipoProdutos/novo";
+      return "redirect:/notas/novo";
 
-    } catch (TipoProdutoExistentException exception) {
+    } catch (NotaExistentException exception) {
 
       attr.addFlashAttribute("error", exception.getMessage());
-      return "redirect:/tipoProdutos/novo";
+      return "redirect:/notas/novo";
     }
   }
 
   @GetMapping
-	public ModelAndView pesquisar(TipoProdutoFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("pages/TipoProduto/TipoProdutoLista");
+	public ModelAndView pesquisar(NotaFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView mv = new ModelAndView("pages/NotaFiscal/NotaLista");
 		
-		PageWrapper<TipoProduto> paginaWrapper = new PageWrapper<>(this.tipoProdutoRepository.filtrar(filter, pageable),
+		PageWrapper<Nota> paginaWrapper = new PageWrapper<>(this.notaRepository.filtrar(filter, pageable),
 				httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
@@ -76,15 +73,15 @@ public class TipoProdutoController {
 
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
-    model.addAttribute("tipoProduto", tipoProdutoService.buscarUm(codigo));
-    return "pages/TipoProduto/TipoProdutoCadastro";
+    model.addAttribute("nota", notaService.buscarUm(codigo));
+    return "pages/NotaFical/NotaCadastro";
   }
 
   @DeleteMapping("/{codigo}")
   public ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     
 	  try {
-			this.tipoProdutoService.excluir(codigo);	
+			this.notaService.excluir(codigo);	
 		}catch (ImpossivelExcluirEntidadeException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
