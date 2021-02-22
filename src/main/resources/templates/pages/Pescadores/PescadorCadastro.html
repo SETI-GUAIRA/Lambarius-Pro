@@ -13,12 +13,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar novo pescador</h1>
+            <h1 th:if="${codigo} == null">Cadastrar pescador</h1>
             <h1 th:if="${codigo} != null">Editar pescador</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/pescadores}">Pescadores</a></li>
+              <li class="breadcrumb-item"><a th:href="@{/pescadores}">Consultar pescadores</a></li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar pescadores</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar pescadores</li>              
             </ol>
           </div>
         </div>
@@ -304,7 +306,7 @@
 
     if ($('#foto').val()) {
       var foto = $('#foto').val();
-      document.getElementById('photo').innerHTML = `<img id="img" src="${foto}" />`;
+      document.getElementById('photo').innerHTML = `<img id="img" src="data:image/png;base64,${foto}" />`;
     }
 
     Webcam.attach('#preview');

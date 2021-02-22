@@ -13,14 +13,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar novo Porto</h1>
-            <h1 th:if="${codigo} != null">Editar Porto</h1>
+            <h1 th:if="${codigo} == null">Cadastrar porto</h1>
+            <h1 th:if="${codigo} != null">Editar porto</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/portos}">Portos</a></li>
-              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Porto</li>
-              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Porto</li>
+              <li class="breadcrumb-item"><a th:href="@{/portos}">Consultar porto</a></li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar porto</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar porto</li>
             </ol>
           </div>
         </div>

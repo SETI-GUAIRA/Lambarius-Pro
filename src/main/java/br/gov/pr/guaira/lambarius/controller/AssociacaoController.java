@@ -37,7 +37,7 @@ public class AssociacaoController {
 
   @GetMapping("/novo")
   public ModelAndView novo(Associacao associacao) {
-    ModelAndView mv = new ModelAndView("pages/Associacoes/AssociacaoCadastro");
+    ModelAndView mv = new ModelAndView("pages/Associacao/AssociacaoCadastro");
 
     return mv;
   }
@@ -66,7 +66,7 @@ public class AssociacaoController {
 
   @GetMapping
 	public ModelAndView pesquisar(AssociacaoFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("pages/Associacoes/AssociacaoLista");
+		ModelAndView mv = new ModelAndView("pages/Associacao/AssociacaoLista");
 		
 		PageWrapper<Associacao> paginaWrapper = new PageWrapper<>(this.associacaoRepository.filtrar(filter, pageable),
 				httpServletRequest);
