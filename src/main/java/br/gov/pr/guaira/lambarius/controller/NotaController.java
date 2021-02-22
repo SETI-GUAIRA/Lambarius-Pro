@@ -19,56 +19,53 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.gov.pr.guaira.lambarius.controller.page.PageWrapper;
-import br.gov.pr.guaira.lambarius.domain.Associacao;
-import br.gov.pr.guaira.lambarius.exception.AssociacaoExistentException;
+import br.gov.pr.guaira.lambarius.domain.Nota;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
-import br.gov.pr.guaira.lambarius.repository.AssociacaoRepository;
-import br.gov.pr.guaira.lambarius.repository.filter.AssociacaoFilter;
-import br.gov.pr.guaira.lambarius.service.AssociacaoService;
+import br.gov.pr.guaira.lambarius.exception.NotaExistentException;
+import br.gov.pr.guaira.lambarius.repository.NotaRepository;
+import br.gov.pr.guaira.lambarius.repository.filter.NotaFilter;
+import br.gov.pr.guaira.lambarius.service.NotaService;
 
 @Controller
-@RequestMapping("/associacoes")
-public class AssociacaoController {
+@RequestMapping("/notafiscal")
+public class NotaController {
 
   @Autowired
-  private AssociacaoService associacaoService;
+  private NotaService notaService;
   @Autowired
-  private AssociacaoRepository associacaoRepository;
+  private NotaRepository notaRepository;
 
   @GetMapping("/novo")
-  public ModelAndView novo(Associacao associacao) {
-    ModelAndView mv = new ModelAndView("pages/Associacao/AssociacaoCadastro");
-
+  public ModelAndView novo(Nota nota) {
+    ModelAndView mv = new ModelAndView("pages/NotaFiscal/NotaCadastro");
     return mv;
   }
 
   @PostMapping(value = {"/novo", "/codigo"})
-  public String salvar(@Valid Associacao associacao, BindingResult result, RedirectAttributes attr) {
+  public String salvar(@Valid Nota nota, BindingResult result, RedirectAttributes attr) {
     try {
-
       if (result.hasErrors()) {
-
         attr.addFlashAttribute("error", "Preencha todos os campos");
-        return "redirect:/associacoes/novo";
+        return "redirect:/notas/novo";
       }
 
-      associacaoService.salvar(associacao);
-      attr.addFlashAttribute("success", "Associação cadastrada com sucesso");
+      this.notaService.salvar(nota);
+      attr.addFlashAttribute("success", "Nota cadastrado com sucesso.");
 
-      return "redirect:/associacoes/novo";
+      return "redirect:/notas/novo";
 
-    } catch (AssociacaoExistentException exception) {
+    } catch (NotaExistentException exception) {
 
       attr.addFlashAttribute("error", exception.getMessage());
-      return "redirect:/associacoes/novo";
+      return "redirect:/notas/novo";
     }
   }
 
   @GetMapping
-	public ModelAndView pesquisar(AssociacaoFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("pages/Associacao/AssociacaoLista");
+	public ModelAndView pesquisar(NotaFilter filter, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView mv = new ModelAndView("pages/NotaFiscal/NotaLista");
 		
-		PageWrapper<Associacao> paginaWrapper = new PageWrapper<>(this.associacaoRepository.filtrar(filter, pageable),
+		PageWrapper<Nota> paginaWrapper = new PageWrapper<>(this.notaRepository.filtrar(filter, pageable),
 				httpServletRequest);
 		mv.addObject("pagina", paginaWrapper);
 		return mv;
@@ -76,15 +73,15 @@ public class AssociacaoController {
 
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
-    model.addAttribute("associacao", associacaoService.buscarUm(codigo));
-    return "pages/Associacoes/AssociacaoCadastro";
+    model.addAttribute("nota", notaService.buscarUm(codigo));
+    return "pages/NotaFical/NotaCadastro";
   }
-  
+
   @DeleteMapping("/{codigo}")
   public ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attr) {
     
 	  try {
-			this.associacaoService.excluir(codigo);	
+			this.notaService.excluir(codigo);	
 		}catch (ImpossivelExcluirEntidadeException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}

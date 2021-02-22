@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import br.gov.pr.guaira.lambarius.domain.Pescador;
 import br.gov.pr.guaira.lambarius.domain.Produtor;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
 
@@ -38,7 +39,8 @@ public class ProdutorService {
 		if(produtor.getFeirante() == null) {
 			produtor.setFeirante(false);
 		}
-
+		
+		tratarStringFoto(produtor);
 		produtorRepository.save(produtor);
 	}
 
@@ -57,4 +59,9 @@ public class ProdutorService {
 	public Optional<Produtor> buscarUm(Long codigo) {
 		return produtorRepository.findById(codigo);
 	}
+	
+	private void tratarStringFoto(Produtor produtor) {
+		 String fotoBase64 = produtor.getFotoBase64().replaceAll("data:image/png;base64,", "");
+		 produtor.setFotoBase64(fotoBase64);
+    }
 }

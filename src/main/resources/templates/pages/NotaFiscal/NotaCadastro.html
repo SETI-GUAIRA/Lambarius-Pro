@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
-
+  
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
@@ -13,14 +13,14 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar Ilha</h1>
-            <h1 th:if="${codigo} != null">Editar Ilha</h1>
+            <h1 th:if="${codigo} == null">Cadastrar nota Fiscal</h1>
+            <h1 th:if="${codigo} != null">Editar nota Fiscal</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/ilhas}">Consultar ilhas</a></li>
-              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Ilha</li>
-              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Ilha</li>
+              <li class="breadcrumb-item"><a th:href="@{/notafiscal}">Listar nota Fiscal</a></li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Nota Fiscal</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Nota Fiscal</li>
             </ol>
           </div>
         </div>
@@ -31,9 +31,9 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
-              <form role="form" class="form" method="POST" th:action="@{/ilhas/novo}" th:object="${ilha}">
+              <form role="form" class="form" method="POST" th:action="@{/notafiscal/novo}" th:object="${nota}">
                 <div class="card-body">
-                  <label>Nome da ilha *</label>
+                  <label>Nome: *</label>
                   <div class="form-group">
                     <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
                       placeholder="Digite o nome" required="required" />
@@ -42,7 +42,7 @@
                   <div class="card-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                   </div>
-                </div>
+                  </div>
               </form>
             </div>
           </div>
@@ -56,11 +56,11 @@
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
   <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
-      toastr.success(`${message}`)
+    toastr.success(`${message}`)
   </script>
   <script th:if="${error}" th:inline="javascript">
     const message = /*[[${error}]]*/
-      toastr.error(`${message}`)
+    toastr.error(`${message}`)
   </script>
 </div>
 

@@ -18,8 +18,9 @@
             <h1>Listar Pescadores</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/pescadores/novo}">Novo Pescador</a></li>
+            <ol class="breadcrumb float-sm-right"> 
+              <li class="breadcrumb-item"><a th:href="@{/pescadores/novo}">Cadastrar pescador</a></li>
+              <li class="breadcrumb-item active">Listar pescadores</li>
             </ol>
           </div>
         </div>
@@ -77,7 +78,7 @@
                           <i class="fas fa-trash fa-lg"></i>
                         </a>
                         <a class="btn  btn-dark  btn-xs  js-tooltip  js-carterinha-btn" title="Carterinha"
-                             th:href="@{/relatorios/pdf/jr3/03/{codigo}(codigo=${pescador.codigo})}">
+                             th:href="@{/carteirinhas/individual/{codigo}(codigo=${pescador.codigo})}" target="_blank">
                           	<i class="fas fa-address-card fa-lg"></i>
                         </a>   
                       </td>

@@ -29,16 +29,16 @@
                			<div class="row">
                   			<div class="col-md-6">
                   			<a class="btn  btn-primary   btn-xs  js-tooltip  js-carterinha-btn" title="Carterinha"
-                             th:href="@{/relatorios/pdf/jr1(code='01', acao='V')}">
+                             th:href="@{/carteirinhas/todas/(acao='V')}" target="_blank">
                           	<i class="far fa-folder-open fa-lg"></i>
                            </a> 
-                  				<a th:href="@{/relatorios/pdf/jr1(code='01', acao='V')}">abrir</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  				<a th:href="@{/carteirinhas/todas/(acao='V')}" target="_blank">abrir</a>&nbsp;&nbsp;&nbsp;&nbsp;
                   				
                   			<a class="btn  btn-primary  btn-xs  js-tooltip  js-carterinha-btn" title="Carterinha"
-                             th:href="@{/relatorios/pdf/jr1(code='01', acao='D')}">
+                             th:href="@{/carteirinhas/todas/(acao='D')}">
                           	<i class="fas fa-download fa-lg"></i>
                            </a>	
-								<a th:href="@{/relatorios/pdf/jr1(code='01', acao='D')}">Download</a>
+								<a th:href="@{/carteirinhas/todas/(acao='D')}">Download</a>
                   	        </div>
                   		</div>
                   	</div>          
@@ -53,7 +53,7 @@
 	             	<div class="card-header">
                 		<h3 class="card-title">Carteirinha por Associação</h3>
                 	</div>	
-                	<form role="form" class="form" th:object="${pescador}" th:action="@{/relatorios/pdf/jr2/02}" method="get">
+                	<form role="form" class="form" th:object="${pescador}" th:action="@{/carteirinhas/associacao}" method="get" target="_blank">
                 	<div class="card-body">
                			<div class="row">
                   			<div class="col-md-12">                  				
@@ -66,17 +66,13 @@
                   		</div>
                   	</div> 
                   	<div class="card-footer" align="right">						           
-						 <button type="submit" class="btn btn-primary ">Buscar</button>
+						 <button type="submit" class="btn btn-primary" >Buscar</button>
 					</div>  
 					</form>       
 	             </div>	             
 	          </div>
 	      </div>
       </section>
-      
-      
-      
-      
 	</div>
 </body>
 </html>

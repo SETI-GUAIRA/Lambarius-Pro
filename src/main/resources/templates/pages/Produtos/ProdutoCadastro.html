@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout/layout}" xmlns:lambarius="http://ti.guaira.pr.gov.br">
+  
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/layout/css/toastr/toastr.min.css}">
+</head>
+
+<body>
+  <div layout:fragment="corpo">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 th:if="${codigo} == null">Cadastrar Produto</h1>
+            <h1 th:if="${codigo} != null">Editar Produto</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a th:href="@{/produtos}">Listar produtos</a></li>
+              <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Produtos</li>
+              <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Produtos</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-navy">
+              <form role="form" class="form" method="POST" th:action="@{/produtos/novo}" th:object="${produto}">
+                <div class="card-body"> 
+                  
+                  <div class="row">
+                  <div class="col-md-4"> 
+                  <label>Nome do tipo de produto *</label>
+                  <div class="form-group">
+                    <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
+                      placeholder="Digite o nome" required="required" />
+                  </div>
+                  </div>
+                  <div class="col-md-4">  
+	                  <label>Tipo de Produto *</label>                                  				
+							<select  class="select3 form-control " id="tipoProduto"  
+							 th:field="*{tipoproduto}" >									            
+							    <option value="" >Selecione tipo de produto</option>
+							    <option th:each="tipoProduto : ${tipoProdutos}" th:value="${tipoProduto.codigo}"
+							     th:text="${tipoProduto.nome}"></option>
+							</select> 	
+							
+							
+							
+							
+	                  </div> 
+	                  <div class="col-md-4">
+	                      <label>Unidades de Medidas *</label>
+		                      <select class="form-control select2" required="required" th:field="*{unidadesMedidas}" style="width: 100%">
+			                        <option value="" selected>Selecione uma opção</option>
+			                        <option th:each="unidadeMedida : ${unidadesMedidas}" th:value="${unidadeMedida}" th:text="${unidadeMedida.nome}"></option>
+		                      </select>
+	                 </div>                 
+                   
+                  </div>
+                  <input type="hidden" name="id" th:field="*{codigo}">
+                  <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                  </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+
+<div layout:fragment="scripts">
+  <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:if="${success}" th:inline="javascript">
+    const message = /*[[${success}]]*/
+    toastr.success(`${message}`)
+  </script>
+  <script th:if="${error}" th:inline="javascript">
+    const message = /*[[${error}]]*/
+    toastr.error(`${message}`)
+  </script>
+</div>
+
+</html>

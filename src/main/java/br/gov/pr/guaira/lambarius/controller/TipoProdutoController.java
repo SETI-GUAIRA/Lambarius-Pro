@@ -21,7 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.gov.pr.guaira.lambarius.controller.page.PageWrapper;
 import br.gov.pr.guaira.lambarius.domain.TipoProduto;
 import br.gov.pr.guaira.lambarius.exception.ImpossivelExcluirEntidadeException;
-import br.gov.pr.guaira.lambarius.exception.PortoExistentException;
+
+import br.gov.pr.guaira.lambarius.exception.TipoProdutoExistentException;
+
 import br.gov.pr.guaira.lambarius.repository.TipoProdutoRepository;
 import br.gov.pr.guaira.lambarius.repository.filter.TipoProdutoFilter;
 import br.gov.pr.guaira.lambarius.service.TipoProdutoService;
@@ -55,7 +57,7 @@ public class TipoProdutoController {
 
       return "redirect:/tipoProdutos/novo";
 
-    } catch (PortoExistentException exception) {
+    } catch (TipoProdutoExistentException exception) {
 
       attr.addFlashAttribute("error", exception.getMessage());
       return "redirect:/tipoProdutos/novo";

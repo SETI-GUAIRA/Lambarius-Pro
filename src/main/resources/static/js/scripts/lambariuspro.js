@@ -107,4 +107,19 @@ $(() => {
 
   var maskPhone = new LambariusPro.MaskPhone()
   maskPhone.enable()
+  
 })
+$(function(){	
+	
+	$('.select2bs4').select2({
+		theme : 'bootstrap4'
+	});
+	
+	$(document).ready(function() {
+		$('.select3').select2();
+	});
+
+	
+	
+});
+
