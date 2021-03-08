@@ -12,9 +12,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar pescador</h1>
-            <h1 th:if="${codigo} != null">Editar pescador</h1>
+          <div class="col-sm-6">            
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -34,9 +32,10 @@
           <input type="hidden" th:field="*{fotoBase64}" id="foto" />
           <div class="col-md-12">
             <div class="card card-navy">
-              <div class="card-header">
-                <h3 class="card-title">Dados do pescador</h3>
-              </div>
+	              <div class="card-header">  
+		                <h3 class="card-title" th:if="${codigo} == null">Cadastrar pescadores</h3>
+                        <h3 class="card-title" th:if="${codigo} != null">Editar pescadores</h3>	                         
+	              </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">

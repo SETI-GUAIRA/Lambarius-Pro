@@ -12,13 +12,11 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar associação</h1>
-            <h1 th:if="${codigo} != null">Editar Associação</h1>
+          <div class="col-sm-6">            
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a th:href="@{/associacoes}">Associações</a></li>
+              <li class="breadcrumb-item"><a th:href="@{/associacoes}">Pesquisar associações</a></li>
               <li class="breadcrumb-item active" th:if="${codigo} == null">Cadastrar Associação</li>
               <li class="breadcrumb-item active" th:if="${codigo} != null">Editar Associação</li>
             </ol>
@@ -31,9 +29,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
+            <div class="card-header">  
+		                <h3 class="card-title" th:if="${codigo} == null">Cadastrar associação</h3>
+                        <h3 class="card-title" th:if="${codigo} != null">Editar associação</h3>	                         
+	         </div>
               <form role="form" class="form" method="POST" th:action="@{/associacoes/novo}" th:object="${associacao}">
                 <div class="card-body">
-                  <label>Nome da associação *</label>
+                  <label>Nome: *</label>
                   <div class="form-group">
                     <input type="text" id="nome" class="form-control" autofocus placeholder="Digite o nome"
                       required="required" th:field="*{nome}" autocomplete="off">

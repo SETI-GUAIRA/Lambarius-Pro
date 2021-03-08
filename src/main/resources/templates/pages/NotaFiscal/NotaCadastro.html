@@ -13,8 +13,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar nota Fiscal</h1>
-            <h1 th:if="${codigo} != null">Editar nota Fiscal</h1>
+            
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -30,23 +29,202 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-            <div class="card card-navy">
-              <form role="form" class="form" method="POST" th:action="@{/notafiscal/novo}" th:object="${nota}">
-                <div class="card-body">
-                  <label>Nome: *</label>
-                  <div class="form-group">
-                    <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
-                      placeholder="Digite o nome" required="required" />
-                  </div>
-                  <input type="hidden" name="id" th:field="*{codigo}">
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                  </div>
-                  </div>
-              </form>
+            <div class="card card-navy">            
+               		<div class="card-header"> 
+               				<div class="card-title" style="margin-left: 10px" th:if="${codigo} == null"> 
+				                 Cadastrar nota Fiscal &emsp;&emsp;
+				                 <input class="form-check-input check-pescador" type="radio" name="radio" checked>
+	               					<label class="form-check-label">Pescador</label>&emsp;&emsp;
+	               					<input class="form-check-input check-produtor" type="radio" name="radio" >
+	               					<label class="form-check-label">Produtor</label>				               
+				              </div> 
+               				<h3 class="card-title" th:if="${codigo} != null">Editar nota Fiscal</h3>
+               	    </div>
+                    <form role="form" class="form" method="POST" th:action="@{/notafiscal/novo}" th:object="${nota}">
+	                	<div class="card-body">	
+			               <div class="row">
+				                <div class="col-md-8 ">	
+				                     <div class="content-pescador" style="display: block">
+		                  				<label>Nome pescador: *</label>
+							                  <div class="form-group">
+								                  <select  class="select3" name="pescador" id="pescador"  
+															 th:field="*{pescador}" style="width: 100%" 
+															 th:classappend="${#fields.hasErrors('pescador')} ? 'is-invalid'">									            
+															    <option value="" >Selecione nome pescador</option>
+															    <option th:each="pescador : ${pescador}" th:value="${pescador.codigo}"
+															     th:text="${pescador.nome}"></option>
+												  </select>
+												  <div class="invalid-feedback"><span th:errors="*{pescador}"></span></div> 
+							                  </div>
+							           </div>
+					                   <div class="content-produtor" style="display: none;">
+					                       <label>Nome produtor: *</label>
+						                   <div class="form-group">
+							                  <select  class="select3 " name="produtor" id="produtor"  
+														 th:field="*{produtor}" style="width: 100%"
+														 th:classappend="${#fields.hasErrors('produtor')} ? 'is-invalid'">									            
+														    <option value="" >Selecione nome produtor</option>
+														    <option th:each="produtor : ${produtor}" th:value="${produtor.codigo}" th:text="${produtor.nome}"></option>
+											  </select> 
+											  <div class="invalid-feedback"><span th:errors="*{produtor}"></span></div>
+						               </div>
+			                     </div>
+			                    </div>
+			                    <div class="col-md-2">
+					                    <label>Tipo Nota:*</label>
+		                      				<select class="form-control select2" th:field="*{tipoNota}" style="width: 100%"
+                                                th:classappend="${#fields.hasErrors('tipoNota')} ? 'is-invalid'">
+			                       				<option value="" selected>Selecione uma opção</option>
+			                        			<option th:each="tipoNotas : ${tipoNota}" th:value="${tipoNotas}" th:text="${tipoNotas.nome}"></option>
+		                      				</select>
+		                      				<div class="invalid-feedback"><span th:errors="*{produtor}"></span></div>
+					            </div>
+					            <div class="col-md-2">
+					                    <label>Natureza Operação: </label>
+					                     <input type="text" name="naturazaOp" class="form-control" th:field="*{naturzaoperacao}"
+					                      placeholder="Digite a natureza da Operação" maxlength="20" 
+					                       th:classappend="${#fields.hasErrors('naturzaoperacao')} ? 'is-invalid'">
+					                      <div class="invalid-feedback"><span th:errors="*{naturzaoperacao}"></span></div>
+					           </div>	
+			                  </div>			                  
+			                  <div class="row">
+					                  <div class="col-md-4">
+					                    <label>Nr. Nota: </label>
+					                    <input type="text" name="nrNota" class="form-control"
+					                      placeholder="Digite o número da nota" maxlength="15" 
+					                      autocomplete="off">
+					                  </div>
+					                  <div class="col-md-4">
+					                    <label>Valor Total: </label>
+					                     <input type="text" name="valortotal" class="form-control"
+					                      data-mask="#.##0,00" data-mask-reverse="true" 
+					                      placeholder="Digite o Valor Total" maxlength="15" 
+					                      autocomplete="off">
+					                  </div>	
+					                  <div class="col-md-4">
+					                    <label>Valor Imposto: </label>
+					                     <input type="text" name="valorimposto" class="form-control"
+					                      placeholder="Digite o Valor do imposto" maxlength="15" 
+					                      autocomplete="off">
+					                  </div>		                   
+		                        </div> 
+		                        <div class="row">
+					                  <div class="col-md-4">
+					                    <label for="dataEmissao">Data de Emissão</label>
+					                        <input type="date" class="form-control" id="dataEmissao" th:field="*{dataEmissao}"
+					                        	   th:classappend="${#fields.hasErrors('dataEmissao')} ? 'is-invalid'" />
+					                        <div class="invalid-feedback">
+												<span th:errors="*{dataEmissao}"></span>
+					                        </div>
+					                  </div>
+					                  <div class="col-md-4">					                  
+					                    <label for="dataSaida">Data Saida/Entrada</label>
+					                        <input type="date" class="form-control" id="dataSaida" th:field="*{dataSaida}"
+					                        	   th:classappend="${#fields.hasErrors('dataSaida')} ? 'is-invalid'" />
+					                        <div class="invalid-feedback">
+												<span th:errors="*{dataSaida}"></span>
+					                        </div>
+					                  </div>	
+					                  <div class="col-md-4">
+					                    <label>Hora Saída: </label>
+					                     <input type="text" name="horaSaida" class="form-control"
+					                      placeholder="Digite a hora" maxlength="15" 
+					                      autocomplete="off">
+					                  </div>		                   
+		                        </div> 		                        
+             </div>
+             <div class="col-md-12">
+	             <div class="card card-navy">
+	              <div class="card-header">
+	                <h3 class="card-title">Produtos</h3>
+	              </div>
+	              <div class="card-body">
+	                <div class="row" >
+	                  <div class="col-md-4">
+	                    	<label>Nome: *</label>
+						        <div class="form-group">
+							        <select  class="select3 " name="produto" id="produto"  
+										th:field="*{produto}" style="width: 100%">									            
+										<option value="" >Selecione produto</option>
+										<option th:each="produto : ${produto}" th:value="${produto.codigo}" th:text="${produto.nome}"></option>
+									</select> 
+						       </div>
+	                 </div>
+	                 <div class="col-md-2">
+	                 	<label>Quantidade:</label>
+					    <input type="text" name="quantidade" class="form-control"
+					                      placeholder="Digite a quantidade" maxlength="15" 
+					                      autocomplete="off">
+	                 </div>
+	                  <div class="col-md-2">
+	                  		<label>Valor Unit:</label>
+					   		<input type="text" name="valorUni" class="form-control"
+					                      placeholder="Digite Valor" maxlength="15"
+					                      data-mask="#.##0,00" data-mask-reverse="true"  
+					                      autocomplete="off">
+	                 </div>
+	                  <div class="col-md-2 ">
+	                  <div class="btn  btn-primary altura">	                         
+	                  		<a title="Add"> <i class="fas fa-plus fa-lg" ></i> Adicionar
+                           </a>
+                       </div>
+	                 </div>
+	                 
+	            </div>
+	            <div class="row">
+	            	<div class="col-md-12">
+	            			<table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
+				                  <thead>
+				                    <tr>
+				                      <th><i class="fas fa-user-alt"></i> Nome: </th>
+				                      <th><i class="fas fa-user-alt"></i> Quantidade: </th>
+				                      <th><i class="fas fa-user-alt"></i> Valor Unitario: </th>
+				                      <th><i class="fas fa-user-alt"></i> Total: </th>
+				                      <th class="text-center"><i class="fa fa-edit"></i> Ações</th>
+				                    </tr>
+				                  </thead>
+				                  <tbody>
+				                    <tr >
+				                      <td >Nome:</td>
+				                      <td >Quantidade:</td>
+				                      <td >Valor Unitario:</td>
+				                      <td >Total</td>
+				                      <td class="text-center">				                      
+				                        <a class="btn  btn-danger  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" 
+				                        href="#">
+				                          <i class="fas fa-trash fa-lg"></i>
+				                       </a>
+				                      </td>
+				                    </tr>
+				                    <tr>
+				                      <td colspan="5">Adicione os produtos!</td>
+				                    </tr>
+				                  </tbody>
+                            </table>
+	            	</div>
+	            </div>
+	            <div class="row">
+	            <div class="col-md-10"></div>
+	            	<div class="col-md-2">
+	                  	<label>Valor Total Nota:</label>
+					   		<input type="text" name="valorTotalNota" class="form-control"
+					                      placeholder="" maxlength="15" 
+					                      autocomplete="off">   
+	                </div>
+	            </div>
+               </div>
+               </div>
             </div>
-          </div>
-        </div>
+             
+		     <div class="card-header"> </div>   
+		    
+		     <div class="card-footer col-md-12">
+		          <button type="submit" name="salvar"  class="btn btn-primary float-right">Salvar</button>
+		     </div>
+		     </form>
+		     </div> 
+		</div> 
+      </div>
       </div>
     </section>
   </div>
@@ -54,6 +232,7 @@
 
 <div layout:fragment="scripts">
   <script th:src="@{/layout/js/toastr/toastr.min.js}"></script>
+  <script th:src=@{/js/scripts/TogglePescadorProdutor.js}></script>
   <script th:if="${success}" th:inline="javascript">
     const message = /*[[${success}]]*/
     toastr.success(`${message}`)

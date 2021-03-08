@@ -44,12 +44,12 @@ public class PescadorService {
 	}
 	
 	//TODO RETIRAR ESTE MÉTODO APÓS MIGRAR AS FOTOS
-	public void salvarProvisorio(Pescador pescador) {
-		pescadorRepository.save(pescador);
-	}
+	//public void salvarProvisorio(Pescador pescador) {
+		//pescadorRepository.save(pescador);
+	//}
 
 	public List<Pescador> buscarTodos() {
-		return pescadorRepository.findAll();
+		return pescadorRepository.findAllByOrderByNomeAsc();
 	}
 
 	public void excluir(Long codigo) {

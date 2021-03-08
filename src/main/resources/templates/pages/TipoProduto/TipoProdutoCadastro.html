@@ -12,10 +12,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 th:if="${codigo} == null">Cadastrar Tipo de Produto</h1>
-            <h1 th:if="${codigo} != null">Editar Tipo de Produto</h1>
-          </div>
+          <div class="col-sm-6"></div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a th:href="@{/tipoProdutos}">Listar tipo de produto</a></li>
@@ -31,9 +28,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card card-navy">
+            <div class="card-header">  
+		                <h3 class="card-title" th:if="${codigo} == null">Cadastrar tipo de produto</h3>
+                        <h3 class="card-title" th:if="${codigo} != null">Editar tipo de produto</h3>	                         
+	         </div>
               <form role="form" class="form" method="POST" th:action="@{/tipoProdutos/novo}" th:object="${tipoProduto}">
                 <div class="card-body">
-                  <label>Nome do tipo de produto *</label>
+                  <label>Nome: *</label>
                   <div class="form-group">
                     <input type="text" th:field="*{nome}" id="nome" class="form-control" autofocus
                       placeholder="Digite o nome" required="required" />

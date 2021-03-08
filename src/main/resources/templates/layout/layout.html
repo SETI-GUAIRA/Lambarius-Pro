@@ -8,16 +8,12 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
   <title>Lambárius - Pro</title>
-
+  <link rel="stylesheet" th:href="@{/layout/select2/css/select2.min.css}" />
   <link rel="shortcut icon" href="/images/logo_municipio_preto.png" />
-
   <link rel="stylesheet" th:href="@{/layout/css/fontawesome/css/all.min.css}" />
   <link rel="stylesheet" th:href="@{/css/vendors/sweetrt.css}" />
-
   <link rel="stylesheet" th:href="@{/layout/css/adminlte.css}" />
-  <link rel="stylesheet" th:href="@{/css/custom.css}" />
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
-
+  <link rel="stylesheet" th:href="@{/css/custom.css}" /> 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet" />
 </head>
 
@@ -43,7 +39,8 @@
   <script th:src="@{/js/scripts/vendors/sweetalert/sweetalert.min.js}"></script>
   <script th:src="@{/js/scripts/lambariuspro.dialogo-excluir.js}"></script>
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+   <script th:src="@{/layout/select2/js/select2.full.min.js}"></script>
+   <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>-->
   <div layout:fragment="scripts"></div>
 </body>
 

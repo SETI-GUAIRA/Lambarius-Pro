@@ -20,18 +20,16 @@ public class NotaService {
 
   public void salvar(Nota nota) {
 
-    Optional<Nota> portoOp = notaRepository.findByIgnoreCaseNome(nota.getNome());
+    Optional<Nota> portoOp = notaRepository.findByIgnoreCaseNrNota(nota.getNrNota());
 
     if (portoOp.isPresent() && nota.isNovo()) {
-      throw new NotaExistentException("Nota já cadastrado");
+      throw new NotaExistentException("Nota jÃ¡ cadastrado");
     }
 
     notaRepository.save(nota);
   }
 
-  public List<Nota> buscarTodos() {
-    return notaRepository.findAllByOrderByNomeAsc();
-  }
+ 
 
   public Optional<Nota> buscarUm(Long codigo){
     return notaRepository.findById(codigo);
@@ -41,7 +39,7 @@ public class NotaService {
     try {
     	notaRepository.deleteById(codigo);
     } catch (DataIntegrityViolationException e){
-      throw new ImpossivelExcluirEntidadeException("Não foi possível excluir o Nota, esta em uso");
+      throw new ImpossivelExcluirEntidadeException("NÃ£o foi possÃ­vel excluir o Nota, esta em uso");
     }
   }
 

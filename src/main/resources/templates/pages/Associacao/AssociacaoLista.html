@@ -14,9 +14,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Listar Associações</h1>
-          </div>
+          <div class="col-sm-6"></div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a th:href="@{/associacoes}">Associações</a></li>
@@ -31,17 +29,23 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-body">
+            <div class="card-header">                
+	                <h3 class="card-title">Pesquisar associações</h3>	                         
+              </div>
+              <div class="card-body">                 
                 <form method="GET" th:object="${associacaoFilter}">
-                  <div class="row">
-                    <div class="form-group  col-sm-12">
-                      <label class="control-label" for="nome">Nome</label> <input type="text" class="form-control"
-                        id="nome" th:field="*{nome}" />
-                    </div>
-                  </div>
-
-                  <button type="submit" class="btn  btn-primary">
-                    Pesquisar</button>
+                  <div class="row">                  
+	                 <div class="col-sm-1">
+	                       <label class="control-label" for="nome">Nome:</label> 
+		             </div>
+	                  <div class="col-sm-4">          
+		                       <input type="text" class="form-control"
+		                        id="nome" th:field="*{nome}" />
+		              </div>
+	                  <div class="col-sm-2">
+	                  	  <button type="submit" class="btn  btn-primary">Pesquisar</button>
+	                  </div> 
+                  </div> 
                 </form>
                 <table id="table" style="margin-top: 20px" class="table table-bordered table-striped">
                   <thead>

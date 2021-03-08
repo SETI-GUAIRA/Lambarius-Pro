@@ -77,7 +77,7 @@ public class AssociacaoController {
   @GetMapping("/{codigo}")
   public String editar(@PathVariable("codigo") Long codigo, ModelMap model) {
     model.addAttribute("associacao", associacaoService.buscarUm(codigo));
-    return "pages/Associacoes/AssociacaoCadastro";
+    return "pages/Associacao/AssociacaoCadastro";
   }
   
   @DeleteMapping("/{codigo}")
